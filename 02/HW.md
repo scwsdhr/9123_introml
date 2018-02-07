@@ -83,7 +83,107 @@ y_{T-1}
 \end{matrix} \right].
 $$
 
-(c) 
+(c) First, we can divide the matrix $\mathbf{A}$ into two parts.
+$$
+\mathbf{A}=\left[
+\begin{matrix}
+\mathbf{A}_\mathbf{y} &\mathbf{A}_\mathbf{x}
+\end{matrix} \right],
+$$
+where
+$$
+\mathbf{A}_\mathbf{y}=\left[
+\begin{matrix}
+y_{M-1} &\cdots &y_0 \\
+y_{M} &\cdots &y_1 \\
+\vdots &\cdots &\vdots \\
+y_{T-2} &\cdots &y_0 
+\end{matrix} \right],~
+\mathbf{A}_\mathbf{x}=\left[
+\begin{matrix}
+x_M &\cdots &x_{M-N} \\
+x_{M+1} &\cdots &x_{M-N+1} \\
+\vdots &\cdots &\vdots \\
+x_M &\cdots &x_{T-N-1}
+\end{matrix} \right].
+$$
+So we have 
+$$
+\begin{aligned}
+\frac{1}{T}\mathbf{A}^\mathrm{T}\mathbf{A}
+&=\frac{1}{T}\left[
+\begin{matrix}
+\mathbf{A}_\mathbf{y}^\mathrm{T} \\
+\mathbf{A}_\mathbf{x}^\mathrm{T}
+\end{matrix} \right] \left[
+\begin{matrix}
+\mathbf{A}_\mathbf{y} &\mathbf{A}_\mathbf{x}
+\end{matrix} \right] \\
+&=\left[
+\begin{matrix}
+\frac{1}{T}\mathbf{A}_\mathbf{y}^\mathrm{T}\mathbf{A}_\mathbf{y} &\frac{1}{T}\mathbf{A}_\mathbf{y}^\mathrm{T}\mathbf{A}_\mathbf{x} \\
+\frac{1}{T}\mathbf{A}_\mathbf{x}^\mathrm{T}\mathbf{A}_\mathbf{y} &\frac{1}{T}\mathbf{A}_\mathbf{x}^\mathrm{T}\mathbf{A}_\mathbf{x} \\
+\end{matrix} \right]
+\end{aligned}
+$$
+Now focus on a certain element.
+$$
+\begin{aligned}
+\frac{1}{T}(\mathbf{A}_\mathbf{y}^\mathrm{T}\mathbf{A}_\mathbf{y})_{i,j}
+&=\sum_{k=1}^{T-M}(\mathbf{A}_\mathbf{y}^\mathrm{T})_{i,k}(\mathbf{A}_\mathbf{y})_{k,j} \\
+&=\sum_{k=1}^{T-M}(\mathbf{A}_\mathbf{y})_{k,i}(\mathbf{A}_\mathbf{y})_{k,j} \\
+&=\sum_{k=1}^{T-M}y_{M+k-i-1}y_{M+k-j-1} \\
+&=\sum_{k=M-i}^{T-i-1}y_{k}y_{k+(i-j)}
+\end{aligned}
+$$
+Since $T \gg N$ and $T \gg M$, it goes like
+$$
+\frac{1}{T}(\mathbf{A}_\mathbf{y}^\mathrm{T}\mathbf{A}_\mathbf{y})_{i,j} \approx \sum_{k=0}^{T-1}y_{k}y_{k+(i-j)} = R_{yy}(i-j).
+$$
+Similarly, we have 
+$$
+\begin{aligned}
+&\frac{1}{T}(\mathbf{A}_\mathbf{x}^\mathrm{T}\mathbf{A}_\mathbf{x})_{i,j} \approx \sum_{k=0}^{T-1}x_{k}x_{k+(i-j)} = R_{xx}(i-j), \\
+&\frac{1}{T}(\mathbf{A}_\mathbf{y}^\mathrm{T}\mathbf{A}_\mathbf{x})_{i,j} = \frac{1}{T}(\mathbf{A}_\mathbf{x}^\mathrm{T}\mathbf{A}_\mathbf{y})_{i,j} \approx \sum_{k=0}^{T-1}x_{k}y_{k+(i-j)} = R_{xy}(i-j).
+\end{aligned}
+$$
+To $\frac{1}{T}\mathbf{A}^\mathrm{T}\mathbf{y}$, we can take the same steps. First,
+$$
+\begin{aligned}
+\frac{1}{T}\mathbf{A}^\mathrm{T}\mathbf{y}
+&=\frac{1}{T}\left[
+\begin{matrix}
+\mathbf{A}_\mathbf{y}^\mathrm{T} \\
+\mathbf{A}_\mathbf{x}^\mathrm{T}
+\end{matrix} \right] \mathbf{y} \\
+&=\left[
+\begin{matrix}
+\frac{1}{T}\mathbf{A}_\mathbf{y}^\mathrm{T}\mathbf{y} \\
+\frac{1}{T}\mathbf{A}_\mathbf{x}^\mathrm{T}\mathbf{y} \\
+\end{matrix} \right].
+\end{aligned}
+$$
+Then concentrate on one element.
+$$
+\begin{aligned}
+\frac{1}{T}(\mathbf{A}_\mathbf{y}^\mathrm{T}\mathbf{y})_{i,1}
+&=\sum_{k=1}^{T-M}(\mathbf{A}_\mathbf{y}^\mathrm{T})_{i,k}(\mathbf{y})_{k,1} \\
+&=\sum_{k=1}^{T-M}(\mathbf{A}_\mathbf{y})_{k,i}(\mathbf{y})_{k,1} \\
+&=\sum_{k=1}^{T-M}y_{M+k-i-1}y_{M+k-1} \\
+&=\sum_{k=M-i}^{T-i-1}y_{k}y_{k+i} \\
+&\approx \sum_{k=0}^{T-1}y_{k}y_{k+i} \\
+&= R_{yy}(i)
+\end{aligned}
+$$
+And also we can get
+$$
+\begin{aligned}
+\frac{1}{T}(\mathbf{A}_\mathbf{x}^\mathrm{T}\mathbf{y})_{i,1}
+&\approx \sum_{k=0}^{T-1}x_{k}y_{k+i} \\
+&= R_{xy}(i)
+\end{aligned}
+$$
+In conclusion, $\frac{1}{T}\mathbf{A}^\mathrm{T}\mathbf{A}$ and $\frac{1}{T}\mathbf{A}^\mathrm{T}\mathbf{y}$ can be approximately computed from the autocorrelation functions.
 
 ### 4.
 
