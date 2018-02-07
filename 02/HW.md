@@ -194,7 +194,7 @@ $$
 cos(\Omega_1(0)) &\cdots &cos(\Omega_L(0)) &sin(\Omega_1(0)) &\cdots &sin(\Omega_L(0)) \\
 cos(\Omega_1(1)) &\cdots &cos(\Omega_L(1)) &sin(\Omega_1(1)) &\cdots &sin(\Omega_L(1)) \\
 \vdots &\cdots &\vdots &\vdots &\cdots &\vdots \\
-cos(\Omega_1(T-1)) &\cdots &cos(\Omega_L(T-1)) &sin(\Omega_1(T-1)) &\cdots &sin(\Omega_L(T-1))
+cos(\Omega_1(N-1)) &\cdots &cos(\Omega_L(N-1)) &sin(\Omega_1(N-1)) &\cdots &sin(\Omega_L(N-1))
 \end{matrix} \right]
 $$
 and
@@ -203,7 +203,7 @@ $$
 \begin{matrix}
 x_0 \\
 \vdots \\
-x_{T-1}
+x_{N-1}
 \end{matrix} \right],
 \mathbf{\beta}=\left[
 \begin{matrix}
