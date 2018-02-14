@@ -512,20 +512,14 @@ efficient code try to avoid the for loop and use
          \PY{n}{syy} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{(}\PY{n}{ytr}\PY{o}{\PYZhy{}}\PY{n}{ym}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)}
          \PY{n}{sxx} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{(}\PY{n}{Xtr}\PY{o}{\PYZhy{}}\PY{n}{Xm}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
          \PY{n}{sxy} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{(}\PY{n}{Xtr}\PY{o}{\PYZhy{}}\PY{n}{Xm}\PY{p}{)}\PY{o}{*}\PY{p}{(}\PY{n}{ytr}\PY{o}{\PYZhy{}}\PY{n}{ym}\PY{p}{)}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{k+kc}{None}\PY{p}{]}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
-         \PY{n}{Rsq} \PY{o}{=} \PY{n}{sxy}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{o}{/}\PY{n}{sxx}\PY{o}{/}\PY{n}{syy}
+         \PY{n}{Rsq} \PY{o}{=} \PY{n}{sxy}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2} \PY{o}{/} \PY{p}{(}\PY{n}{sxx} \PY{o}{+} \PY{l+m+mf}{1e\PYZhy{}8}\PY{p}{)} \PY{o}{/} \PY{p}{(}\PY{n}{syy} \PY{o}{+} \PY{l+m+mf}{1e\PYZhy{}8}\PY{p}{)}
          \PY{n}{plt}\PY{o}{.}\PY{n}{stem}\PY{p}{(}\PY{n}{Rsq}\PY{o}{.}\PY{n}{T}\PY{p}{)}
          \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
 \end{Verbatim}
 
 
-    \begin{Verbatim}[commandchars=\\\{\}]
-/usr/local/lib/python3.6/site-packages/ipykernel\_launcher.py:7: RuntimeWarning: invalid value encountered in true\_divide
-  import sys
-
-    \end{Verbatim}
-
     \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_21_1.png}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_21_0.png}
     \end{center}
     { \hspace*{\fill} \\}
     
@@ -541,13 +535,13 @@ neurons with the 10 highest correlations.
 {\color{incolor}In [{\color{incolor}11}]:} \PY{n}{d} \PY{o}{=} \PY{l+m+mi}{50}  \PY{c+c1}{\PYZsh{} Number of neurons to use}
          
          \PY{c+c1}{\PYZsh{} TODO}
-         \PY{n}{Isel} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{argsort}\PY{p}{(}\PY{n}{Rsq}\PY{p}{)}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{n}{d}\PY{p}{:}\PY{p}{]}
-         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{The neurons with the ten highest R\PYZca{}2 values are}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{Isel}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{10}\PY{p}{:}\PY{p}{]}\PY{p}{)}
+         \PY{n}{Isel} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{argsort}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{n}{Rsq}\PY{p}{)}\PY{p}{[}\PY{p}{:}\PY{n}{d}\PY{p}{]}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{The neurons with the ten highest R\PYZca{}2 values are}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{Isel}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{10}\PY{p}{]}\PY{p}{)}
 \end{Verbatim}
 
 
     \begin{Verbatim}[commandchars=\\\{\}]
-The neurons with the ten highest R\^{}2 values are [ 67 126  58 164  41 105 122 177  13 139]
+The neurons with the ten highest R\^{}2 values are [164  58 126  67 188 190 134  18 129 114]
 
     \end{Verbatim}
 
@@ -560,15 +554,15 @@ step and print both the test RSS per sample and the normalized test RSS.
          \PY{n}{regr\PYZus{}d}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{Xtr}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{n}{Isel}\PY{p}{]}\PY{p}{,} \PY{n}{ytr}\PY{p}{)}
          \PY{n}{y\PYZus{}pred\PYZus{}d} \PY{o}{=} \PY{n}{regr\PYZus{}d}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{Xts}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{n}{Isel}\PY{p}{]}\PY{p}{)}
          \PY{n}{RSS\PYZus{}ps\PYZus{}d} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{(}\PY{n}{y\PYZus{}pred\PYZus{}d} \PY{o}{\PYZhy{}} \PY{n}{yts}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)}
-         \PY{n}{RSS\PYZus{}d} \PY{o}{=} \PY{n}{RSS\PYZus{}ps\PYZus{}d}\PY{o}{/}\PY{n}{np}\PY{o}{.}\PY{n}{std}\PY{p}{(}\PY{n}{yts}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}
+         \PY{n}{RSS\PYZus{}d} \PY{o}{=} \PY{n}{RSS\PYZus{}ps\PYZus{}d} \PY{o}{/} \PY{n}{np}\PY{o}{.}\PY{n}{std}\PY{p}{(}\PY{n}{yts}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}
          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Test RSS per sample is }\PY{l+s+si}{\PYZpc{}f}\PY{l+s+s2}{.}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{n}{RSS\PYZus{}ps\PYZus{}d}\PY{p}{)}
          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Normalized test RSS is }\PY{l+s+si}{\PYZpc{}f}\PY{l+s+s2}{.}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{n}{RSS\PYZus{}d}\PY{p}{)}
 \end{Verbatim}
 
 
     \begin{Verbatim}[commandchars=\\\{\}]
-Test RSS per sample is 0.000980.
-Normalized test RSS is 0.504026.
+Test RSS per sample is 0.000963.
+Normalized test RSS is 0.495387.
 
     \end{Verbatim}
 
@@ -642,11 +636,11 @@ to print the progress.
              \PY{n}{syy} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{(}\PY{n}{ytr}\PY{o}{\PYZhy{}}\PY{n}{ym}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)}
              \PY{n}{sxx} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{(}\PY{n}{Xtr}\PY{o}{\PYZhy{}}\PY{n}{Xm}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
              \PY{n}{sxy} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{(}\PY{n}{Xtr}\PY{o}{\PYZhy{}}\PY{n}{Xm}\PY{p}{)}\PY{o}{*}\PY{p}{(}\PY{n}{ytr}\PY{o}{\PYZhy{}}\PY{n}{ym}\PY{p}{)}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{k+kc}{None}\PY{p}{]}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
-             \PY{n}{Rsq} \PY{o}{=} \PY{n}{sxy}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{o}{/}\PY{n}{sxx}\PY{o}{/}\PY{n}{syy}
+             \PY{n}{Rsq} \PY{o}{=} \PY{n}{sxy}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2} \PY{o}{/} \PY{p}{(}\PY{n}{sxx} \PY{o}{+} \PY{l+m+mf}{1e\PYZhy{}8}\PY{p}{)} \PY{o}{/} \PY{p}{(}\PY{n}{syy} \PY{o}{+} \PY{l+m+mf}{1e\PYZhy{}8}\PY{p}{)}
              
              \PY{c+c1}{\PYZsh{} Loop over the model order}
              \PY{k}{for} \PY{n}{it}\PY{p}{,} \PY{n}{d} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{dtest}\PY{p}{)}\PY{p}{:}
-                 \PY{n}{Isel} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{argsort}\PY{p}{(}\PY{n}{Rsq}\PY{p}{)}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{n}{d}\PY{p}{:}\PY{p}{]}
+                 \PY{n}{Isel} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{argsort}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{n}{Rsq}\PY{p}{)}\PY{p}{[}\PY{p}{:}\PY{n}{d}\PY{p}{]}
              
                  \PY{c+c1}{\PYZsh{} Fit data on training data}
                  \PY{n}{regr\PYZus{}it} \PY{o}{=} \PY{n}{sklearn}\PY{o}{.}\PY{n}{linear\PYZus{}model}\PY{o}{.}\PY{n}{LinearRegression}\PY{p}{(}\PY{p}{)}
@@ -727,7 +721,7 @@ optimal \texttt{d}.
     { \hspace*{\fill} \\}
     
     \begin{Verbatim}[commandchars=\\\{\}]
-The estimated model order is 110
+The estimated model order is 120
 
     \end{Verbatim}
 
