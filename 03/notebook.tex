@@ -477,7 +477,7 @@ and fit the linear model to the training data.
     \begin{Verbatim}[commandchars=\\\{\}]
 {\color{incolor}In [{\color{incolor}9}]:} \PY{c+c1}{\PYZsh{} TODO}
         \PY{n}{y\PYZus{}pred} \PY{o}{=} \PY{n}{regr}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{Xts}\PY{p}{)}
-        \PY{n}{RSS} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{(}\PY{n}{y\PYZus{}pred} \PY{o}{\PYZhy{}} \PY{n}{yts}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)}\PY{o}{/}\PY{n}{np}\PY{o}{.}\PY{n}{std}\PY{p}{(}\PY{n}{yts}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}
+        \PY{n}{RSS} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{(}\PY{n}{y\PYZus{}pred} \PY{o}{\PYZhy{}} \PY{n}{yts}\PY{p}{)} \PY{o}{*}\PY{o}{*} \PY{l+m+mi}{2}\PY{p}{)} \PY{o}{/} \PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{std}\PY{p}{(}\PY{n}{yts}\PY{p}{)} \PY{o}{*}\PY{o}{*} \PY{l+m+mi}{2}\PY{p}{)}
         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Normalized RSS is }\PY{l+s+si}{\PYZpc{}f}\PY{l+s+s2}{.}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{n}{RSS}\PY{p}{)}
 \end{Verbatim}
 
@@ -637,14 +637,15 @@ to print the progress.
              \PY{n}{Xts} \PY{o}{=} \PY{n}{X0}\PY{p}{[}\PY{n}{Its}\PY{p}{]}
              \PY{n}{yts} \PY{o}{=} \PY{n}{y0}\PY{p}{[}\PY{n}{Its}\PY{p}{]}
              
+             \PY{n}{ym} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{ytr}\PY{p}{)}
+             \PY{n}{Xm} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{Xtr}\PY{p}{)}
+             \PY{n}{syy} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{(}\PY{n}{ytr}\PY{o}{\PYZhy{}}\PY{n}{ym}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)}
+             \PY{n}{sxx} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{(}\PY{n}{Xtr}\PY{o}{\PYZhy{}}\PY{n}{Xm}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+             \PY{n}{sxy} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{(}\PY{n}{Xtr}\PY{o}{\PYZhy{}}\PY{n}{Xm}\PY{p}{)}\PY{o}{*}\PY{p}{(}\PY{n}{ytr}\PY{o}{\PYZhy{}}\PY{n}{ym}\PY{p}{)}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{k+kc}{None}\PY{p}{]}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+             \PY{n}{Rsq} \PY{o}{=} \PY{n}{sxy}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{o}{/}\PY{n}{sxx}\PY{o}{/}\PY{n}{syy}
+             
              \PY{c+c1}{\PYZsh{} Loop over the model order}
              \PY{k}{for} \PY{n}{it}\PY{p}{,} \PY{n}{d} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{dtest}\PY{p}{)}\PY{p}{:}
-                 \PY{n}{ym} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{ytr}\PY{p}{)}
-                 \PY{n}{Xm} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{Xtr}\PY{p}{)}
-                 \PY{n}{syy} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{(}\PY{n}{ytr}\PY{o}{\PYZhy{}}\PY{n}{ym}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)}
-                 \PY{n}{sxx} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{(}\PY{n}{Xtr}\PY{o}{\PYZhy{}}\PY{n}{Xm}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
-                 \PY{n}{sxy} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{(}\PY{n}{Xtr}\PY{o}{\PYZhy{}}\PY{n}{Xm}\PY{p}{)}\PY{o}{*}\PY{p}{(}\PY{n}{ytr}\PY{o}{\PYZhy{}}\PY{n}{ym}\PY{p}{)}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{k+kc}{None}\PY{p}{]}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
-                 \PY{n}{Rsq} \PY{o}{=} \PY{n}{sxy}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{o}{/}\PY{n}{sxx}\PY{o}{/}\PY{n}{syy}
                  \PY{n}{Isel} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{argsort}\PY{p}{(}\PY{n}{Rsq}\PY{p}{)}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{n}{d}\PY{p}{:}\PY{p}{]}
              
                  \PY{c+c1}{\PYZsh{} Fit data on training data}
@@ -726,7 +727,7 @@ optimal \texttt{d}.
     { \hspace*{\fill} \\}
     
     \begin{Verbatim}[commandchars=\\\{\}]
-The estimated model order is 100
+The estimated model order is 110
 
     \end{Verbatim}
 
