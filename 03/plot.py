@@ -8,7 +8,7 @@ import matplotlib.pyplot as plt
 import numpy.polynomial.polynomial as poly
 
 def main():
-    beta0 = np.array([1, 2, 0.5])
+    beta0 = np.array([1, 2, -1])
     x = np.linspace(0, 1, 10)
     y = poly.polyval(x, beta0)
 
