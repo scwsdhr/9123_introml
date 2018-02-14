@@ -512,7 +512,7 @@ efficient code try to avoid the for loop and use
          \PY{n}{syy} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{(}\PY{n}{ytr}\PY{o}{\PYZhy{}}\PY{n}{ym}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)}
          \PY{n}{sxx} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{(}\PY{n}{Xtr}\PY{o}{\PYZhy{}}\PY{n}{Xm}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
          \PY{n}{sxy} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{(}\PY{n}{Xtr}\PY{o}{\PYZhy{}}\PY{n}{Xm}\PY{p}{)}\PY{o}{*}\PY{p}{(}\PY{n}{ytr}\PY{o}{\PYZhy{}}\PY{n}{ym}\PY{p}{)}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{k+kc}{None}\PY{p}{]}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
-         \PY{n}{Rsq} \PY{o}{=} \PY{n}{sxy}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2} \PY{o}{/} \PY{p}{(}\PY{n}{sxx} \PY{o}{+} \PY{l+m+mf}{1e\PYZhy{}8}\PY{p}{)} \PY{o}{/} \PY{p}{(}\PY{n}{syy} \PY{o}{+} \PY{l+m+mf}{1e\PYZhy{}8}\PY{p}{)}
+         \PY{n}{Rsq} \PY{o}{=} \PY{n}{sxy}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2} \PY{o}{/} \PY{p}{(}\PY{n}{sxx} \PY{o}{+} \PY{l+m+mf}{1e\PYZhy{}18}\PY{p}{)} \PY{o}{/} \PY{p}{(}\PY{n}{syy} \PY{o}{+} \PY{l+m+mf}{1e\PYZhy{}18}\PY{p}{)}
          \PY{n}{plt}\PY{o}{.}\PY{n}{stem}\PY{p}{(}\PY{n}{Rsq}\PY{o}{.}\PY{n}{T}\PY{p}{)}
          \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
 \end{Verbatim}
@@ -636,7 +636,7 @@ to print the progress.
              \PY{n}{syy} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{(}\PY{n}{ytr}\PY{o}{\PYZhy{}}\PY{n}{ym}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)}
              \PY{n}{sxx} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{(}\PY{n}{Xtr}\PY{o}{\PYZhy{}}\PY{n}{Xm}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
              \PY{n}{sxy} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{(}\PY{n}{Xtr}\PY{o}{\PYZhy{}}\PY{n}{Xm}\PY{p}{)}\PY{o}{*}\PY{p}{(}\PY{n}{ytr}\PY{o}{\PYZhy{}}\PY{n}{ym}\PY{p}{)}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{k+kc}{None}\PY{p}{]}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
-             \PY{n}{Rsq} \PY{o}{=} \PY{n}{sxy}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2} \PY{o}{/} \PY{p}{(}\PY{n}{sxx} \PY{o}{+} \PY{l+m+mf}{1e\PYZhy{}8}\PY{p}{)} \PY{o}{/} \PY{p}{(}\PY{n}{syy} \PY{o}{+} \PY{l+m+mf}{1e\PYZhy{}8}\PY{p}{)}
+             \PY{n}{Rsq} \PY{o}{=} \PY{n}{sxy}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2} \PY{o}{/} \PY{p}{(}\PY{n}{sxx} \PY{o}{+} \PY{l+m+mf}{1e\PYZhy{}18}\PY{p}{)} \PY{o}{/} \PY{p}{(}\PY{n}{syy} \PY{o}{+} \PY{l+m+mf}{1e\PYZhy{}18}\PY{p}{)}
              
              \PY{c+c1}{\PYZsh{} Loop over the model order}
              \PY{k}{for} \PY{n}{it}\PY{p}{,} \PY{n}{d} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{dtest}\PY{p}{)}\PY{p}{:}
@@ -721,7 +721,7 @@ optimal \texttt{d}.
     { \hspace*{\fill} \\}
     
     \begin{Verbatim}[commandchars=\\\{\}]
-The estimated model order is 120
+The estimated model order is 110
 
     \end{Verbatim}
 
