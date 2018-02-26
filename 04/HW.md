@@ -19,14 +19,9 @@ The problem with (c):
 Need more computing capacity. 
 An accurate result requires $K$ fits of parameters.
 
-$$
-\begin{aligned}
-P(X_i=x|x\text{ in list})&=\frac{1}{n}\times 50\% \\
-E =\sum_{i=1}^niP(X_i=x|x \text{ in list})
-&=\sum_{i=1}^ni\frac{1}{2n}
-=\frac{1+n}{4}
-\end{aligned}
-$$
+I would use method (c) when $N$ is relatively small. But when $N$ becomes vary large, I still prefer method (c) with a smaller $K$.
+
+I will use One Standard Error Rule to decide the optimal parameters to do prediction.
 
 ### 2. 
 
@@ -41,9 +36,15 @@ $$
 
 ### 3. 
 
+(1) When $N$ is very large.     
+First, we choose a certain $K$ based on the computing power. Then we can get the nonzeros along with the optimal $\alpha$ by K-fold cross validation. Finally, drop the zero ones and sort the coefficients with decreasing magnitude. After that, we can reach the optimal subset.      
+
+(2) When $N$ is relatively small.       
+The steps are same with the previous case, but we can use a larger $K$ to reach a more accurate result. Even $K=N$, so one sample is left out.
+
 ### 4. 
 
-Filtering method, wrapper method, embedded method, forward stepwise algorithm. 
+For example, filtering method, wrapper method, embedded method, forward stepwise algorithm. 
 
 ### 5. 
 
@@ -99,7 +100,7 @@ which is the inverse of normalization.
 
 ### 6. 
 
-Without regularization, large positive and negative coefficients cancel each other for correlated features, resulting in high variance of the resulting models.
+Without regularization, large positive and negative coefficients cancel each other for correlated features, resulting in high variance of the resulting models. Besides, the regularization can remove the intercept.
 
 ### 7.
 
@@ -127,3 +128,24 @@ $$
 
 ### 9. 
 
+First, we define an artificial data set by
+$$
+\boldsymbol{A}^*=(1+\alpha\lambda)^{-\frac{1}{2}}\left(
+\begin{matrix}
+\boldsymbol{A} \\
+\sqrt{\alpha\lambda}\boldsymbol{I}
+\end{matrix} \right),
+$$
+$$
+\boldsymbol{y}^*=\left(
+\begin{matrix}
+\boldsymbol{y} \\
+0
+\end{matrix} \right)
+$$
+Let $\alpha^*=\frac{\alpha(1-\lambda)}{\sqrt{1+\alpha\lambda}}$ and $\boldsymbol{\beta}^*=\sqrt{1+\alpha\lambda}\boldsymbol{\beta}$. 
+Then the elastic-net can be rewritten as 
+$$
+J(\boldsymbol{\beta})=||\boldsymbol{y}^*-\boldsymbol{A}^*\boldsymbol{\beta}^*||^2+\alpha^*||\boldsymbol{\beta}^*||_1
+$$
+which is turned into a LASSO problem.
