@@ -1,0 +1,1311 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{lab03b\_student-performance\_LASSO}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \hypertarget{lab-feature-selection-for-linear-regression-for-student-performance-data}{%
+\section{Lab: Feature Selection for Linear Regression for Student
+Performance
+Data}\label{lab-feature-selection-for-linear-regression-for-student-performance-data}}
+
+In this lab we use the UCI dataset of \texttt{Student\ Performance} to
+use linear regression with LASSO regularization. We will also look at
+some Feature Selection methods. The dataset is about student achievement
+in secondary education of two Portuguese schools. The target variable is
+the student's grade in their Mathematics exam and there are many
+features such as demographic (address), social (family, age, sex, etc)
+and school related (schoolName, study time etc) features. So, we will
+try to predict the student's grades based on their background.
+
+This lab has the following objectives
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Learn about converting the categorical dataset to numerical values.
+\item
+  Perform LASSO regression and compare the results with simple linear
+  regression.
+\item
+  Visualize the features obtained by LASSO and the LASSO path.
+\item
+  Learn another technique for feature selection.
+\end{enumerate}
+
+    \hypertarget{loading-the-data}{%
+\subsection{Loading the data}\label{loading-the-data}}
+
+The dataset is available at P. Cortez and A. Silva. Using Data Mining to
+Predict Secondary School Student Performance. In A. Brito and J.
+Teixeira Eds., Proceedings of 5th FUture BUsiness TEChnology Conference
+(FUBUTEC 2008) pp.~5-12, Porto, Portugal, April, 2008, EUROSIS, ISBN
+978-9077381-39-7.
+
+You need to download the Data Folder which is a \texttt{student.zip}
+file. It contains \texttt{student-mat.csv} file which we will use in
+this lab. You should go through the website to understand the meaning of
+each feature in the dataset, to be able to interpret your results.
+
+We start with loading the basic packages.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib} 
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+        \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
+        \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+\end{Verbatim}
+
+
+    Now, use \texttt{pd.read\_csv(...)} to load the \texttt{student-mat.csv}
+file. Also, print the first 6 samples of dataframe \texttt{df}.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{c+c1}{\PYZsh{}TODO}
+        \PY{n}{df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{student/student\PYZhy{}mat.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{sep} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{;}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{df}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{l+m+mi}{6}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}2}]:}   school sex  age address famsize Pstatus  Medu  Fedu      Mjob      Fjob {\ldots}  \textbackslash{}
+        0     GP   F   18       U     GT3       A     4     4   at\_home   teacher {\ldots}   
+        1     GP   F   17       U     GT3       T     1     1   at\_home     other {\ldots}   
+        2     GP   F   15       U     LE3       T     1     1   at\_home     other {\ldots}   
+        3     GP   F   15       U     GT3       T     4     2    health  services {\ldots}   
+        4     GP   F   16       U     GT3       T     3     3     other     other {\ldots}   
+        5     GP   M   16       U     LE3       T     4     3  services     other {\ldots}   
+        
+          famrel freetime  goout  Dalc  Walc health absences  G1  G2  G3  
+        0      4        3      4     1     1      3        6   5   6   6  
+        1      5        3      3     1     1      3        4   5   5   6  
+        2      4        3      2     2     3      3       10   7   8  10  
+        3      3        2      2     1     1      5        2  15  14  15  
+        4      4        3      2     1     2      5        4   6  10  10  
+        5      5        4      2     1     2      5       10  15  15  15  
+        
+        [6 rows x 33 columns]
+\end{Verbatim}
+            
+    You can see that the dataset contains a mixture of numerical and
+categorial features. For our analysis we can convert the categories to a
+numerical value. We can use two techniques-
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{One-Hot Coding}: Create K new binary features for each
+  categorical feature with K categories.
+\item
+  \textbf{Label Encoder}: Map categorical values of a feature to
+  numericals using whole numbers (0,1,2,\ldots{}).
+\end{enumerate}
+
+We first look at the datatype of each features. Use the command
+\texttt{df.dtypes} and display the results.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{n}{df}\PY{o}{.}\PY{n}{dtypes}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}3}]:} school        object
+        sex           object
+        age            int64
+        address       object
+        famsize       object
+        Pstatus       object
+        Medu           int64
+        Fedu           int64
+        Mjob          object
+        Fjob          object
+        reason        object
+        guardian      object
+        traveltime     int64
+        studytime      int64
+        failures       int64
+        schoolsup     object
+        famsup        object
+        paid          object
+        activities    object
+        nursery       object
+        higher        object
+        internet      object
+        romantic      object
+        famrel         int64
+        freetime       int64
+        goout          int64
+        Dalc           int64
+        Walc           int64
+        health         int64
+        absences       int64
+        G1             int64
+        G2             int64
+        G3             int64
+        dtype: object
+\end{Verbatim}
+            
+    Some of the features are of datatype \textbf{object}. Use the
+\texttt{select\_dtypes} method in Pandas DataFrame to identify the
+categorical features (features of datatype \texttt{object}) and save the
+name of those features into a list \texttt{categorical\_features}. Print
+this list. You should get these set of features: {[}`school', `sex',
+`address', `famsize', `Pstatus', `Mjob', `Fjob', `reason', `guardian',
+`schoolsup', `famsup', `paid', `activities', `nursery', `higher',
+`internet', `romantic'{]}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{c+c1}{\PYZsh{}TODO}
+        
+        \PY{n}{categorical\PYZus{}features} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{df}\PY{o}{.}\PY{n}{select\PYZus{}dtypes}\PY{p}{(}\PY{n}{include}\PY{o}{=}\PY{n+nb}{object}\PY{p}{)}\PY{o}{.}\PY{n}{axes}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{tolist}\PY{p}{(}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{categorical\PYZus{}features}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+['school', 'sex', 'address', 'famsize', 'Pstatus', 'Mjob', 'Fjob', 'reason', 'guardian', 'schoolsup', 'famsup', 'paid', 'activities', 'nursery', 'higher', 'internet', 'romantic']
+
+    \end{Verbatim}
+
+    \hypertarget{one-hot-coding-and-label-encoder}{%
+\subsection{One-Hot Coding and Label
+Encoder}\label{one-hot-coding-and-label-encoder}}
+
+For a categorical feature with more than two categories, we should use
+one-hot-coding (OHC) to convert it to binary features. However, for a
+categorical feature with only two categories, we should apply Label
+Encoder. We first list the features that need OHC and those that need
+Label Encoder.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{n}{ohc\PYZus{}category} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Mjob}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Fjob}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{reason}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{guardian}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+        \PY{n}{le\PYZus{}category} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{school}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sex}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{address}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{famsize}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Pstatus}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{schoolsup}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{famsup}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{paid}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{activities}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+               \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{nursery}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{higher}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{internet}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{romantic}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+\end{Verbatim}
+
+
+    \hypertarget{one-hot-coding}{%
+\subsection{One-Hot Coding}\label{one-hot-coding}}
+
+We first use One-Hot Coding to all categorical features. Pandas has a
+method called \texttt{get\_dummies()} to do the job. It's interesting
+that this method is called \texttt{get\_dummies} because it generates
+new dummy features corresponding to each categories. Find a new
+dataframe df\_ohc which replace those features in the ohc\_category by
+one-hot coding (apply get\_dummies on columns in ohc\_category). Also
+print the first 6 samples of the new dataframe \texttt{df\_ohc}, and
+observe and comment on how each categorical feature is converted to
+multiple binary numerical features.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{c+c1}{\PYZsh{}TODO}
+        \PY{n}{df\PYZus{}ohc} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{n}{ohc\PYZus{}category}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n}{pd}\PY{o}{.}\PY{n}{get\PYZus{}dummies}\PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{n}{ohc\PYZus{}category}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+        \PY{n}{df\PYZus{}ohc}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{l+m+mi}{6}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}6}]:}   school sex  age address famsize Pstatus  Medu  Fedu  traveltime  studytime  \textbackslash{}
+        0     GP   F   18       U     GT3       A     4     4           2          2   
+        1     GP   F   17       U     GT3       T     1     1           1          2   
+        2     GP   F   15       U     LE3       T     1     1           1          2   
+        3     GP   F   15       U     GT3       T     4     2           1          3   
+        4     GP   F   16       U     GT3       T     3     3           1          2   
+        5     GP   M   16       U     LE3       T     4     3           1          2   
+        
+                {\ldots}        Fjob\_other Fjob\_services Fjob\_teacher reason\_course  \textbackslash{}
+        0       {\ldots}                 0             0            1             1   
+        1       {\ldots}                 1             0            0             1   
+        2       {\ldots}                 1             0            0             0   
+        3       {\ldots}                 0             1            0             0   
+        4       {\ldots}                 1             0            0             0   
+        5       {\ldots}                 1             0            0             0   
+        
+          reason\_home reason\_other reason\_reputation guardian\_father guardian\_mother  \textbackslash{}
+        0           0            0                 0               0               1   
+        1           0            0                 0               1               0   
+        2           0            1                 0               0               1   
+        3           1            0                 0               0               1   
+        4           1            0                 0               1               0   
+        5           0            0                 1               0               1   
+        
+           guardian\_other  
+        0               0  
+        1               0  
+        2               0  
+        3               0  
+        4               0  
+        5               0  
+        
+        [6 rows x 46 columns]
+\end{Verbatim}
+            
+    \hypertarget{linear-encoder}{%
+\subsection{Linear Encoder}\label{linear-encoder}}
+
+Now we further convert those in the \texttt{df\_ohc} data frame that are
+in the \texttt{le\_category} using Label Encoder. Find a new dataframe
+\texttt{df\_le} which is a copy of dataframe \texttt{df\_ohc} except
+that all the binary categorial features are encoded to a numerical value
+of 0 or 1. You should use the \texttt{fit\_transform()} method of the
+\texttt{LabelEncoder()}. Print first 6 lines of \texttt{df\_le}, and
+make sure the entries in the final data frame are all properly encoded
+into numerical features.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{preprocessing} \PY{k}{import} \PY{n}{LabelEncoder}
+        
+        \PY{c+c1}{\PYZsh{}TODO}
+        
+        \PY{n}{df\PYZus{}le} \PY{o}{=} \PY{n}{df\PYZus{}ohc}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} Hint: Now use a for loop over the elements in `le\PYZus{}category` and update df\PYZus{}le}
+        \PY{k}{for} \PY{n}{cat} \PY{o+ow}{in} \PY{n}{le\PYZus{}category}\PY{p}{:}
+            \PY{n}{le} \PY{o}{=} \PY{n}{LabelEncoder}\PY{p}{(}\PY{p}{)}
+            \PY{n}{le}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{df\PYZus{}le}\PY{p}{[}\PY{n}{cat}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+            \PY{n}{df\PYZus{}le}\PY{p}{[}\PY{n}{cat}\PY{p}{]} \PY{o}{=} \PY{n}{le}\PY{o}{.}\PY{n}{transform}\PY{p}{(}\PY{n}{df\PYZus{}le}\PY{p}{[}\PY{n}{cat}\PY{p}{]}\PY{p}{)}
+        \PY{n}{df\PYZus{}le}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{l+m+mi}{6}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}7}]:}    school  sex  age  address  famsize  Pstatus  Medu  Fedu  traveltime  \textbackslash{}
+        0       0    0   18        1        0        0     4     4           2   
+        1       0    0   17        1        0        1     1     1           1   
+        2       0    0   15        1        1        1     1     1           1   
+        3       0    0   15        1        0        1     4     2           1   
+        4       0    0   16        1        0        1     3     3           1   
+        5       0    1   16        1        1        1     4     3           1   
+        
+           studytime       {\ldots}        Fjob\_other  Fjob\_services  Fjob\_teacher  \textbackslash{}
+        0          2       {\ldots}                 0              0             1   
+        1          2       {\ldots}                 1              0             0   
+        2          2       {\ldots}                 1              0             0   
+        3          3       {\ldots}                 0              1             0   
+        4          2       {\ldots}                 1              0             0   
+        5          2       {\ldots}                 1              0             0   
+        
+           reason\_course  reason\_home  reason\_other  reason\_reputation  \textbackslash{}
+        0              1            0             0                  0   
+        1              1            0             0                  0   
+        2              0            0             1                  0   
+        3              0            1             0                  0   
+        4              0            1             0                  0   
+        5              0            0             0                  1   
+        
+           guardian\_father  guardian\_mother  guardian\_other  
+        0                0                1               0  
+        1                1                0               0  
+        2                0                1               0  
+        3                0                1               0  
+        4                1                0               0  
+        5                0                1               0  
+        
+        [6 rows x 46 columns]
+\end{Verbatim}
+            
+    The dataset has three targets namely G1, G2, and G3 which represents the
+grades in midterm1, midterm2 and final exams respectively. These
+variables are highly correlated with each other and therefore, if we use
+G3 as out target, it is not interesting to include G1 and G2 to our
+features. For our exercise, we will drop G1,G2, and G3 from the feature
+list, and use G1 as the target. You could try to use G2 or G3 as the
+target as well and see what happens, but submit the results with target
+`G1' only.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{n}{X\PYZus{}df} \PY{o}{=} \PY{n}{df\PYZus{}le}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{G1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{G2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{G3}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}\PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+        \PY{n}{col\PYZus{}names} \PY{o}{=} \PY{n}{X\PYZus{}df}\PY{o}{.}\PY{n}{columns}
+        \PY{n}{X} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{X\PYZus{}df}\PY{p}{)}
+        \PY{n}{y} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{df\PYZus{}le}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{G1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    If there are \texttt{nsamples} number of samples and \texttt{nfeatures}
+number of features, use the \texttt{shape} method to find them and print
+their values.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{c+c1}{\PYZsh{} TODO }
+        \PY{p}{(}\PY{n}{nsamples}\PY{p}{,} \PY{n}{nfeatures}\PY{p}{)} \PY{o}{=} \PY{n}{X}\PY{o}{.}\PY{n}{shape}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{There are }\PY{l+s+si}{\PYZpc{}d}\PY{l+s+s2}{ number of samples and }\PY{l+s+si}{\PYZpc{}d}\PY{l+s+s2}{ number of features.}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{p}{(}\PY{n}{nsamples}\PY{p}{,} \PY{n}{nfeatures}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+There are 395 number of samples and 43 number of features.
+
+    \end{Verbatim}
+
+    \hypertarget{using-linear-regression}{%
+\subsection{Using Linear Regression}\label{using-linear-regression}}
+
+Train a linear model using half of the samples and test the trained
+model using the other half samples. Print the Normalized train and test
+RSS.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{k+kn}{from} \PY{n+nn}{sklearn} \PY{k}{import} \PY{n}{linear\PYZus{}model}
+         
+         \PY{c+c1}{\PYZsh{} TODO}
+         \PY{n}{ns\PYZus{}train} \PY{o}{=} \PY{n}{nsamples} \PY{o}{/}\PY{o}{/} \PY{l+m+mi}{2}
+         \PY{n}{ns\PYZus{}test} \PY{o}{=} \PY{n}{nsamples} \PY{o}{\PYZhy{}} \PY{n}{ns\PYZus{}train}
+         \PY{n}{Xtr} \PY{o}{=} \PY{n}{X}\PY{p}{[}\PY{p}{:}\PY{n}{ns\PYZus{}train}\PY{p}{]}
+         \PY{n}{ytr} \PY{o}{=} \PY{n}{y}\PY{p}{[}\PY{p}{:}\PY{n}{ns\PYZus{}train}\PY{p}{]}
+         \PY{n}{Xts} \PY{o}{=} \PY{n}{X}\PY{p}{[}\PY{n}{ns\PYZus{}train}\PY{p}{:}\PY{p}{]}
+         \PY{n}{yts} \PY{o}{=} \PY{n}{y}\PY{p}{[}\PY{n}{ns\PYZus{}train}\PY{p}{:}\PY{p}{]}
+         
+         \PY{n}{regr} \PY{o}{=} \PY{n}{linear\PYZus{}model}\PY{o}{.}\PY{n}{LinearRegression}\PY{p}{(}\PY{p}{)}
+         \PY{n}{regr}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{Xtr}\PY{p}{,} \PY{n}{ytr}\PY{p}{)}
+         
+         \PY{n}{y\PYZus{}train} \PY{o}{=} \PY{n}{regr}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{Xtr}\PY{p}{)}
+         \PY{n}{train\PYZus{}RSS} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{(}\PY{n}{y\PYZus{}train} \PY{o}{\PYZhy{}} \PY{n}{ytr}\PY{p}{)} \PY{o}{*}\PY{o}{*} \PY{l+m+mi}{2}\PY{p}{)} \PY{o}{/} \PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{std}\PY{p}{(}\PY{n}{ytr}\PY{p}{)} \PY{o}{*}\PY{o}{*} \PY{l+m+mi}{2}\PY{p}{)} 
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Normalized train RSS is }\PY{l+s+si}{\PYZpc{}f}\PY{l+s+s2}{.}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{n}{train\PYZus{}RSS}\PY{p}{)}
+         
+         \PY{n}{y\PYZus{}test} \PY{o}{=} \PY{n}{regr}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{Xts}\PY{p}{)}
+         \PY{n}{test\PYZus{}RSS} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{(}\PY{n}{y\PYZus{}test} \PY{o}{\PYZhy{}} \PY{n}{yts}\PY{p}{)} \PY{o}{*}\PY{o}{*} \PY{l+m+mi}{2}\PY{p}{)} \PY{o}{/} \PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{std}\PY{p}{(}\PY{n}{yts}\PY{p}{)} \PY{o}{*}\PY{o}{*} \PY{l+m+mi}{2}\PY{p}{)} 
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Normalized test RSS is }\PY{l+s+si}{\PYZpc{}f}\PY{l+s+s2}{.}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{n}{test\PYZus{}RSS}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Normalized train RSS is 0.514120.
+Normalized test RSS is 1.078027.
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+/usr/local/lib/python3.6/site-packages/scipy/linalg/basic.py:1226: RuntimeWarning: internal gelsd driver lwork query error, required iwork dimension not returned. This is likely the result of LAPACK bug 0038, fixed in LAPACK 3.2.2 (released July 21, 2010). Falling back to 'gelss' driver.
+  warnings.warn(mesg, RuntimeWarning)
+
+    \end{Verbatim}
+
+    You should observe that the normalized training RSS is reasonably small,
+but the testing error is large! One way to understand why this is the
+case is by printing the coeffcient values. Use the \texttt{coef\_}
+method of model \texttt{regr} to get the regression coefficients. Print
+the coefficients in decreasing order of their magnitudes.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{c+c1}{\PYZsh{}TODO}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{regr}\PY{o}{.}\PY{n}{coef\PYZus{}}\PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{argsort}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{n}{np}\PY{o}{.}\PY{n}{abs}\PY{p}{(}\PY{n}{regr}\PY{o}{.}\PY{n}{coef\PYZus{}}\PY{p}{)}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[-2.42018633  1.41322947  1.34876693 -1.32217565 -1.0878967  -1.05166117
+ -0.9709538   0.91049692  0.88398883  0.70133622 -0.65949467  0.58617418
+ -0.55594619 -0.54087673  0.51415568 -0.50054604  0.49041546 -0.47882562
+ -0.42154072  0.39086244 -0.35560053  0.33424881  0.30750373 -0.30368204
+ -0.2691571   0.25833785  0.24584255 -0.23744384 -0.21326584  0.19538738
+ -0.18054761  0.15443934  0.133797    0.12218268 -0.11549284  0.09108316
+  0.08933163  0.08793535  0.07634628 -0.02057175 -0.01289411 -0.01243405
+  0.        ]
+
+    \end{Verbatim}
+
+    \hypertarget{question}{%
+\paragraph{Question:}\label{question}}
+
+Can you explain in one or two sentences below why the linear regression
+gives a large test error?
+
+    \hypertarget{type-answer-here}{%
+\paragraph{Type Answer Here:}\label{type-answer-here}}
+
+Because there are too many features, i.e.~there occurs an underfitting.
+
+    \hypertarget{using-lasso-regression}{%
+\subsection{Using LASSO regression}\label{using-lasso-regression}}
+
+Now let us try to use LASSO regression to select the optimal features.
+Note that it is extremely important to normalize (standardize) the data
+for the regularization methods.
+
+First use the \texttt{preprocessing.scale} method to standardize the
+data matrix \texttt{X} and target \texttt{y}. Store the standardized
+values in \texttt{Xs} and \texttt{ys} respectively. For this data, the
+\texttt{scale} routine may throw a warning that you are converting data
+types. That is fine.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{k+kn}{from} \PY{n+nn}{sklearn} \PY{k}{import} \PY{n}{preprocessing}
+         
+         \PY{c+c1}{\PYZsh{} TODO}
+         \PY{n}{Xs} \PY{o}{=} \PY{n}{preprocessing}\PY{o}{.}\PY{n}{scale}\PY{p}{(}\PY{n}{X}\PY{p}{)}
+         \PY{n}{ys} \PY{o}{=} \PY{n}{preprocessing}\PY{o}{.}\PY{n}{scale}\PY{p}{(}\PY{n}{y}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+/usr/local/lib/python3.6/site-packages/sklearn/utils/validation.py:475: DataConversionWarning: Data with input dtype int64 was converted to float64 by the scale function.
+  warnings.warn(msg, DataConversionWarning)
+
+    \end{Verbatim}
+
+    Now, use the LASSO method to fit a model. Use cross validation to select
+the regularization level \texttt{alpha}. Use 100 \texttt{alpha} values
+logarithmically spaced from \texttt{1e-3} to \texttt{10}, and use 10
+fold cross validation. Store the test RSS in a matrix \texttt{RSSts}
+with rows correponding to different \texttt{alpha} values and columns
+corresponding to different cross validation folds.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{k+kn}{import}  \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{model\PYZus{}selection} 
+         
+         \PY{c+c1}{\PYZsh{}TODO}
+         \PY{c+c1}{\PYZsh{} Create a k\PYZhy{}fold object}
+         \PY{n}{nfold} \PY{o}{=} \PY{l+m+mi}{10}
+         \PY{n}{kf} \PY{o}{=} \PY{n}{sklearn}\PY{o}{.}\PY{n}{model\PYZus{}selection}\PY{o}{.}\PY{n}{KFold}\PY{p}{(}\PY{n}{n\PYZus{}splits}\PY{o}{=}\PY{n}{nfold}\PY{p}{,}\PY{n}{shuffle}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Create the LASSO model.  We use the `warm start` parameter so that the fit will start at the previous value.}
+         \PY{c+c1}{\PYZsh{} This speeds up the fitting.}
+         \PY{n}{model} \PY{o}{=} \PY{n}{linear\PYZus{}model}\PY{o}{.}\PY{n}{Lasso}\PY{p}{(}\PY{n}{warm\PYZus{}start}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Regularization values to test}
+         \PY{n}{nalpha} \PY{o}{=} \PY{l+m+mi}{100}
+         \PY{n}{alphas} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{logspace}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{,}\PY{n}{nalpha}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} MSE for each alpha and fold value}
+         \PY{n}{RSSts} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n}{nalpha}\PY{p}{,}\PY{n}{nfold}\PY{p}{)}\PY{p}{)}
+         
+         \PY{k}{for} \PY{n}{ifold}\PY{p}{,} \PY{n}{ind} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{kf}\PY{o}{.}\PY{n}{split}\PY{p}{(}\PY{n}{X}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+             
+             \PY{c+c1}{\PYZsh{} Get the training data in the split}
+             \PY{n}{Itr}\PY{p}{,} \PY{n}{Its} \PY{o}{=} \PY{n}{ind}
+             \PY{n}{X\PYZus{}tr} \PY{o}{=} \PY{n}{Xs}\PY{p}{[}\PY{n}{Itr}\PY{p}{,}\PY{p}{:}\PY{p}{]}
+             \PY{n}{y\PYZus{}tr} \PY{o}{=} \PY{n}{ys}\PY{p}{[}\PY{n}{Itr}\PY{p}{]}
+             \PY{n}{X\PYZus{}ts} \PY{o}{=} \PY{n}{Xs}\PY{p}{[}\PY{n}{Its}\PY{p}{,}\PY{p}{:}\PY{p}{]}
+             \PY{n}{y\PYZus{}ts} \PY{o}{=} \PY{n}{ys}\PY{p}{[}\PY{n}{Its}\PY{p}{]}
+             
+             \PY{c+c1}{\PYZsh{} Compute the lasso path for the split}
+             \PY{k}{for} \PY{n}{ia}\PY{p}{,} \PY{n}{a} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{alphas}\PY{p}{)}\PY{p}{:}
+                 
+                 \PY{c+c1}{\PYZsh{} Fit the model on the training data}
+                 \PY{n}{model}\PY{o}{.}\PY{n}{alpha} \PY{o}{=} \PY{n}{a}
+                 \PY{n}{model}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}tr}\PY{p}{,} \PY{n}{y\PYZus{}tr}\PY{p}{)}
+                 
+                 \PY{c+c1}{\PYZsh{} Compute the prediction error on the test data}
+                 \PY{n}{y\PYZus{}ts\PYZus{}pred} \PY{o}{=} \PY{n}{model}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X\PYZus{}ts}\PY{p}{)}
+                 \PY{n}{RSSts}\PY{p}{[}\PY{n}{ia}\PY{p}{,} \PY{n}{ifold}\PY{p}{]} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{(}\PY{n}{y\PYZus{}ts\PYZus{}pred} \PY{o}{\PYZhy{}} \PY{n}{y\PYZus{}ts}\PY{p}{)} \PY{o}{*}\PY{o}{*} \PY{l+m+mi}{2}\PY{p}{)} \PY{o}{/} \PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{std}\PY{p}{(}\PY{n}{y\PYZus{}ts}\PY{p}{)} \PY{o}{*}\PY{o}{*} \PY{l+m+mi}{2}\PY{p}{)}
+\end{Verbatim}
+
+
+    Determine the RSS mean and standard error corresponding to different
+alpha and plot the mean RSS with error bar as a function of alpha. Label
+the axis.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}14}]:} \PY{c+c1}{\PYZsh{} TODO}
+         \PY{n}{RSS\PYZus{}mean} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{RSSts}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{RSS\PYZus{}std} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{std}\PY{p}{(}\PY{n}{RSSts}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)} \PY{o}{/} \PY{n}{np}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{n}{nfold} \PY{o}{\PYZhy{}} \PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{semilogx}\PY{p}{(}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{errorbar}\PY{p}{(}\PY{n}{alphas}\PY{p}{,} \PY{n}{RSS\PYZus{}mean}\PY{p}{,} \PY{n}{yerr}\PY{o}{=}\PY{n}{RSS\PYZus{}std}\PY{p}{,} \PY{n}{fmt}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+sa}{r}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZdl{}}\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{alpha\PYZdl{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Mean RSS}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_30_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Find the optimal \texttt{alpha} and the mean test RSS at this optimal
+point using the one standard error rule.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}15}]:} \PY{c+c1}{\PYZsh{} TO DO}
+         \PY{c+c1}{\PYZsh{} Find the minimum MSE and MSE target}
+         \PY{n}{imin} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{argmin}\PY{p}{(}\PY{n}{RSS\PYZus{}mean}\PY{p}{)}
+         \PY{n}{RSS\PYZus{}tgt} \PY{o}{=} \PY{n}{RSS\PYZus{}mean}\PY{p}{[}\PY{n}{imin}\PY{p}{]} \PY{o}{+} \PY{n}{RSS\PYZus{}std}\PY{p}{[}\PY{n}{imin}\PY{p}{]}
+         \PY{n}{alpha\PYZus{}min} \PY{o}{=} \PY{n}{alphas}\PY{p}{[}\PY{n}{imin}\PY{p}{]}
+         
+         \PY{c+c1}{\PYZsh{} Find the least complex model with mse\PYZus{}mean \PYZlt{} mse\PYZus{}tgt}
+         \PY{n}{I} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{where}\PY{p}{(}\PY{n}{RSS\PYZus{}mean} \PY{o}{\PYZlt{}} \PY{n}{RSS\PYZus{}tgt}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+         \PY{n}{iopt} \PY{o}{=} \PY{n}{I}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}
+         \PY{n}{alpha\PYZus{}opt} \PY{o}{=} \PY{n}{alphas}\PY{p}{[}\PY{n}{iopt}\PY{p}{]}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Optimal alpha = }\PY{l+s+si}{\PYZpc{}f}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{n}{alpha\PYZus{}opt}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Plot the mean MSE and the mean MSE + 1 std dev}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{semilogx}\PY{p}{(}\PY{n}{alphas}\PY{p}{,} \PY{n}{RSS\PYZus{}mean}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{semilogx}\PY{p}{(}\PY{n}{alphas}\PY{p}{,} \PY{n}{RSS\PYZus{}mean}\PY{o}{+}\PY{n}{RSS\PYZus{}std}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Plot the MSE target}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{semilogx}\PY{p}{(}\PY{p}{[}\PY{n}{alpha\PYZus{}min}\PY{p}{,} \PY{n}{alpha\PYZus{}opt}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{n}{RSS\PYZus{}tgt}\PY{p}{,} \PY{n}{RSS\PYZus{}tgt}\PY{p}{]}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{rs\PYZhy{}\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Plot the optimal alpha line}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{semilogx}\PY{p}{(}\PY{p}{[}\PY{n}{alpha\PYZus{}opt}\PY{p}{,} \PY{n}{alpha\PYZus{}opt}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{l+m+mf}{0.78}\PY{p}{,} \PY{n}{RSS\PYZus{}mean}\PY{p}{[}\PY{n}{iopt}\PY{p}{]}\PY{p}{]}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ro\PYZhy{}\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Mean RSS}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Mean RSS + 1 SE}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{RSS target}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{alpha opt}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{loc}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{upper left}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{alpha}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Test RSS}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylim}\PY{p}{(}\PY{p}{[}\PY{l+m+mf}{0.78}\PY{p}{,} \PY{l+m+mf}{1.08}\PY{p}{]}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{grid}\PY{p}{(}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Optimal alpha = 0.079248
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_32_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{lasso-path}{%
+\subsection{LASSO path}\label{lasso-path}}
+
+To further illustrate the effect of regularization, we conclude by
+drawing the \emph{LASSO path}. This is simply a plot of the coefficients
+as a function of the regularization \texttt{alpha}. The path
+demonstrates the effect of regularization well. Use the
+\texttt{lasso\_path} method to obtain all the coefficients for the given
+range of alphas and plot the LASSO path. Also draw a vertical line at
+optimal value of alpha.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}16}]:} \PY{c+c1}{\PYZsh{} TODO}
+         \PY{n}{alphas1}\PY{p}{,} \PY{n}{coeffs}\PY{p}{,} \PY{n}{\PYZus{}} \PY{o}{=} \PY{n}{sklearn}\PY{o}{.}\PY{n}{linear\PYZus{}model}\PY{o}{.}\PY{n}{lasso\PYZus{}path}\PY{p}{(}\PY{n}{Xs}\PY{p}{,} \PY{n}{ys}\PY{p}{,} \PY{n}{alphas}\PY{o}{=}\PY{n}{alphas}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Plot the paths of the coefficients}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{semilogx}\PY{p}{(}\PY{n}{alphas1}\PY{p}{,} \PY{n}{coeffs}\PY{o}{.}\PY{n}{T}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{grid}\PY{p}{(}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{}plt.legend(col\PYZus{}names, loc=\PYZsq{}upper right\PYZsq{})}
+         
+         
+         \PY{c+c1}{\PYZsh{} Plot a line on the optimal alpha}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{semilogx}\PY{p}{(}\PY{p}{[}\PY{n}{alpha\PYZus{}opt}\PY{p}{,} \PY{n}{alpha\PYZus{}opt}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mf}{0.3}\PY{p}{,}\PY{l+m+mf}{0.2}\PY{p}{]}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{alpha}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{coeff}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_34_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{non-zero-lasso-coefficients}{%
+\subsubsection{Non-zero LASSO
+Coefficients}\label{non-zero-lasso-coefficients}}
+
+Using the above coefficients, Plot the number of non-zero coefficients
+vs alpha. Also draw a vertical line at optimal value of alpha. You can
+assume any coefficients with magnitude \textless{}= 0.001 to be zero.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}17}]:} \PY{c+c1}{\PYZsh{} TODO}
+         
+         \PY{c+c1}{\PYZsh{} Plot the numbers of the non\PYZhy{}zero coefficients}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{semilogx}\PY{p}{(}\PY{n}{alphas1}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{abs}\PY{p}{(}\PY{n}{coeffs}\PY{p}{)} \PY{o}{\PYZgt{}} \PY{l+m+mf}{0.001}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{grid}\PY{p}{(}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Plot a line on the optimal alpha}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{semilogx}\PY{p}{(}\PY{p}{[}\PY{n}{alpha\PYZus{}opt}\PY{p}{,} \PY{n}{alpha\PYZus{}opt}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{40}\PY{p}{]}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{alpha}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{coeff}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_36_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Let us now find out with this optimal alpha, what coefficients are
+nonzero. Let us consider any coefficients with absoluate value
+\textless{}= 0.001 as zero. You need to first do a model fit using the
+entire data (\texttt{Xs}, \texttt{ys}) to find the model coefficients.
+Then determine and \textbf{print} the number of nonzeros (Call it
+\texttt{nfea1}). Finally, \textbf{print} the corresponding feature name
+(Hint: use the list \texttt{col\_names} obtained previously) with their
+corresponding coefficient in the order with decreasing coefficient
+magnitudes.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}18}]:} \PY{c+c1}{\PYZsh{}TO DO}
+         
+         \PY{c+c1}{\PYZsh{}First do a model fit using alpha\PYZus{}opt}
+         \PY{n}{model} \PY{o}{=} \PY{n}{linear\PYZus{}model}\PY{o}{.}\PY{n}{Lasso}\PY{p}{(}\PY{n}{warm\PYZus{}start}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+         \PY{n}{model}\PY{o}{.}\PY{n}{alpha} \PY{o}{=} \PY{n}{alpha\PYZus{}opt}
+         \PY{n}{model}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{Xs}\PY{p}{,} \PY{n}{ys}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Find model coefficients that are \PYZgt{}0.001 and count}
+         \PY{n}{nfea1} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{abs}\PY{p}{(}\PY{n}{model}\PY{o}{.}\PY{n}{coef\PYZus{}}\PY{p}{)} \PY{o}{\PYZgt{}} \PY{l+m+mf}{0.001}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{The number of nonzeros is }\PY{l+s+si}{\PYZpc{}d}\PY{l+s+s1}{.}\PY{l+s+s1}{\PYZsq{}} \PY{o}{\PYZpc{}} \PY{n}{nfea1}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Sort the coeffients in decreasing order and print. }
+         \PY{n}{sorted\PYZus{}coeff} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{argsort}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{n}{np}\PY{o}{.}\PY{n}{abs}\PY{p}{(}\PY{n}{model}\PY{o}{.}\PY{n}{coef\PYZus{}}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{The corresponding feature names and their corresponding coefficients are as follows.}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZpc{}\PYZhy{}20s}\PY{l+s+si}{\PYZpc{} s}\PY{l+s+s1}{\PYZsq{}} \PY{o}{\PYZpc{}} \PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{FEATURE NAMES}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{COEFFICIENTS}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}
+         \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{sorted\PYZus{}coeff}\PY{p}{:}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZpc{}\PYZhy{}20s}\PY{l+s+si}{\PYZpc{} f}\PY{l+s+s1}{\PYZsq{}} \PY{o}{\PYZpc{}} \PY{p}{(}\PY{n}{col\PYZus{}names}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{,} \PY{n}{model}\PY{o}{.}\PY{n}{coef\PYZus{}}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+The number of nonzeros is 14.
+The corresponding feature names and their corresponding coefficients are as follows.
+FEATURE NAMES       COEFFICIENTS
+failures            -0.246618
+schoolsup           -0.133702
+Fjob\_teacher         0.069205
+Mjob\_other          -0.057919
+studytime            0.049264
+goout               -0.043411
+famsup              -0.031221
+Medu                 0.024277
+higher               0.020592
+sex                  0.017202
+Mjob\_services        0.015178
+Mjob\_health          0.013558
+Fedu                 0.004695
+Fjob\_other          -0.003542
+Fjob\_services       -0.000000
+Mjob\_at\_home        -0.000000
+reason\_reputation    0.000000
+Fjob\_health          0.000000
+Fjob\_at\_home         0.000000
+Mjob\_teacher        -0.000000
+reason\_other        -0.000000
+reason\_home          0.000000
+reason\_course       -0.000000
+guardian\_father      0.000000
+absences            -0.000000
+school              -0.000000
+Walc                -0.000000
+age                 -0.000000
+address              0.000000
+famsize              0.000000
+Pstatus             -0.000000
+traveltime          -0.000000
+paid                -0.000000
+health              -0.000000
+activities           0.000000
+internet             0.000000
+romantic            -0.000000
+famrel               0.000000
+freetime             0.000000
+guardian\_mother     -0.000000
+Dalc                -0.000000
+nursery              0.000000
+guardian\_other       0.000000
+
+    \end{Verbatim}
+
+    \hypertarget{question}{%
+\paragraph{Question:}\label{question}}
+
+Observe the coefficient values carefully. Do they make sense to you? Do
+you see positive coefficients for features that you think are likely to
+increase student performance, and vice versa? Put your answer below. You
+may need to consult the original datasource, to understand the meaning
+of each chosen feature.
+
+    \hypertarget{type-answer-here}{%
+\paragraph{Type answer here:}\label{type-answer-here}}
+
+They do not make sense to me.
+
+For example, I thought the sex should have no effect on the student
+performance, while the corresponding coefficient is non-zero. In the
+other hand, the school and absences seems to have no influence on the
+student performance, which is weird.
+
+    \hypertarget{determine-linear-predictor-with-the-selected-features-using-the-optimal-alpha}{%
+\section{Determine linear predictor with the selected features using the
+optimal
+alpha}\label{determine-linear-predictor-with-the-selected-features-using-the-optimal-alpha}}
+
+Note that we cannot use the coefficients determined above as is as our
+predictor, as it is fitted using all data. Also it obtained by
+minimizing the LASSO loss. With the selected features, we now go through
+a 10 fold cross validation to determine the predictor coefficients and
+the estimated test error using the \textbf{linear regression} directly.
+
+    First get new feature array only containing these chosen features and
+name it \emph{X\_new}. Print a few lines to make sure that you got the
+data correctly.
+
+Note: You can convert the dataframe into numpy array using
+\texttt{np.array(...)}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}19}]:} \PY{c+c1}{\PYZsh{} TO DO}
+         \PY{n}{col\PYZus{}names\PYZus{}new} \PY{o}{=} \PY{n}{col\PYZus{}names}\PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{abs}\PY{p}{(}\PY{n}{model}\PY{o}{.}\PY{n}{coef\PYZus{}}\PY{p}{)} \PY{o}{\PYZgt{}} \PY{l+m+mf}{0.001}\PY{p}{]}
+         \PY{n}{X\PYZus{}new} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{X\PYZus{}df}\PY{p}{[}\PY{n}{col\PYZus{}names\PYZus{}new}\PY{p}{]}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{X\PYZus{}new}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{:}\PY{l+m+mi}{6}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[[0 4 4 2 0 1 0 1 4 0 0 0 0 1]
+ [0 1 1 2 0 0 1 1 3 0 0 0 1 0]
+ [0 1 1 2 3 1 0 1 2 0 0 0 1 0]
+ [0 4 2 3 0 0 1 1 2 1 0 0 0 0]
+ [0 3 3 2 0 0 1 1 2 0 1 0 1 0]
+ [1 4 3 2 0 0 1 1 2 0 0 1 1 0]]
+
+    \end{Verbatim}
+
+    Now compute the mean predictor coefficients and mean test error using 10
+fold cross validation. For this part, you can use the linear predictor
+on the original features (not scaled) directly, or using the scaled
+data. Using the scaled data enables you to judge the importance of
+featurs based on the coefficient magnitude. Therefore let us use scaled
+data.
+
+Store the mean coefficients in \texttt{coeff\_mean} and the mean
+intercept in \texttt{intercept\_mean}. Print them along with the feature
+names. Also print the mean and std of RSS.
+
+Hint: Get the intercept using \texttt{regr.intercept\_} attribute.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}20}]:} \PY{c+c1}{\PYZsh{} Scale the data}
+         \PY{n}{Xs\PYZus{}new} \PY{o}{=} \PY{n}{preprocessing}\PY{o}{.}\PY{n}{scale}\PY{p}{(}\PY{n}{X\PYZus{}new}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} TODO}
+         \PY{c+c1}{\PYZsh{} 10 fold CV using the linear regression model to find the RSS and coef using each fold }
+         
+         \PY{c+c1}{\PYZsh{} Hint: First set up arrays to store the test errors and coefficients then go through a loop of 10 folds}
+         
+         \PY{k+kn}{from} \PY{n+nn}{IPython}\PY{n+nn}{.}\PY{n+nn}{display} \PY{k}{import} \PY{n}{clear\PYZus{}output}
+         
+         \PY{c+c1}{\PYZsh{} Create a k\PYZhy{}fold object}
+         \PY{n}{nfold} \PY{o}{=} \PY{l+m+mi}{10}
+         \PY{n}{kf} \PY{o}{=} \PY{n}{sklearn}\PY{o}{.}\PY{n}{model\PYZus{}selection}\PY{o}{.}\PY{n}{KFold}\PY{p}{(}\PY{n}{n\PYZus{}splits}\PY{o}{=}\PY{n}{nfold}\PY{p}{,} \PY{n}{shuffle}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Model orders to be tested}
+         \PY{n}{RSSts} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n}{nfold}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+         \PY{n}{coef} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n}{nfold}\PY{p}{,} \PY{n}{nfea1}\PY{p}{)}\PY{p}{)}
+         \PY{n}{intercept} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n}{nfold}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Loop over the folds}
+         \PY{k}{for} \PY{n}{ifold}\PY{p}{,} \PY{n}{ind} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{kf}\PY{o}{.}\PY{n}{split}\PY{p}{(}\PY{n}{Xs\PYZus{}new}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+             \PY{c+c1}{\PYZsh{} Print loading}
+             \PY{n}{i} \PY{o}{=} \PY{n+nb}{round}\PY{p}{(}\PY{n}{ifold} \PY{o}{/} \PY{n}{nfold} \PY{o}{*} \PY{l+m+mi}{100}\PY{p}{)}
+             \PY{n}{load\PYZus{}str} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZgt{}}\PY{l+s+s1}{\PYZsq{}} \PY{o}{*} \PY{p}{(}\PY{n}{i} \PY{o}{/}\PY{o}{/} \PY{l+m+mi}{2}\PY{p}{)} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ }\PY{l+s+s1}{\PYZsq{}} \PY{o}{*} \PY{p}{(}\PY{p}{(}\PY{l+m+mi}{99} \PY{o}{\PYZhy{}} \PY{n}{i}\PY{p}{)} \PY{o}{/}\PY{o}{/} \PY{l+m+mi}{2}\PY{p}{)}
+             \PY{n}{clear\PYZus{}output}\PY{p}{(}\PY{n}{wait}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}r}\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n}{load\PYZus{}str} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{[}\PY{l+s+si}{\PYZpc{}s}\PY{l+s+si}{\PYZpc{}\PYZpc{}}\PY{l+s+s1}{]}\PY{l+s+s1}{\PYZsq{}} \PY{o}{\PYZpc{}} \PY{n}{i}\PY{p}{)}
+             
+             \PY{c+c1}{\PYZsh{} Get the training data in the split}
+             \PY{n}{Itr}\PY{p}{,} \PY{n}{Its} \PY{o}{=} \PY{n}{ind}
+             
+             \PY{c+c1}{\PYZsh{}kf.split( ) returns Ind, which contains the indices to the training and testing d }
+             \PY{n}{X\PYZus{}tr} \PY{o}{=} \PY{n}{Xs\PYZus{}new}\PY{p}{[}\PY{n}{Itr}\PY{p}{]}
+             \PY{n}{y\PYZus{}tr} \PY{o}{=} \PY{n}{ys}\PY{p}{[}\PY{n}{Itr}\PY{p}{]}
+             \PY{n}{X\PYZus{}ts} \PY{o}{=} \PY{n}{Xs\PYZus{}new}\PY{p}{[}\PY{n}{Its}\PY{p}{]}
+             \PY{n}{y\PYZus{}ts} \PY{o}{=} \PY{n}{ys}\PY{p}{[}\PY{n}{Its}\PY{p}{]}
+             
+             \PY{n}{regr}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}tr}\PY{p}{,} \PY{n}{y\PYZus{}tr}\PY{p}{)}
+             \PY{n}{y\PYZus{}ts\PYZus{}pred} \PY{o}{=} \PY{n}{regr}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X\PYZus{}ts}\PY{p}{)}
+             \PY{n}{RSSts}\PY{p}{[}\PY{n}{ifold}\PY{p}{]} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{(}\PY{n}{y\PYZus{}ts\PYZus{}pred} \PY{o}{\PYZhy{}} \PY{n}{y\PYZus{}ts}\PY{p}{)} \PY{o}{*}\PY{o}{*} \PY{l+m+mi}{2}\PY{p}{)} \PY{o}{/} \PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{std}\PY{p}{(}\PY{n}{y\PYZus{}ts}\PY{p}{)} \PY{o}{*}\PY{o}{*} \PY{l+m+mi}{2}\PY{p}{)}
+             \PY{n}{coef}\PY{p}{[}\PY{n}{ifold}\PY{p}{]} \PY{o}{=} \PY{n}{regr}\PY{o}{.}\PY{n}{coef\PYZus{}}
+             \PY{n}{intercept}\PY{p}{[}\PY{n}{ifold}\PY{p}{]} \PY{o}{=} \PY{n}{regr}\PY{o}{.}\PY{n}{intercept\PYZus{}}
+             
+         \PY{n}{coef\PYZus{}mean} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{coef}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+         \PY{n}{intercept\PYZus{}mean} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{intercept}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+         
+         \PY{n}{clear\PYZus{}output}\PY{p}{(}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Done!}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZpc{}\PYZhy{}20s}\PY{l+s+si}{\PYZpc{}\PYZhy{}20s}\PY{l+s+s1}{\PYZsq{}} \PY{o}{\PYZpc{}} \PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{FEATURE NAMES}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{COEFFICIENTS MEAN}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}
+         \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{nfea1}\PY{p}{)}\PY{p}{:}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZpc{}\PYZhy{}20s}\PY{l+s+si}{\PYZpc{} .6f}\PY{l+s+s1}{\PYZsq{}} \PY{o}{\PYZpc{}} \PY{p}{(}\PY{n}{col\PYZus{}names\PYZus{}new}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{,} \PY{n}{coef\PYZus{}mean}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{The mean of intercept is }\PY{l+s+si}{\PYZpc{}f}\PY{l+s+s1}{.}\PY{l+s+s1}{\PYZsq{}} \PY{o}{\PYZpc{}} \PY{n}{intercept\PYZus{}mean}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{The mean of RSS is }\PY{l+s+si}{\PYZpc{}f}\PY{l+s+s1}{.}\PY{l+s+s1}{\PYZsq{}} \PY{o}{\PYZpc{}} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{RSSts}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{The std of RSS is }\PY{l+s+si}{\PYZpc{}f}\PY{l+s+s1}{.}\PY{l+s+s1}{\PYZsq{}} \PY{o}{\PYZpc{}} \PY{n}{np}\PY{o}{.}\PY{n}{std}\PY{p}{(}\PY{n}{RSSts}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Done!
+FEATURE NAMES       COEFFICIENTS MEAN   
+sex                  0.121626
+Medu                 0.010446
+Fedu                 0.048166
+studytime            0.162403
+failures            -0.283834
+schoolsup           -0.204966
+famsup              -0.139419
+higher               0.083077
+goout               -0.126391
+Mjob\_health          0.122746
+Mjob\_other          -0.054148
+Mjob\_services        0.122682
+Fjob\_other          -0.035638
+Fjob\_teacher         0.139814
+The mean of intercept is -0.000575.
+The mean of RSS is 0.775155.
+The std of RSS is 0.088311.
+
+    \end{Verbatim}
+
+    Using the \textbf{mean predictor} above, compute the predicted response
+variable on the whole data (\texttt{Xs\_new}). Plot the predicted
+vs.~actual values. Also show a line of 45 degree slope. Also print the
+normalized RSS.
+
+Hint: Use \(\hat{y} = Xs_{new}\beta+\beta_0\), where \(\beta\) is the
+vector \texttt{coef\_mean} and \(\beta_0\) is \texttt{intercept\_mean}.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}21}]:} \PY{c+c1}{\PYZsh{} TO DO}
+         \PY{c+c1}{\PYZsh{} Compute the response and plot}
+         
+         \PY{n}{yhat} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{Xs\PYZus{}new}\PY{p}{,} \PY{n}{coef\PYZus{}mean}\PY{p}{)} \PY{o}{+} \PY{n}{intercept\PYZus{}mean}
+         
+         \PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{ys}\PY{p}{,} \PY{n}{yhat}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{y}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+sa}{r}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZdl{}}\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{hat}\PY{l+s+si}{\PYZob{}y\PYZcb{}}\PY{l+s+s1}{\PYZdl{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ymin} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{min}\PY{p}{(}\PY{n}{ys}\PY{p}{)}
+         \PY{n}{ymax} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{n}{ys}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{p}{[}\PY{n}{ymin}\PY{p}{,} \PY{n}{ymax}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{n}{ymin}\PY{p}{,} \PY{n}{ymax}\PY{p}{]}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{linewidth}\PY{o}{=}\PY{l+m+mi}{3}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_47_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{feature-ranking-based-on-f-test-and-mutual-information}{%
+\section{Feature Ranking based on F-test and mutual
+information}\label{feature-ranking-based-on-f-test-and-mutual-information}}
+
+Rank all the original features (\texttt{Xs}) using f-test metric. Print
+first \emph{nfea1} top ranked feature names. If you wish, you could try
+other metrics as well (e.g.~mutual information).
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}22}]:} \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{feature\PYZus{}selection} \PY{k}{import} \PY{n}{f\PYZus{}regression}
+         
+         \PY{c+c1}{\PYZsh{} TO DO}
+         
+         \PY{n}{f\PYZus{}test}\PY{p}{,} \PY{n}{\PYZus{}} \PY{o}{=} \PY{n}{f\PYZus{}regression}\PY{p}{(}\PY{n}{Xs}\PY{p}{,} \PY{n}{ys}\PY{p}{)}
+         \PY{n}{f\PYZus{}test} \PY{o}{/}\PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{n}{f\PYZus{}test}\PY{p}{)}
+         
+         \PY{n}{col\PYZus{}names\PYZus{}f} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{col\PYZus{}names}\PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{argsort}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{n}{f\PYZus{}test}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{:}\PY{n}{nfea1}\PY{p}{]}\PY{p}{]}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{col\PYZus{}names\PYZus{}f}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+['failures' 'schoolsup' 'Medu' 'Fedu' 'higher' 'Fjob\_teacher' 'Mjob\_other'
+ 'studytime' 'goout' 'Walc' 'Mjob\_health' 'Fjob\_other' 'reason\_reputation'
+ 'Dalc']
+
+    \end{Verbatim}
+
+    \hypertarget{test-error-with-f_test}{%
+\subsubsection{Test Error with f\_test}\label{test-error-with-f_test}}
+
+Take the top ranked \emph{nfea1} features, apply linear regression fit
+in cross validation to find the test error, to see how they compare with
+LASSO result.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}23}]:} \PY{c+c1}{\PYZsh{} TO DO}
+         \PY{n}{X\PYZus{}f} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{X\PYZus{}df}\PY{p}{[}\PY{n}{col\PYZus{}names\PYZus{}f}\PY{p}{]}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{} Scale the data}
+         \PY{n}{Xs\PYZus{}f} \PY{o}{=} \PY{n}{preprocessing}\PY{o}{.}\PY{n}{scale}\PY{p}{(}\PY{n}{X\PYZus{}f}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} 10 fold CV using the linear regression model to find the RSS and coef using each fold }
+         
+         \PY{c+c1}{\PYZsh{} Hint: First set up arrays to store the test errors and coefficients then go through a loop of 10 folds}
+         
+         \PY{k+kn}{from} \PY{n+nn}{IPython}\PY{n+nn}{.}\PY{n+nn}{display} \PY{k}{import} \PY{n}{clear\PYZus{}output}
+         
+         \PY{c+c1}{\PYZsh{} Create a k\PYZhy{}fold object}
+         \PY{n}{nfold} \PY{o}{=} \PY{l+m+mi}{10}
+         \PY{n}{kf} \PY{o}{=} \PY{n}{sklearn}\PY{o}{.}\PY{n}{model\PYZus{}selection}\PY{o}{.}\PY{n}{KFold}\PY{p}{(}\PY{n}{n\PYZus{}splits}\PY{o}{=}\PY{n}{nfold}\PY{p}{,} \PY{n}{shuffle}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Model orders to be tested}
+         \PY{n}{RSSts} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n}{nfold}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+         \PY{n}{coef} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n}{nfold}\PY{p}{,} \PY{n}{nfea1}\PY{p}{)}\PY{p}{)}
+         \PY{n}{intercept} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n}{nfold}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Loop over the folds}
+         \PY{k}{for} \PY{n}{ifold}\PY{p}{,} \PY{n}{ind} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{kf}\PY{o}{.}\PY{n}{split}\PY{p}{(}\PY{n}{Xs\PYZus{}new}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+             \PY{c+c1}{\PYZsh{} Print loading}
+             \PY{n}{i} \PY{o}{=} \PY{n+nb}{round}\PY{p}{(}\PY{n}{ifold} \PY{o}{/} \PY{n}{nfold} \PY{o}{*} \PY{l+m+mi}{100}\PY{p}{)}
+             \PY{n}{load\PYZus{}str} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZgt{}}\PY{l+s+s1}{\PYZsq{}} \PY{o}{*} \PY{p}{(}\PY{n}{i} \PY{o}{/}\PY{o}{/} \PY{l+m+mi}{2}\PY{p}{)} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ }\PY{l+s+s1}{\PYZsq{}} \PY{o}{*} \PY{p}{(}\PY{p}{(}\PY{l+m+mi}{99} \PY{o}{\PYZhy{}} \PY{n}{i}\PY{p}{)} \PY{o}{/}\PY{o}{/} \PY{l+m+mi}{2}\PY{p}{)}
+             \PY{n}{clear\PYZus{}output}\PY{p}{(}\PY{n}{wait}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}r}\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n}{load\PYZus{}str} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{[}\PY{l+s+si}{\PYZpc{}s}\PY{l+s+si}{\PYZpc{}\PYZpc{}}\PY{l+s+s1}{]}\PY{l+s+s1}{\PYZsq{}} \PY{o}{\PYZpc{}} \PY{n}{i}\PY{p}{)}
+             
+             \PY{c+c1}{\PYZsh{} Get the training data in the split}
+             \PY{n}{Itr}\PY{p}{,} \PY{n}{Its} \PY{o}{=} \PY{n}{ind}
+             
+             \PY{c+c1}{\PYZsh{}kf.split( ) returns Ind, which contains the indices to the training and testing d }
+             \PY{n}{X\PYZus{}tr} \PY{o}{=} \PY{n}{Xs\PYZus{}f}\PY{p}{[}\PY{n}{Itr}\PY{p}{]}
+             \PY{n}{y\PYZus{}tr} \PY{o}{=} \PY{n}{ys}\PY{p}{[}\PY{n}{Itr}\PY{p}{]}
+             \PY{n}{X\PYZus{}ts} \PY{o}{=} \PY{n}{Xs\PYZus{}f}\PY{p}{[}\PY{n}{Its}\PY{p}{]}
+             \PY{n}{y\PYZus{}ts} \PY{o}{=} \PY{n}{ys}\PY{p}{[}\PY{n}{Its}\PY{p}{]}
+             
+             \PY{n}{regr}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}tr}\PY{p}{,} \PY{n}{y\PYZus{}tr}\PY{p}{)}
+             \PY{n}{y\PYZus{}ts\PYZus{}pred} \PY{o}{=} \PY{n}{regr}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X\PYZus{}ts}\PY{p}{)}
+             \PY{n}{RSSts}\PY{p}{[}\PY{n}{ifold}\PY{p}{]} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{(}\PY{n}{y\PYZus{}ts\PYZus{}pred} \PY{o}{\PYZhy{}} \PY{n}{y\PYZus{}ts}\PY{p}{)} \PY{o}{*}\PY{o}{*} \PY{l+m+mi}{2}\PY{p}{)} \PY{o}{/} \PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{std}\PY{p}{(}\PY{n}{y\PYZus{}ts}\PY{p}{)} \PY{o}{*}\PY{o}{*} \PY{l+m+mi}{2}\PY{p}{)}
+             \PY{n}{coef}\PY{p}{[}\PY{n}{ifold}\PY{p}{]} \PY{o}{=} \PY{n}{regr}\PY{o}{.}\PY{n}{coef\PYZus{}}
+             \PY{n}{intercept}\PY{p}{[}\PY{n}{ifold}\PY{p}{]} \PY{o}{=} \PY{n}{regr}\PY{o}{.}\PY{n}{intercept\PYZus{}}
+             
+         \PY{n}{coef\PYZus{}mean} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{coef}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+         \PY{n}{intercept\PYZus{}mean} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{intercept}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+         
+         \PY{n}{clear\PYZus{}output}\PY{p}{(}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Done!}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZpc{}\PYZhy{}20s}\PY{l+s+si}{\PYZpc{}\PYZhy{}20s}\PY{l+s+s1}{\PYZsq{}} \PY{o}{\PYZpc{}} \PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{FEATURE NAMES}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{COEFFICIENTS MEAN}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}
+         \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{nfea1}\PY{p}{)}\PY{p}{:}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZpc{}\PYZhy{}20s}\PY{l+s+si}{\PYZpc{} .6f}\PY{l+s+s1}{\PYZsq{}} \PY{o}{\PYZpc{}} \PY{p}{(}\PY{n}{col\PYZus{}names\PYZus{}new}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{,} \PY{n}{coef\PYZus{}mean}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{The mean of intercept is }\PY{l+s+si}{\PYZpc{}f}\PY{l+s+s1}{.}\PY{l+s+s1}{\PYZsq{}} \PY{o}{\PYZpc{}} \PY{n}{intercept\PYZus{}mean}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{The mean of RSS is }\PY{l+s+si}{\PYZpc{}f}\PY{l+s+s1}{.}\PY{l+s+s1}{\PYZsq{}} \PY{o}{\PYZpc{}} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{RSSts}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{The std of RSS is }\PY{l+s+si}{\PYZpc{}f}\PY{l+s+s1}{.}\PY{l+s+s1}{\PYZsq{}} \PY{o}{\PYZpc{}} \PY{n}{np}\PY{o}{.}\PY{n}{std}\PY{p}{(}\PY{n}{RSSts}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Done!
+FEATURE NAMES       COEFFICIENTS MEAN   
+sex                 -0.278008
+Medu                -0.228736
+Fedu                 0.018084
+studytime            0.021665
+failures             0.068069
+schoolsup            0.132384
+famsup              -0.105948
+higher               0.093229
+goout               -0.107636
+Mjob\_health         -0.024205
+Mjob\_other           0.067389
+Mjob\_services       -0.048336
+Fjob\_other           0.058246
+Fjob\_teacher         0.016259
+The mean of intercept is 0.000494.
+The mean of RSS is 0.832865.
+The std of RSS is 0.095158.
+
+    \end{Verbatim}
+
+    \hypertarget{question}{%
+\paragraph{Question:}\label{question}}
+
+Comment on the features choosen, their corresponding coefficient values,
+and the test error, in contrast to those obtained with LASSO. Explain
+why the feature ranking method is generally not as effective as LASSO.
+
+    \hypertarget{type-answer-here}{%
+\paragraph{Type answer here:}\label{type-answer-here}}
+
+The feature ranking based on F-test is a kind of univariate feature
+selection. It can only estimate the degree of linear dependency between
+two random variables. However, LASSO consider several random variables
+at the same time. So it will have a better result with an optimal
+\(\alpha\).
+
+    \hypertarget{test-error-with-mi-optional}{%
+\subsubsection{Test error with MI
+(Optional)}\label{test-error-with-mi-optional}}
+
+Similarly obtain the test error with MI and compare with LASSO and
+f\_test.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} 
+\end{Verbatim}
+
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}

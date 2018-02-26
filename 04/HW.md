@@ -51,22 +51,22 @@ For example, filtering method, wrapper method, embedded method, forward stepwise
 (a) The mean is     
 $$
 \begin{aligned}
-\frac{1}{J}\sum_iy_i
-&=\frac{1}{J}\sum_i\frac{y_i^r-\bar{y}}{\sigma_y} \\
-&=\frac{1}{J}\frac{\sum_i(y_i^r-\bar{y})}{\sigma_y} \\
-&=\frac{1}{J}\frac{\sum_iy_i^r-\sum_i\bar{y}}{\sigma_y} \\
+\frac{1}{N}\sum_iy_i
+&=\frac{1}{N}\sum_i\frac{y_i^r-\bar{y}}{\sigma_y} \\
+&=\frac{1}{N}\frac{\sum_i(y_i^r-\bar{y})}{\sigma_y} \\
+&=\frac{1}{N}\frac{\sum_iy_i^r-\sum_i\bar{y}}{\sigma_y} \\
 &=0
 \end{aligned}
 $$
 The variance is     
 $$
 \begin{aligned}
-\frac{1}{J}\sum_i(y_i-0)^2
-&=\frac{1}{J}\sum_iy_i^2 \\
-&=\frac{1}{J}\sum_i[\frac{y_i^r-\bar{y}}{\sigma_y}]^2 \\
-&=\frac{1}{J}\sum_i\frac{(y_i^r-\bar{y})^2}{\sigma_y^2} \\
-&=\frac{1}{J}\frac{\sum_i(y_i^r-\bar{y})^2}{\sigma_y^2} \\
-&=\frac{1}{J}\frac{J\cdot\sigma_y^2}{\sigma_y^2} \\
+\frac{1}{N}\sum_i(y_i-0)^2
+&=\frac{1}{N}\sum_iy_i^2 \\
+&=\frac{1}{N}\sum_i[\frac{y_i^r-\bar{y}}{\sigma_y}]^2 \\
+&=\frac{1}{N}\sum_i\frac{(y_i^r-\bar{y})^2}{\sigma_y^2} \\
+&=\frac{1}{N}\frac{\sum_i(y_i^r-\bar{y})^2}{\sigma_y^2} \\
+&=\frac{1}{N}\frac{J\cdot\sigma_y^2}{\sigma_y^2} \\
 &=1
 \end{aligned}
 $$
@@ -92,11 +92,25 @@ $$
 \beta_0=0.
 $$
 
-(c) The formula should be
+(c)  
 $$
-\beta_j^r=(\beta_j\cdot \sigma_j)+x_{i,j}^r,
+\begin{aligned}
+\hat{y_i}
+&=\sum_{j=1}^J\beta_jx_{i,j} \\
+&=\sum_{j=1}^J\beta_j\frac{x_{i,j}^r-\bar{x_j}}{\sigma_j} \\
+&=\sum_{j=1}^J\frac{\beta_j}{\sigma_j}x_{i,j}^r-\sum_{j=1}^J\frac{\beta_j}{\sigma_j}\bar{x_j} \\
+&=-\sum_{j=1}^J\frac{\beta_j}{\sigma_j}\bar{x_j}+\sum_{j=1}^J\frac{\beta_j}{\sigma_j}x_{i,j}^r \\
+&=\beta_0^r+\sum_{j=1}^J\beta_j^rx_{i,j}^r \\
+\end{aligned}
 $$
-which is the inverse of normalization.
+So we have
+$$
+\beta_0^r=-\sum_{j=1}^J\frac{\beta_j}{\sigma_j}\bar{x_j}
+$$
+and
+$$
+\beta_j^r=\frac{\beta_j}{\sigma_j}x_{i,j}^r
+$$
 
 ### 6. 
 
