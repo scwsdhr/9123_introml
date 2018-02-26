@@ -828,7 +828,7 @@ point using the one standard error rule.
 
 
     \begin{Verbatim}[commandchars=\\\{\}]
-Optimal alpha = 0.079248
+Optimal alpha = 0.065793
 
     \end{Verbatim}
 
@@ -931,34 +931,34 @@ magnitudes.
 
 
     \begin{Verbatim}[commandchars=\\\{\}]
-The number of nonzeros is 14.
+The number of nonzeros is 15.
 The corresponding feature names and their corresponding coefficients are as follows.
 FEATURE NAMES       COEFFICIENTS
-failures            -0.246618
-schoolsup           -0.133702
-Fjob\_teacher         0.069205
-Mjob\_other          -0.057919
-studytime            0.049264
-goout               -0.043411
-famsup              -0.031221
-Medu                 0.024277
-higher               0.020592
-sex                  0.017202
-Mjob\_services        0.015178
-Mjob\_health          0.013558
-Fedu                 0.004695
-Fjob\_other          -0.003542
-Fjob\_services       -0.000000
+failures            -0.252643
+schoolsup           -0.145763
+Fjob\_teacher         0.081575
+studytime            0.066901
+Mjob\_other          -0.058465
+goout               -0.057220
+famsup              -0.050161
+sex                  0.035477
+Mjob\_services        0.032373
+Mjob\_health          0.031101
+higher               0.030990
+Medu                 0.020936
+Fedu                 0.012106
+reason\_reputation    0.010079
+Fjob\_other          -0.009195
+guardian\_father      0.000000
 Mjob\_at\_home        -0.000000
-reason\_reputation    0.000000
 Fjob\_health          0.000000
 Fjob\_at\_home         0.000000
 Mjob\_teacher        -0.000000
 reason\_other        -0.000000
 reason\_home          0.000000
 reason\_course       -0.000000
-guardian\_father      0.000000
-absences            -0.000000
+Fjob\_services       -0.000000
+absences             0.000000
 school              -0.000000
 Walc                -0.000000
 age                 -0.000000
@@ -1026,12 +1026,12 @@ Note: You can convert the dataframe into numpy array using
 
 
     \begin{Verbatim}[commandchars=\\\{\}]
-[[0 4 4 2 0 1 0 1 4 0 0 0 0 1]
- [0 1 1 2 0 0 1 1 3 0 0 0 1 0]
- [0 1 1 2 3 1 0 1 2 0 0 0 1 0]
- [0 4 2 3 0 0 1 1 2 1 0 0 0 0]
- [0 3 3 2 0 0 1 1 2 0 1 0 1 0]
- [1 4 3 2 0 0 1 1 2 0 0 1 1 0]]
+[[0 4 4 2 0 1 0 1 4 0 0 0 0 1 0]
+ [0 1 1 2 0 0 1 1 3 0 0 0 1 0 0]
+ [0 1 1 2 3 1 0 1 2 0 0 0 1 0 0]
+ [0 4 2 3 0 0 1 1 2 1 0 0 0 0 0]
+ [0 3 3 2 0 0 1 1 2 0 1 0 1 0 0]
+ [1 4 3 2 0 0 1 1 2 0 0 1 1 0 1]]
 
     \end{Verbatim}
 
@@ -1109,23 +1109,24 @@ Hint: Get the intercept using \texttt{regr.intercept\_} attribute.
     \begin{Verbatim}[commandchars=\\\{\}]
 Done!
 FEATURE NAMES       COEFFICIENTS MEAN   
-sex                  0.121626
-Medu                 0.010446
-Fedu                 0.048166
-studytime            0.162403
-failures            -0.283834
-schoolsup           -0.204966
-famsup              -0.139419
-higher               0.083077
-goout               -0.126391
-Mjob\_health          0.122746
-Mjob\_other          -0.054148
-Mjob\_services        0.122682
-Fjob\_other          -0.035638
-Fjob\_teacher         0.139814
-The mean of intercept is -0.000575.
-The mean of RSS is 0.775155.
-The std of RSS is 0.088311.
+sex                  0.124920
+Medu                 0.004095
+Fedu                 0.049071
+studytime            0.151906
+failures            -0.281982
+schoolsup           -0.205576
+famsup              -0.143570
+higher               0.081456
+goout               -0.124690
+Mjob\_health          0.116241
+Mjob\_other          -0.061608
+Mjob\_services        0.116099
+Fjob\_other          -0.037186
+Fjob\_teacher         0.141587
+reason\_reputation    0.065919
+The mean of intercept is 0.000275.
+The mean of RSS is 0.775050.
+The std of RSS is 0.147311.
 
     \end{Verbatim}
 
@@ -1182,7 +1183,7 @@ other metrics as well (e.g.~mutual information).
     \begin{Verbatim}[commandchars=\\\{\}]
 ['failures' 'schoolsup' 'Medu' 'Fedu' 'higher' 'Fjob\_teacher' 'Mjob\_other'
  'studytime' 'goout' 'Walc' 'Mjob\_health' 'Fjob\_other' 'reason\_reputation'
- 'Dalc']
+ 'Dalc' 'traveltime']
 
     \end{Verbatim}
 
@@ -1255,23 +1256,24 @@ LASSO result.
     \begin{Verbatim}[commandchars=\\\{\}]
 Done!
 FEATURE NAMES       COEFFICIENTS MEAN   
-sex                 -0.278008
-Medu                -0.228736
-Fedu                 0.018084
-studytime            0.021665
-failures             0.068069
-schoolsup            0.132384
-famsup              -0.105948
-higher               0.093229
-goout               -0.107636
-Mjob\_health         -0.024205
-Mjob\_other           0.067389
-Mjob\_services       -0.048336
-Fjob\_other           0.058246
-Fjob\_teacher         0.016259
-The mean of intercept is 0.000494.
-The mean of RSS is 0.832865.
-The std of RSS is 0.095158.
+sex                 -0.278358
+Medu                -0.229665
+Fedu                 0.014263
+studytime            0.018558
+failures             0.067177
+schoolsup            0.135673
+famsup              -0.107479
+higher               0.091371
+goout               -0.108031
+Mjob\_health         -0.023344
+Mjob\_other           0.065759
+Mjob\_services       -0.045052
+Fjob\_other           0.059431
+Fjob\_teacher         0.019548
+reason\_reputation   -0.030541
+The mean of intercept is -0.000207.
+The mean of RSS is 0.794210.
+The std of RSS is 0.063465.
 
     \end{Verbatim}
 

@@ -70,6 +70,7 @@ $$
 &=1
 \end{aligned}
 $$
+For $x_{i,j}$, just follow the steps above and replace $y_i,y_i^r,\bar{y},\sigma_y$ with $x_{i,j},x_{i,j}^r,\bar{x_j},\sigma_j$.
 
 (b) Since both the target $y$ and the features $x_j$ are normalized, we have
 $$
@@ -109,7 +110,7 @@ $$
 $$
 and
 $$
-\beta_j^r=\frac{\beta_j}{\sigma_j}x_{i,j}^r
+\beta_j^r=\frac{\beta_j}{\sigma_j}
 $$
 
 ### 6. 
