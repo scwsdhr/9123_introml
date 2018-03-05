@@ -163,4 +163,8 @@ $$
 =\sum_{i=1}^N\left(\frac{e^{z_i}x_{2i}}{1+e^{z_i}}-y_ix_{2i}\right)
 $$
 
-(c) Let $\frac{\partial J}{\partial \beta_0}=0$, $\frac{\partial J}{\partial \beta_1}=0$, $\frac{\partial J}{\partial \beta_2}=0$.
+(c) Let $\frac{\partial J}{\partial \beta_0}=0$, $\frac{\partial J}{\partial \beta_1}=0$, $\frac{\partial J}{\partial \beta_2}=0$. Then sum them all. We will have
+$$
+\sum_{i=1}^N\left(\frac{e^{z_i}z_i}{1+e^{z_i}}-y_iz_i\right)=0
+$$
+This is a transcendental equation. So there is no analytical solutions. To optimize the loss function, we can use some numerical methods, such as gradient descent.
