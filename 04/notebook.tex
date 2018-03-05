@@ -509,12 +509,12 @@ magnitude of \texttt{W{[}i{]}} is largest.
 
     \begin{Verbatim}[commandchars=\\\{\}]
 {\color{incolor}In [{\color{incolor}9}]:} \PY{c+c1}{\PYZsh{} TODO}
-        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{The two components are }\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+si}{\PYZpc{}s}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{ and }\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+si}{\PYZpc{}s}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{.}\PY{l+s+s1}{\PYZsq{}} \PY{o}{\PYZpc{}} \PY{n+nb}{tuple}\PY{p}{(}\PY{n}{df1}\PY{o}{.}\PY{n}{columns}\PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{argsort}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{n}{logreg}\PY{o}{.}\PY{n}{coef\PYZus{}}\PY{p}{)}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{p}{:}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{The two components are }\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+si}{\PYZpc{}s}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{ and }\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+si}{\PYZpc{}s}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{.}\PY{l+s+s1}{\PYZsq{}} \PY{o}{\PYZpc{}} \PY{n+nb}{tuple}\PY{p}{(}\PY{n}{df1}\PY{o}{.}\PY{n}{columns}\PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{argsort}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{n}{np}\PY{o}{.}\PY{n}{abs}\PY{p}{(}\PY{n}{logreg}\PY{o}{.}\PY{n}{coef\PYZus{}}\PY{p}{)}\PY{p}{)}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{p}{:}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{)}
 \end{Verbatim}
 
 
     \begin{Verbatim}[commandchars=\\\{\}]
-The two components are 'ITSN1\_N' and 'TIAM1\_N'.
+The two components are 'ITSN1\_N' and 'BRAF\_N'.
 
     \end{Verbatim}
 
@@ -591,7 +591,7 @@ precision, recall and f1-score and error rate across all the folds.
 Precision =  0.4689, SE = 0.1590
 Recall =     0.3378, SE = 0.1211
 f1 =         0.3804, SE = 0.1308
-Error rate = 0.3565, SE = 0.0576
+Error rate = 0.3574, SE = 0.0573
 
     \end{Verbatim}
 
@@ -692,23 +692,23 @@ of the test accuracy across the folds.
 
 
     \begin{Verbatim}[commandchars=\\\{\}]
-Test error rate for fold 01 = 0.0349
-Test error rate for fold 02 = 0.0190
-Test error rate for fold 03 = 0.0542
-Test error rate for fold 04 = 0.0856
-Test error rate for fold 05 = 0.0346
-Test error rate for fold 06 = 0.0343
-Test error rate for fold 07 = 0.0326
-Test error rate for fold 08 = 0.0000
-Test error rate for fold 09 = 0.0000
-Test error rate for fold 10 = 0.0000
+Test error rate for fold 01 = 0.0017
+Test error rate for fold 02 = 0.0174
+Test error rate for fold 03 = 0.0000
+Test error rate for fold 04 = 0.0262
+Test error rate for fold 05 = 0.0420
+Test error rate for fold 06 = 0.0894
+Test error rate for fold 07 = 0.0509
+Test error rate for fold 08 = 0.0417
+Test error rate for fold 09 = 0.0017
+Test error rate for fold 10 = 0.0164
 
 Confusion Matrix: 
- [[0.9997 0.0069 0.0069 0.     0.0207 0.     0.     0.    ]
- [0.0076 0.9999 0.     0.     0.0076 0.0076 0.     0.    ]
+ [[0.9997 0.0139 0.0069 0.     0.0208 0.     0.     0.    ]
+ [0.     0.9999 0.     0.     0.0075 0.0075 0.     0.    ]
  [0.     0.     1.     0.     0.     0.     0.     0.0067]
  [0.0075 0.     0.     1.     0.     0.     0.     0.    ]
- [0.0076 0.0229 0.     0.     0.9997 0.     0.     0.    ]
+ [0.0076 0.0151 0.     0.     0.9999 0.     0.     0.    ]
  [0.     0.     0.     0.     0.     1.     0.     0.    ]
  [0.     0.     0.0075 0.     0.     0.     1.     0.    ]
  [0.     0.     0.     0.     0.     0.     0.     1.    ]]
@@ -837,8 +837,8 @@ value.
 
 
     \begin{Verbatim}[commandchars=\\\{\}]
-The minimum test error rate = 8.3333e-03, SE=2.9117e-03
-The C value corresponding to minimum error = 7.8476e-01
+The minimum test error rate = 7.4074e-03, SE=2.3097e-03
+The C value corresponding to minimum error = 2.0691e+00
 
     \end{Verbatim}
 
@@ -867,9 +867,9 @@ as possible while meeting the error target!
 
 
     \begin{Verbatim}[commandchars=\\\{\}]
-Optimal C = 4.8329e-01
-The test error rate = 1.1111e-02, SE=2.3097e-03
-Accuracy = 0.9889, SE=0.0023
+Optimal C = 7.8476e-01
+The test error rate = 8.3333e-03, SE=2.5638e-03
+Accuracy = 0.9917, SE=0.0026
 
     \end{Verbatim}
 
@@ -902,7 +902,7 @@ coefficients corresponding to C\_opt.
 
 
     \begin{Verbatim}[commandchars=\\\{\}]
-The number of non-zero coefficients for the optimal C = 249.300000
+The number of non-zero coefficients for the optimal C = 268.200000
 
     \end{Verbatim}
 
@@ -943,7 +943,7 @@ you expect the accuracy to improve?
 
 
     \begin{Verbatim}[commandchars=\\\{\}]
-Accuracy on the training data is 0.997222
+Accuracy on the training data is 0.998148
 
     \end{Verbatim}
 
