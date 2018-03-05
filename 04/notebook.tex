@@ -457,7 +457,7 @@ measure the accuracy and AUC on cross-validation data.
         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{TPR}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
         
-        \PY{n}{auc}\PY{o}{=}\PY{n}{metrics}\PY{o}{.}\PY{n}{roc\PYZus{}auc\PYZus{}score}\PY{p}{(}\PY{n}{y}\PY{p}{,} \PY{n}{yprob}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+        \PY{n}{auc} \PY{o}{=} \PY{n}{metrics}\PY{o}{.}\PY{n}{roc\PYZus{}auc\PYZus{}score}\PY{p}{(}\PY{n}{y}\PY{p}{,} \PY{n}{yprob}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{AUC = }\PY{l+s+si}{\PYZpc{}f}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{n}{auc}\PY{p}{)}
 \end{Verbatim}
 
@@ -536,12 +536,13 @@ precision, recall and f1-score and error rate across all the folds.
          \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{metrics} \PY{k}{import} \PY{n}{precision\PYZus{}recall\PYZus{}fscore\PYZus{}support}
          
          \PY{n}{nfold} \PY{o}{=} \PY{l+m+mi}{10}
-         \PY{n}{kf} \PY{o}{=} \PY{n}{KFold}\PY{p}{(}\PY{n}{n\PYZus{}splits}\PY{o}{=}\PY{n}{nfold}\PY{p}{)}
+         \PY{n}{kf} \PY{o}{=} \PY{n}{KFold}\PY{p}{(}\PY{n}{n\PYZus{}splits}\PY{o}{=}\PY{n}{nfold}\PY{p}{,} \PY{n}{shuffle} \PY{o}{=} \PY{k+kc}{True}\PY{p}{)}
          
          \PY{n}{prec} \PY{o}{=} \PY{p}{[}\PY{p}{]}
          \PY{n}{rec} \PY{o}{=} \PY{p}{[}\PY{p}{]}
          \PY{n}{f1} \PY{o}{=} \PY{p}{[}\PY{p}{]}
          \PY{n}{err} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         \PY{n}{auc} \PY{o}{=} \PY{p}{[}\PY{p}{]}
          
          \PY{k}{for} \PY{n}{train}\PY{p}{,} \PY{n}{test} \PY{o+ow}{in} \PY{n}{kf}\PY{o}{.}\PY{n}{split}\PY{p}{(}\PY{n}{Xs}\PY{p}{)}\PY{p}{:}            
              \PY{c+c1}{\PYZsh{} Get training and test data}
@@ -553,45 +554,35 @@ precision, recall and f1-score and error rate across all the folds.
              \PY{c+c1}{\PYZsh{} Fit a model}
              \PY{n}{logreg}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{Xtr}\PY{p}{,} \PY{n}{ytr}\PY{p}{)}
              \PY{n}{yhat} \PY{o}{=} \PY{n}{logreg}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{Xts}\PY{p}{)}
+             \PY{n}{yprob} \PY{o}{=} \PY{n}{logreg}\PY{o}{.}\PY{n}{predict\PYZus{}proba}\PY{p}{(}\PY{n}{Xts}\PY{p}{)}
              
              \PY{c+c1}{\PYZsh{} Measure performance}
              \PY{n}{preci}\PY{p}{,}\PY{n}{reci}\PY{p}{,}\PY{n}{f1i}\PY{p}{,}\PY{n}{\PYZus{}}\PY{o}{=} \PY{n}{precision\PYZus{}recall\PYZus{}fscore\PYZus{}support}\PY{p}{(}\PY{n}{yts}\PY{p}{,} \PY{n}{yhat}\PY{p}{,} \PY{n}{average}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{binary}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} 
              \PY{n}{prec}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{preci}\PY{p}{)}
              \PY{n}{rec}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{reci}\PY{p}{)}
              \PY{n}{f1}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{f1i}\PY{p}{)}
-             \PY{n}{erri} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{yhat} \PY{o}{!=} \PY{n}{yts}\PY{p}{)}
-             \PY{n}{err}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{erri}\PY{p}{)}
+             \PY{n}{err}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{yhat} \PY{o}{!=} \PY{n}{yts}\PY{p}{)}\PY{p}{)}
+             \PY{n}{auc}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{metrics}\PY{o}{.}\PY{n}{roc\PYZus{}auc\PYZus{}score}\PY{p}{(}\PY{n}{yts}\PY{p}{,} \PY{n}{yprob}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{)}
          
          \PY{c+c1}{\PYZsh{} Take average values of the metrics}
          \PY{n}{precm} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{prec}\PY{p}{)}
          \PY{n}{recm} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{rec}\PY{p}{)}
          \PY{n}{f1m} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{f1}\PY{p}{)}
          \PY{n}{errm} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{err}\PY{p}{)}
+         \PY{n}{aucm} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{auc}\PY{p}{)}
          
-         \PY{c+c1}{\PYZsh{} Compute the standard errors}
-         \PY{n}{prec\PYZus{}se} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{std}\PY{p}{(}\PY{n}{prec}\PY{p}{)}\PY{o}{/}\PY{n}{np}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{n}{nfold}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}
-         \PY{n}{rec\PYZus{}se} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{std}\PY{p}{(}\PY{n}{rec}\PY{p}{)}\PY{o}{/}\PY{n}{np}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{n}{nfold}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}
-         \PY{n}{f1\PYZus{}se} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{std}\PY{p}{(}\PY{n}{f1}\PY{p}{)}\PY{o}{/}\PY{n}{np}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{n}{nfold}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}
-         \PY{n}{err\PYZus{}se} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{std}\PY{p}{(}\PY{n}{err}\PY{p}{)}\PY{o}{/}\PY{n}{np}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{n}{nfold}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}
-         
-         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Precision =  }\PY{l+s+si}{\PYZpc{}0.4f}\PY{l+s+s1}{, SE = }\PY{l+s+si}{\PYZpc{}0.4f}\PY{l+s+s1}{\PYZsq{}} \PY{o}{\PYZpc{}} \PY{p}{(}\PY{n}{precm}\PY{p}{,}\PY{n}{prec\PYZus{}se}\PY{p}{)}\PY{p}{)}
-         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Recall =     }\PY{l+s+si}{\PYZpc{}0.4f}\PY{l+s+s1}{, SE = }\PY{l+s+si}{\PYZpc{}0.4f}\PY{l+s+s1}{\PYZsq{}} \PY{o}{\PYZpc{}} \PY{p}{(}\PY{n}{recm}\PY{p}{,} \PY{n}{rec\PYZus{}se}\PY{p}{)}\PY{p}{)}
-         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{f1 =         }\PY{l+s+si}{\PYZpc{}0.4f}\PY{l+s+s1}{, SE = }\PY{l+s+si}{\PYZpc{}0.4f}\PY{l+s+s1}{\PYZsq{}} \PY{o}{\PYZpc{}} \PY{p}{(}\PY{n}{f1m}\PY{p}{,} \PY{n}{f1\PYZus{}se}\PY{p}{)}\PY{p}{)}
-         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Error rate = }\PY{l+s+si}{\PYZpc{}0.4f}\PY{l+s+s1}{, SE = }\PY{l+s+si}{\PYZpc{}0.4f}\PY{l+s+s1}{\PYZsq{}} \PY{o}{\PYZpc{}} \PY{p}{(}\PY{n}{errm}\PY{p}{,} \PY{n}{err\PYZus{}se}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Precision =  }\PY{l+s+si}{\PYZpc{}0.4f}\PY{l+s+s1}{\PYZsq{}} \PY{o}{\PYZpc{}} \PY{n}{precm}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Recall =     }\PY{l+s+si}{\PYZpc{}0.4f}\PY{l+s+s1}{\PYZsq{}} \PY{o}{\PYZpc{}} \PY{n}{recm}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{f1 =         }\PY{l+s+si}{\PYZpc{}0.4f}\PY{l+s+s1}{\PYZsq{}} \PY{o}{\PYZpc{}} \PY{n}{f1m}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Error rate = }\PY{l+s+si}{\PYZpc{}0.4f}\PY{l+s+s1}{\PYZsq{}} \PY{o}{\PYZpc{}} \PY{n}{errm}\PY{p}{)}
 \end{Verbatim}
 
 
     \begin{Verbatim}[commandchars=\\\{\}]
-/usr/local/lib/python3.6/site-packages/sklearn/metrics/classification.py:1137: UndefinedMetricWarning: Recall and F-score are ill-defined and being set to 0.0 due to no true samples.
-  'recall', 'true', average, warn\_for)
-
-    \end{Verbatim}
-
-    \begin{Verbatim}[commandchars=\\\{\}]
-Precision =  0.4689, SE = 0.1590
-Recall =     0.3378, SE = 0.1211
-f1 =         0.3804, SE = 0.1308
-Error rate = 0.3574, SE = 0.0573
+Precision =  0.9411
+Recall =     0.9608
+f1 =         0.9499
+Error rate = 0.0472
 
     \end{Verbatim}
 
@@ -666,9 +657,11 @@ of the test accuracy across the folds.
          \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{model\PYZus{}selection} \PY{k}{import} \PY{n}{KFold}
          
          \PY{c+c1}{\PYZsh{} TODO}
-         \PY{n}{C} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{l+m+mi}{8}\PY{p}{,} \PY{l+m+mi}{8}\PY{p}{)}\PY{p}{)}
          \PY{n}{nfold} \PY{o}{=} \PY{l+m+mi}{10}
          \PY{n}{kf} \PY{o}{=} \PY{n}{KFold}\PY{p}{(}\PY{n}{n\PYZus{}splits}\PY{o}{=}\PY{n}{nfold}\PY{p}{,} \PY{n}{shuffle}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+         
+         \PY{n}{C} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{l+m+mi}{8}\PY{p}{,} \PY{l+m+mi}{8}\PY{p}{)}\PY{p}{)}
+         \PY{n}{acc} \PY{o}{=} \PY{p}{[}\PY{p}{]}
          
          \PY{k}{for} \PY{n}{train}\PY{p}{,} \PY{n}{test} \PY{o+ow}{in} \PY{n}{kf}\PY{o}{.}\PY{n}{split}\PY{p}{(}\PY{n}{Xs}\PY{p}{)}\PY{p}{:}
              \PY{n}{Xtr} \PY{o}{=} \PY{n}{Xs}\PY{p}{[}\PY{n}{train}\PY{p}{,}\PY{p}{:}\PY{p}{]}
@@ -681,37 +674,29 @@ of the test accuracy across the folds.
              
              \PY{n}{C} \PY{o}{+}\PY{o}{=} \PY{n}{confusion\PYZus{}matrix}\PY{p}{(}\PY{n}{yts}\PY{p}{,} \PY{n}{yhat}\PY{p}{)}
              
-             \PY{n}{RSS} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{(}\PY{n}{yhat}\PY{o}{\PYZhy{}}\PY{n}{yts}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)}\PY{o}{/}\PY{n}{np}\PY{o}{.}\PY{n}{std}\PY{p}{(}\PY{n}{yts}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}
-             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Test error rate for fold }\PY{l+s+si}{\PYZpc{}02d}\PY{l+s+s2}{ = }\PY{l+s+si}{\PYZpc{}.4f}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{p}{(}\PY{l+m+mi}{11}\PY{o}{\PYZhy{}}\PY{n}{nfold}\PY{p}{,} \PY{n}{RSS}\PY{p}{)}\PY{p}{)}
-             \PY{n}{nfold} \PY{o}{\PYZhy{}}\PY{o}{=} \PY{l+m+mi}{1}
-             
-         \PY{n}{new\PYZus{}matrix} \PY{o}{=} \PY{n}{preprocessing}\PY{o}{.}\PY{n}{normalize}\PY{p}{(}\PY{n}{C}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+             \PY{n}{acc}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{yhat} \PY{o}{==} \PY{n}{yts}\PY{p}{)}\PY{p}{)}
          
-         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{Confusion Matrix: }\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{array\PYZus{}str}\PY{p}{(}\PY{n}{new\PYZus{}matrix}\PY{p}{,} \PY{n}{precision}\PY{o}{=}\PY{l+m+mi}{4}\PY{p}{,} \PY{n}{suppress\PYZus{}small}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}\PY{p}{)}
+         \PY{n}{accm} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{acc}\PY{p}{)}
+         \PY{n}{acc\PYZus{}se} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{std}\PY{p}{(}\PY{n}{acc}\PY{p}{)} \PY{o}{/} \PY{n}{np}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{n}{nfold}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{C} \PY{o}{=} \PY{n}{preprocessing}\PY{o}{.}\PY{n}{normalize}\PY{p}{(}\PY{n}{C}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+         
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{Confusion Matrix: }\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{array\PYZus{}str}\PY{p}{(}\PY{n}{C}\PY{p}{,} \PY{n}{precision}\PY{o}{=}\PY{l+m+mi}{4}\PY{p}{,} \PY{n}{suppress\PYZus{}small}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Accuracy = }\PY{l+s+si}{\PYZpc{}0.4f}\PY{l+s+s1}{, SE = }\PY{l+s+si}{\PYZpc{}0.4f}\PY{l+s+s1}{\PYZsq{}} \PY{o}{\PYZpc{}} \PY{p}{(}\PY{n}{accm}\PY{p}{,} \PY{n}{acc\PYZus{}se}\PY{p}{)}\PY{p}{)}
 \end{Verbatim}
 
 
     \begin{Verbatim}[commandchars=\\\{\}]
-Test error rate for fold 01 = 0.0017
-Test error rate for fold 02 = 0.0174
-Test error rate for fold 03 = 0.0000
-Test error rate for fold 04 = 0.0262
-Test error rate for fold 05 = 0.0420
-Test error rate for fold 06 = 0.0894
-Test error rate for fold 07 = 0.0509
-Test error rate for fold 08 = 0.0417
-Test error rate for fold 09 = 0.0017
-Test error rate for fold 10 = 0.0164
 
 Confusion Matrix: 
- [[0.9997 0.0139 0.0069 0.     0.0208 0.     0.     0.    ]
- [0.     0.9999 0.     0.     0.0075 0.0075 0.     0.    ]
- [0.     0.     1.     0.     0.     0.     0.     0.0067]
+ [[0.9997 0.0069 0.0069 0.     0.0207 0.     0.     0.    ]
+ [0.0076 0.9999 0.     0.     0.0076 0.0076 0.     0.    ]
+ [0.     0.     0.9999 0.0135 0.     0.     0.     0.    ]
  [0.0075 0.     0.     1.     0.     0.     0.     0.    ]
- [0.0076 0.0151 0.     0.     0.9999 0.     0.     0.    ]
+ [0.0076 0.0229 0.     0.     0.9997 0.     0.     0.    ]
  [0.     0.     0.     0.     0.     1.     0.     0.    ]
- [0.     0.     0.0075 0.     0.     0.     1.     0.    ]
+ [0.     0.     0.     0.     0.     0.     1.     0.    ]
  [0.     0.     0.     0.     0.     0.     0.     1.    ]]
+Accuracy = 0.9861, SE = 0.0028
 
     \end{Verbatim}
 
@@ -766,7 +751,7 @@ magnitude \textless{}0.01 as zero.
          \PY{n}{kf} \PY{o}{=} \PY{n}{KFold}\PY{p}{(}\PY{n}{n\PYZus{}splits}\PY{o}{=}\PY{n}{nfold}\PY{p}{,} \PY{n}{shuffle}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
          
          \PY{n}{npen} \PY{o}{=} \PY{l+m+mi}{20}
-         \PY{n}{C\PYZus{}test} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{logspace}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{n}{npen}\PY{p}{)}
+         \PY{n}{C\PYZus{}test} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{logspace}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{,}\PY{n}{npen}\PY{p}{)}
          \PY{n}{err\PYZus{}rate} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n}{npen}\PY{p}{,}\PY{n}{nfold}\PY{p}{)}\PY{p}{)}
          \PY{n}{num\PYZus{}nonzerocoef} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n}{npen}\PY{p}{,}\PY{n}{nfold}\PY{p}{)}\PY{p}{)}
          
@@ -837,8 +822,8 @@ value.
 
 
     \begin{Verbatim}[commandchars=\\\{\}]
-The minimum test error rate = 7.4074e-03, SE=2.3097e-03
-The C value corresponding to minimum error = 2.0691e+00
+The minimum test error rate = 7.4074e-03, SE=1.8519e-03
+The C value corresponding to minimum error = 1.8330e+00
 
     \end{Verbatim}
 
@@ -867,9 +852,9 @@ as possible while meeting the error target!
 
 
     \begin{Verbatim}[commandchars=\\\{\}]
-Optimal C = 7.8476e-01
-The test error rate = 8.3333e-03, SE=2.5638e-03
-Accuracy = 0.9917, SE=0.0026
+Optimal C = 1.8330e+00
+The test error rate = 7.4074e-03, SE=1.8519e-03
+Accuracy = 0.9926, SE=0.0019
 
     \end{Verbatim}
 
@@ -902,7 +887,7 @@ coefficients corresponding to C\_opt.
 
 
     \begin{Verbatim}[commandchars=\\\{\}]
-The number of non-zero coefficients for the optimal C = 268.200000
+The number of non-zero coefficients for the optimal C = 295.800000
 
     \end{Verbatim}
 
@@ -943,7 +928,7 @@ you expect the accuracy to improve?
 
 
     \begin{Verbatim}[commandchars=\\\{\}]
-Accuracy on the training data is 0.998148
+Accuracy on the training data is 1.000000
 
     \end{Verbatim}
 
