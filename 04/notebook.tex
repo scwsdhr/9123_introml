@@ -1,0 +1,960 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{lab04\_gene\_partial}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \hypertarget{lab-logistic-regression-for-gene-expression-data}{%
+\section{Lab: Logistic Regression for Gene Expression
+Data}\label{lab-logistic-regression-for-gene-expression-data}}
+
+In this lab, we use logistic regression to predict biological
+characteristics (``phenotypes'') from gene expression data. In addition
+to the concepts in \href{./demo04_breast_cancer.ipynb}{breast cancer
+demo}, you will learn to: * Handle missing data * Perform binary
+classification, and evaluating performance using various metrics *
+Perform multi-class logistic classification, and evaluating performance
+using accuracy and confusion matrix * Use L1-regularization to promote
+sparse weights for improved estimation (Grad students only)
+
+\hypertarget{background}{%
+\subsection{Background}\label{background}}
+
+Genes are the basic unit in the DNA and encode blueprints for proteins.
+When proteins are synthesized from a gene, the gene is said to
+``express''. Micro-arrays are devices that measure the expression levels
+of large numbers of genes in parallel. By finding correlations between
+expression levels and phenotypes, scientists can identify possible
+genetic markers for biological characteristics.
+
+The data in this lab comes from:
+
+https://archive.ics.uci.edu/ml/datasets/Mice+Protein+Expression
+
+In this data, mice were characterized by three properties: * Whether
+they had down's syndrome (trisomy) or not * Whether they were stimulated
+to learn or not * Whether they had a drug memantine or a saline control
+solution.
+
+With these three choices, there are 8 possible classes for each mouse.
+For each mouse, the expression levels were measured across 77 genes. We
+will see if the characteristics can be predicted from the gene
+expression levels. This classification could reveal which genes are
+potentially involved in Down's syndrome and if drugs and learning have
+any noticeable effects.
+
+    \hypertarget{load-the-data}{%
+\subsection{Load the Data}\label{load-the-data}}
+
+We begin by loading the standard modules.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+        \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib}
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+        \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
+        \PY{k+kn}{from} \PY{n+nn}{sklearn} \PY{k}{import} \PY{n}{linear\PYZus{}model}\PY{p}{,} \PY{n}{preprocessing}
+\end{Verbatim}
+
+
+    Use the \texttt{pd.read\_excel} command to read the data from
+
+https://archive.ics.uci.edu/ml/machine-learning-databases/00342/Data\_Cortex\_Nuclear.xls
+
+into a dataframe \texttt{df}. Use the \texttt{index\_col} option to
+specify that column 0 is the index. Use the \texttt{df.head()} to print
+the first few rows.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{c+c1}{\PYZsh{} TODO}
+        \PY{n}{df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}excel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{https://archive.ics.uci.edu/ml/machine\PYZhy{}learning\PYZhy{}databases/00342/Data\PYZus{}Cortex\PYZus{}Nuclear.xls}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{index\PYZus{}col}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+        \PY{n}{df}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}2}]:}          DYRK1A\_N   ITSN1\_N    BDNF\_N     NR1\_N    NR2A\_N    pAKT\_N   pBRAF\_N  \textbackslash{}
+        MouseID                                                                         
+        309\_1    0.503644  0.747193  0.430175  2.816329  5.990152  0.218830  0.177565   
+        309\_2    0.514617  0.689064  0.411770  2.789514  5.685038  0.211636  0.172817   
+        309\_3    0.509183  0.730247  0.418309  2.687201  5.622059  0.209011  0.175722   
+        309\_4    0.442107  0.617076  0.358626  2.466947  4.979503  0.222886  0.176463   
+        309\_5    0.434940  0.617430  0.358802  2.365785  4.718679  0.213106  0.173627   
+        
+                 pCAMKII\_N   pCREB\_N    pELK\_N   {\ldots}     pCFOS\_N     SYP\_N  H3AcK18\_N  \textbackslash{}
+        MouseID                                  {\ldots}                                    
+        309\_1     2.373744  0.232224  1.750936   {\ldots}    0.108336  0.427099   0.114783   
+        309\_2     2.292150  0.226972  1.596377   {\ldots}    0.104315  0.441581   0.111974   
+        309\_3     2.283337  0.230247  1.561316   {\ldots}    0.106219  0.435777   0.111883   
+        309\_4     2.152301  0.207004  1.595086   {\ldots}    0.111262  0.391691   0.130405   
+        309\_5     2.134014  0.192158  1.504230   {\ldots}    0.110694  0.434154   0.118481   
+        
+                   EGR1\_N  H3MeK4\_N    CaNA\_N  Genotype  Treatment  Behavior   class  
+        MouseID                                                                       
+        309\_1    0.131790  0.128186  1.675652   Control  Memantine       C/S  c-CS-m  
+        309\_2    0.135103  0.131119  1.743610   Control  Memantine       C/S  c-CS-m  
+        309\_3    0.133362  0.127431  1.926427   Control  Memantine       C/S  c-CS-m  
+        309\_4    0.147444  0.146901  1.700563   Control  Memantine       C/S  c-CS-m  
+        309\_5    0.140314  0.148380  1.839730   Control  Memantine       C/S  c-CS-m  
+        
+        [5 rows x 81 columns]
+\end{Verbatim}
+            
+    This data has missing values. The site:
+
+http://pandas.pydata.org/pandas-docs/stable/missing\_data.html
+
+has an excellent summary of methods to deal with missing values.
+Following the techniques there, create a new data frame \texttt{df1}
+where the missing values in each column are filled with the mean values
+from the non-missing values.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{c+c1}{\PYZsh{} TODO}
+        \PY{n}{df1} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{fillna}\PY{p}{(}\PY{n}{df}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \hypertarget{binary-classification-for-downs-syndrome}{%
+\subsection{Binary Classification for Down's
+Syndrome}\label{binary-classification-for-downs-syndrome}}
+
+We will first predict the binary class label in
+\texttt{df1{[}\textquotesingle{}Genotype\textquotesingle{}{]}} which
+indicates if the mouse has Down's syndrome or not. Get the string values
+in \texttt{df1{[}\textquotesingle{}Genotype\textquotesingle{}{]}.values}
+and convert this to a numeric vector \texttt{y} with 0 or 1. You may
+wish to use the \texttt{np.unique} command with the
+\texttt{return\_inverse=True} option.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{c+c1}{\PYZsh{} TODO}
+        \PY{n}{y} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{unique}\PY{p}{(}\PY{n}{df1}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Genotype}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{values}\PY{p}{,} \PY{n}{return\PYZus{}inverse} \PY{o}{=} \PY{k+kc}{True}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}
+\end{Verbatim}
+
+
+    As predictors, get all but the last four columns of the dataframes.
+Standardize the data matrix and call the standardized matrix
+\texttt{Xs}. The predictors are the expression levels of the 77 genes.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{c+c1}{\PYZsh{} TODO}
+        \PY{n}{Xs} \PY{o}{=} \PY{n}{preprocessing}\PY{o}{.}\PY{n}{scale}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{df1}\PY{p}{[}\PY{n}{df1}\PY{o}{.}\PY{n}{columns}\PY{p}{[}\PY{p}{:}\PY{o}{\PYZhy{}}\PY{l+m+mi}{4}\PY{p}{]}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    Create a \texttt{LogisticRegression} object \texttt{logreg} and
+\texttt{fit} the training data. Use \texttt{C\ =\ 1e5}.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{c+c1}{\PYZsh{} TODO}
+        \PY{n}{logreg} \PY{o}{=} \PY{n}{linear\PYZus{}model}\PY{o}{.}\PY{n}{LogisticRegression}\PY{p}{(}\PY{n}{C}\PY{o}{=}\PY{l+m+mf}{1e5}\PY{p}{)}
+        \PY{n}{logreg}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{Xs}\PY{p}{,}\PY{n}{y}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}6}]:} LogisticRegression(C=100000.0, class\_weight=None, dual=False,
+                  fit\_intercept=True, intercept\_scaling=1, max\_iter=100,
+                  multi\_class='ovr', n\_jobs=1, penalty='l2', random\_state=None,
+                  solver='liblinear', tol=0.0001, verbose=0, warm\_start=False)
+\end{Verbatim}
+            
+    Measure the accuracy of the classifer. That is, use the
+\texttt{logreg.predict} function to predict labels \texttt{yhat} and
+measure the fraction of time that the predictions match the true labels.
+Also, plot the ROC curve, and measure the AUC. Later, we will properly
+measure the accuracy and AUC on cross-validation data.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{c+c1}{\PYZsh{} TODO}
+        \PY{n}{yhat} \PY{o}{=} \PY{n}{logreg}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{Xs}\PY{p}{)}
+        \PY{n}{yprob} \PY{o}{=} \PY{n}{logreg}\PY{o}{.}\PY{n}{predict\PYZus{}proba}\PY{p}{(}\PY{n}{Xs}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Accuracy of the classifier = }\PY{l+s+si}{\PYZpc{}f}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{yhat} \PY{o}{==} \PY{n}{y}\PY{p}{)}\PY{p}{)}
+        \PY{k+kn}{from} \PY{n+nn}{sklearn} \PY{k}{import} \PY{n}{metrics}
+        \PY{n}{fpr}\PY{p}{,} \PY{n}{tpr}\PY{p}{,} \PY{n}{thresholds} \PY{o}{=} \PY{n}{metrics}\PY{o}{.}\PY{n}{roc\PYZus{}curve}\PY{p}{(}\PY{n}{y}\PY{p}{,} \PY{n}{yprob}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+        
+        \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{fpr}\PY{p}{,} \PY{n}{tpr}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{grid}\PY{p}{(}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{FPR}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{TPR}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+        
+        \PY{n}{auc}\PY{o}{=}\PY{n}{metrics}\PY{o}{.}\PY{n}{roc\PYZus{}auc\PYZus{}score}\PY{p}{(}\PY{n}{y}\PY{p}{,} \PY{n}{yprob}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{AUC = }\PY{l+s+si}{\PYZpc{}f}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{n}{auc}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Accuracy of the classifier = 1.000000
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_14_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+AUC = 1.000000
+
+    \end{Verbatim}
+
+    \hypertarget{interpreting-the-weight-vector}{%
+\subsection{Interpreting the weight
+vector}\label{interpreting-the-weight-vector}}
+
+    Create a stem plot of the coefficients, \texttt{W} in the logistic
+regression model. You can get the coefficients from
+\texttt{logreg.coef\_}, but you will need to reshape this to a 1D array.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{c+c1}{\PYZsh{} TODO}
+        \PY{n}{W} \PY{o}{=} \PY{n}{logreg}\PY{o}{.}\PY{n}{coef\PYZus{}}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{stem}\PY{p}{(}\PY{n}{logreg}\PY{o}{.}\PY{n}{coef\PYZus{}}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{i}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Weight}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_17_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    You should see that \texttt{W{[}i{]}} is very large for a few components
+\texttt{i}. These are the genes that are likely to be most involved in
+Down's Syndrome.
+
+Find the names of the genes for two components \texttt{i} where the
+magnitude of \texttt{W{[}i{]}} is largest.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{c+c1}{\PYZsh{} TODO}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{The two components are }\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+si}{\PYZpc{}s}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{ and }\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+si}{\PYZpc{}s}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{.}\PY{l+s+s1}{\PYZsq{}} \PY{o}{\PYZpc{}} \PY{n+nb}{tuple}\PY{p}{(}\PY{n}{df1}\PY{o}{.}\PY{n}{columns}\PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{argsort}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{n}{logreg}\PY{o}{.}\PY{n}{coef\PYZus{}}\PY{p}{)}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{p}{:}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+The two components are 'ITSN1\_N' and 'TIAM1\_N'.
+
+    \end{Verbatim}
+
+    \hypertarget{cross-validation}{%
+\subsection{Cross Validation}\label{cross-validation}}
+
+The above meaured the accuracy on the training data. It is more accurate
+to measure the accuracy on the test data. Perform 10-fold cross
+validation and measure the average precision, recall and f1-score, as
+well as the AUC. Note, that in performing the cross-validation, you will
+want to randomly permute the test and training sets using the
+\texttt{shuffle} option. In this data set, all the samples from each
+class are bunched together, so shuffling is essential. Print the mean
+precision, recall and f1-score and error rate across all the folds.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{c+c1}{\PYZsh{} TODO}
+         \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{model\PYZus{}selection} \PY{k}{import} \PY{n}{KFold}
+         \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{metrics} \PY{k}{import} \PY{n}{precision\PYZus{}recall\PYZus{}fscore\PYZus{}support}
+         
+         \PY{n}{nfold} \PY{o}{=} \PY{l+m+mi}{10}
+         \PY{n}{kf} \PY{o}{=} \PY{n}{KFold}\PY{p}{(}\PY{n}{n\PYZus{}splits}\PY{o}{=}\PY{n}{nfold}\PY{p}{)}
+         
+         \PY{n}{prec} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         \PY{n}{rec} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         \PY{n}{f1} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         \PY{n}{err} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         
+         \PY{k}{for} \PY{n}{train}\PY{p}{,} \PY{n}{test} \PY{o+ow}{in} \PY{n}{kf}\PY{o}{.}\PY{n}{split}\PY{p}{(}\PY{n}{Xs}\PY{p}{)}\PY{p}{:}            
+             \PY{c+c1}{\PYZsh{} Get training and test data}
+             \PY{n}{Xtr} \PY{o}{=} \PY{n}{Xs}\PY{p}{[}\PY{n}{train}\PY{p}{,}\PY{p}{:}\PY{p}{]}
+             \PY{n}{ytr} \PY{o}{=} \PY{n}{y}\PY{p}{[}\PY{n}{train}\PY{p}{]}
+             \PY{n}{Xts} \PY{o}{=} \PY{n}{Xs}\PY{p}{[}\PY{n}{test}\PY{p}{,}\PY{p}{:}\PY{p}{]}
+             \PY{n}{yts} \PY{o}{=} \PY{n}{y}\PY{p}{[}\PY{n}{test}\PY{p}{]}
+             
+             \PY{c+c1}{\PYZsh{} Fit a model}
+             \PY{n}{logreg}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{Xtr}\PY{p}{,} \PY{n}{ytr}\PY{p}{)}
+             \PY{n}{yhat} \PY{o}{=} \PY{n}{logreg}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{Xts}\PY{p}{)}
+             
+             \PY{c+c1}{\PYZsh{} Measure performance}
+             \PY{n}{preci}\PY{p}{,}\PY{n}{reci}\PY{p}{,}\PY{n}{f1i}\PY{p}{,}\PY{n}{\PYZus{}}\PY{o}{=} \PY{n}{precision\PYZus{}recall\PYZus{}fscore\PYZus{}support}\PY{p}{(}\PY{n}{yts}\PY{p}{,} \PY{n}{yhat}\PY{p}{,} \PY{n}{average}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{binary}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} 
+             \PY{n}{prec}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{preci}\PY{p}{)}
+             \PY{n}{rec}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{reci}\PY{p}{)}
+             \PY{n}{f1}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{f1i}\PY{p}{)}
+             \PY{n}{erri} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{yhat} \PY{o}{!=} \PY{n}{yts}\PY{p}{)}
+             \PY{n}{err}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{erri}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Take average values of the metrics}
+         \PY{n}{precm} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{prec}\PY{p}{)}
+         \PY{n}{recm} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{rec}\PY{p}{)}
+         \PY{n}{f1m} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{f1}\PY{p}{)}
+         \PY{n}{errm} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{err}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Compute the standard errors}
+         \PY{n}{prec\PYZus{}se} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{std}\PY{p}{(}\PY{n}{prec}\PY{p}{)}\PY{o}{/}\PY{n}{np}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{n}{nfold}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{rec\PYZus{}se} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{std}\PY{p}{(}\PY{n}{rec}\PY{p}{)}\PY{o}{/}\PY{n}{np}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{n}{nfold}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{f1\PYZus{}se} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{std}\PY{p}{(}\PY{n}{f1}\PY{p}{)}\PY{o}{/}\PY{n}{np}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{n}{nfold}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{err\PYZus{}se} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{std}\PY{p}{(}\PY{n}{err}\PY{p}{)}\PY{o}{/}\PY{n}{np}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{n}{nfold}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}
+         
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Precision =  }\PY{l+s+si}{\PYZpc{}0.4f}\PY{l+s+s1}{, SE = }\PY{l+s+si}{\PYZpc{}0.4f}\PY{l+s+s1}{\PYZsq{}} \PY{o}{\PYZpc{}} \PY{p}{(}\PY{n}{precm}\PY{p}{,}\PY{n}{prec\PYZus{}se}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Recall =     }\PY{l+s+si}{\PYZpc{}0.4f}\PY{l+s+s1}{, SE = }\PY{l+s+si}{\PYZpc{}0.4f}\PY{l+s+s1}{\PYZsq{}} \PY{o}{\PYZpc{}} \PY{p}{(}\PY{n}{recm}\PY{p}{,} \PY{n}{rec\PYZus{}se}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{f1 =         }\PY{l+s+si}{\PYZpc{}0.4f}\PY{l+s+s1}{, SE = }\PY{l+s+si}{\PYZpc{}0.4f}\PY{l+s+s1}{\PYZsq{}} \PY{o}{\PYZpc{}} \PY{p}{(}\PY{n}{f1m}\PY{p}{,} \PY{n}{f1\PYZus{}se}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Error rate = }\PY{l+s+si}{\PYZpc{}0.4f}\PY{l+s+s1}{, SE = }\PY{l+s+si}{\PYZpc{}0.4f}\PY{l+s+s1}{\PYZsq{}} \PY{o}{\PYZpc{}} \PY{p}{(}\PY{n}{errm}\PY{p}{,} \PY{n}{err\PYZus{}se}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+/usr/local/lib/python3.6/site-packages/sklearn/metrics/classification.py:1137: UndefinedMetricWarning: Recall and F-score are ill-defined and being set to 0.0 due to no true samples.
+  'recall', 'true', average, warn\_for)
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Precision =  0.4689, SE = 0.1590
+Recall =     0.3378, SE = 0.1211
+f1 =         0.3804, SE = 0.1308
+Error rate = 0.3565, SE = 0.0576
+
+    \end{Verbatim}
+
+    \hypertarget{multi-class-classification}{%
+\subsection{Multi-Class
+Classification}\label{multi-class-classification}}
+
+Now use the response variable in
+\texttt{df1{[}\textquotesingle{}class\textquotesingle{}{]}}. This has 8
+possible classes. Use the \texttt{np.unique} funtion as before to
+convert this to a vector \texttt{y} with values 0 to 7.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{c+c1}{\PYZsh{} TODO}
+         \PY{n}{y} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{unique}\PY{p}{(}\PY{n}{df1}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{class}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{values}\PY{p}{,} \PY{n}{return\PYZus{}inverse} \PY{o}{=} \PY{k+kc}{True}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}
+\end{Verbatim}
+
+
+    Fit a multi-class logistic model by creating a
+\texttt{LogisticRegression} object, \texttt{logreg} and then calling the
+\texttt{logreg.fit} method. In general, you could either use the `one
+over rest (ovr)' option or the `multinomial' option. In this exercise
+use the default `ovr' and \texttt{C=1}. As an optional exercise, you
+could also compare the results obtained with these two options.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{c+c1}{\PYZsh{} TODO}
+         \PY{n}{logreg} \PY{o}{=} \PY{n}{linear\PYZus{}model}\PY{o}{.}\PY{n}{LogisticRegression}\PY{p}{(}\PY{n}{multi\PYZus{}class}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ovr}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{C}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{logreg}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{Xs}\PY{p}{,} \PY{n}{y}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}12}]:} LogisticRegression(C=1, class\_weight=None, dual=False, fit\_intercept=True,
+                   intercept\_scaling=1, max\_iter=100, multi\_class='ovr', n\_jobs=1,
+                   penalty='l2', random\_state=None, solver='liblinear', tol=0.0001,
+                   verbose=0, warm\_start=False)
+\end{Verbatim}
+            
+    Measure the accuracy on the training data.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{c+c1}{\PYZsh{} TODO}
+         \PY{n}{yhat} \PY{o}{=} \PY{n}{logreg}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{Xs}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Accuracy on training data = }\PY{l+s+si}{\PYZpc{}f}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{yhat} \PY{o}{==} \PY{n}{y}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Accuracy on training data = 0.999074
+
+    \end{Verbatim}
+
+    Now perform 10-fold cross validation, and measure the confusion matrix
+\texttt{C} on the test data in each fold. You can use the
+\texttt{confustion\_matrix} method in the \texttt{sklearn} package. Add
+the confusion matrix counts across all folds and then normalize the rows
+of the confusion matrix so that they sum to one. Thus, each element
+\texttt{C{[}i,j{]}} will represent the fraction of samples where
+\texttt{yhat==j} given \texttt{ytrue==i}. Print the confusion matrix.
+You can use the command
+
+\begin{verbatim}
+print(np.array_str(C, precision=4, suppress_small=True))
+\end{verbatim}
+
+to create a nicely formatted print. Also print the overall mean and SE
+of the test accuracy across the folds.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}14}]:} \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{metrics} \PY{k}{import} \PY{n}{confusion\PYZus{}matrix}
+         \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{model\PYZus{}selection} \PY{k}{import} \PY{n}{KFold}
+         
+         \PY{c+c1}{\PYZsh{} TODO}
+         \PY{n}{C} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{l+m+mi}{8}\PY{p}{,} \PY{l+m+mi}{8}\PY{p}{)}\PY{p}{)}
+         \PY{n}{nfold} \PY{o}{=} \PY{l+m+mi}{10}
+         \PY{n}{kf} \PY{o}{=} \PY{n}{KFold}\PY{p}{(}\PY{n}{n\PYZus{}splits}\PY{o}{=}\PY{n}{nfold}\PY{p}{,} \PY{n}{shuffle}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+         
+         \PY{k}{for} \PY{n}{train}\PY{p}{,} \PY{n}{test} \PY{o+ow}{in} \PY{n}{kf}\PY{o}{.}\PY{n}{split}\PY{p}{(}\PY{n}{Xs}\PY{p}{)}\PY{p}{:}
+             \PY{n}{Xtr} \PY{o}{=} \PY{n}{Xs}\PY{p}{[}\PY{n}{train}\PY{p}{,}\PY{p}{:}\PY{p}{]}
+             \PY{n}{ytr} \PY{o}{=} \PY{n}{y}\PY{p}{[}\PY{n}{train}\PY{p}{]}
+             \PY{n}{Xts} \PY{o}{=} \PY{n}{Xs}\PY{p}{[}\PY{n}{test}\PY{p}{,}\PY{p}{:}\PY{p}{]}
+             \PY{n}{yts} \PY{o}{=} \PY{n}{y}\PY{p}{[}\PY{n}{test}\PY{p}{]}
+             
+             \PY{n}{logreg}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{Xtr}\PY{p}{,} \PY{n}{ytr}\PY{p}{)}
+             \PY{n}{yhat} \PY{o}{=} \PY{n}{logreg}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{Xts}\PY{p}{)}
+             
+             \PY{n}{C} \PY{o}{+}\PY{o}{=} \PY{n}{confusion\PYZus{}matrix}\PY{p}{(}\PY{n}{yts}\PY{p}{,} \PY{n}{yhat}\PY{p}{)}
+             
+             \PY{n}{RSS} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{(}\PY{n}{yhat}\PY{o}{\PYZhy{}}\PY{n}{yts}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)}\PY{o}{/}\PY{n}{np}\PY{o}{.}\PY{n}{std}\PY{p}{(}\PY{n}{yts}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Test error rate for fold }\PY{l+s+si}{\PYZpc{}02d}\PY{l+s+s2}{ = }\PY{l+s+si}{\PYZpc{}.4f}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{p}{(}\PY{l+m+mi}{11}\PY{o}{\PYZhy{}}\PY{n}{nfold}\PY{p}{,} \PY{n}{RSS}\PY{p}{)}\PY{p}{)}
+             \PY{n}{nfold} \PY{o}{\PYZhy{}}\PY{o}{=} \PY{l+m+mi}{1}
+             
+         \PY{n}{new\PYZus{}matrix} \PY{o}{=} \PY{n}{preprocessing}\PY{o}{.}\PY{n}{normalize}\PY{p}{(}\PY{n}{C}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+         
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{Confusion Matrix: }\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{array\PYZus{}str}\PY{p}{(}\PY{n}{new\PYZus{}matrix}\PY{p}{,} \PY{n}{precision}\PY{o}{=}\PY{l+m+mi}{4}\PY{p}{,} \PY{n}{suppress\PYZus{}small}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Test error rate for fold 01 = 0.0349
+Test error rate for fold 02 = 0.0190
+Test error rate for fold 03 = 0.0542
+Test error rate for fold 04 = 0.0856
+Test error rate for fold 05 = 0.0346
+Test error rate for fold 06 = 0.0343
+Test error rate for fold 07 = 0.0326
+Test error rate for fold 08 = 0.0000
+Test error rate for fold 09 = 0.0000
+Test error rate for fold 10 = 0.0000
+
+Confusion Matrix: 
+ [[0.9997 0.0069 0.0069 0.     0.0207 0.     0.     0.    ]
+ [0.0076 0.9999 0.     0.     0.0076 0.0076 0.     0.    ]
+ [0.     0.     1.     0.     0.     0.     0.     0.0067]
+ [0.0075 0.     0.     1.     0.     0.     0.     0.    ]
+ [0.0076 0.0229 0.     0.     0.9997 0.     0.     0.    ]
+ [0.     0.     0.     0.     0.     1.     0.     0.    ]
+ [0.     0.     0.0075 0.     0.     0.     1.     0.    ]
+ [0.     0.     0.     0.     0.     0.     0.     1.    ]]
+
+    \end{Verbatim}
+
+    Re-run the logistic regression on the entire training data and get the
+weight coefficients. This should be a 8 x 77 matrix. Create a stem plot
+of the first row of this matrix to see the coefficients on each of the
+genes for the first class.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}15}]:} \PY{c+c1}{\PYZsh{} TODO}
+         \PY{n}{logreg}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{Xs}\PY{p}{,} \PY{n}{y}\PY{p}{)}
+         \PY{n}{W} \PY{o}{=} \PY{n}{logreg}\PY{o}{.}\PY{n}{coef\PYZus{}}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{stem}\PY{p}{(}\PY{n}{logreg}\PY{o}{.}\PY{n}{coef\PYZus{}}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_31_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{l1-regularization}{%
+\subsection{L1-Regularization}\label{l1-regularization}}
+
+Graduate students only complete this section.
+
+In most genetic problems, only a limited number of the tested genes are
+likely influence any particular attribute. Hence, we would expect that
+the weight coefficients in the logistic regression model should be
+sparse. That is, they should be zero on any gene that plays no role in
+the particular attribute of interest. Genetic analysis commonly imposes
+sparsity by adding an l1-penalty term. Read the \texttt{sklearn}
+\href{http://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html}{documentation}
+on the \texttt{LogisticRegression} class to see how to set the
+l1-penalty and the inverse regularization strength, \texttt{C}.
+
+Using the model selection strategies from the
+\href{../unit03_model_sel/demo03_2_prostate.ipynb}{prostate cancer
+analysis demo}, use K-fold cross validation to select an appropriate
+inverse regularization strength.\\
+* Use 10-fold cross validation * You should select around 20 values of
+\texttt{C}. It is up to you to find a good range. * For each C and each
+fold, you should compute the classification error rate * For each C and
+each fold, you should also determine the nubmer of non-zero coefficients
+for the first class. For this purpse, you can assume coefficient with
+magnitude \textless{}0.01 as zero.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}16}]:} \PY{c+c1}{\PYZsh{} TODO}
+         \PY{n}{nfold} \PY{o}{=} \PY{l+m+mi}{10}
+         \PY{n}{kf} \PY{o}{=} \PY{n}{KFold}\PY{p}{(}\PY{n}{n\PYZus{}splits}\PY{o}{=}\PY{n}{nfold}\PY{p}{,} \PY{n}{shuffle}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+         
+         \PY{n}{npen} \PY{o}{=} \PY{l+m+mi}{20}
+         \PY{n}{C\PYZus{}test} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{logspace}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{n}{npen}\PY{p}{)}
+         \PY{n}{err\PYZus{}rate} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n}{npen}\PY{p}{,}\PY{n}{nfold}\PY{p}{)}\PY{p}{)}
+         \PY{n}{num\PYZus{}nonzerocoef} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n}{npen}\PY{p}{,}\PY{n}{nfold}\PY{p}{)}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Create the logistic regression object}
+         \PY{n}{logreg} \PY{o}{=} \PY{n}{linear\PYZus{}model}\PY{o}{.}\PY{n}{LogisticRegression}\PY{p}{(}\PY{n}{penalty}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{l1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{warm\PYZus{}start}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+         
+         \PY{k}{for} \PY{n}{ifold}\PY{p}{,} \PY{n}{Ind} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{kf}\PY{o}{.}\PY{n}{split}\PY{p}{(}\PY{n}{Xs}\PY{p}{)}\PY{p}{)}\PY{p}{:} 
+             \PY{c+c1}{\PYZsh{} Get training and test data}
+             \PY{n}{Itr}\PY{p}{,} \PY{n}{Its} \PY{o}{=} \PY{n}{Ind}
+             \PY{n}{Xtr} \PY{o}{=} \PY{n}{Xs}\PY{p}{[}\PY{n}{Itr}\PY{p}{,}\PY{p}{:}\PY{p}{]}
+             \PY{n}{ytr} \PY{o}{=} \PY{n}{y}\PY{p}{[}\PY{n}{Itr}\PY{p}{]}
+             \PY{n}{Xts} \PY{o}{=} \PY{n}{Xs}\PY{p}{[}\PY{n}{Its}\PY{p}{,}\PY{p}{:}\PY{p}{]}
+             \PY{n}{yts} \PY{o}{=} \PY{n}{y}\PY{p}{[}\PY{n}{Its}\PY{p}{]}
+             
+             \PY{c+c1}{\PYZsh{} Loop over penalty levels}
+             \PY{k}{for} \PY{n}{ipen}\PY{p}{,} \PY{n}{c} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{C\PYZus{}test}\PY{p}{)}\PY{p}{:}
+                 
+                 \PY{c+c1}{\PYZsh{} Set the penalty level        }
+                 \PY{n}{logreg}\PY{o}{.}\PY{n}{C} \PY{o}{=} \PY{n}{c}
+             
+                 \PY{c+c1}{\PYZsh{} Fit a model on the training data}
+                 \PY{n}{logreg}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{Xtr}\PY{p}{,} \PY{n}{ytr}\PY{p}{)}
+             
+                 \PY{c+c1}{\PYZsh{} Predict the labels on the test set.}
+                 \PY{n}{yhat} \PY{o}{=} \PY{n}{logreg}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{Xts}\PY{p}{)}
+                 
+                 \PY{c+c1}{\PYZsh{} Measure the accuracy}
+                 \PY{n}{err\PYZus{}rate}\PY{p}{[}\PY{n}{ipen}\PY{p}{,} \PY{n}{ifold}\PY{p}{]} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{yhat} \PY{o}{!=} \PY{n}{yts}\PY{p}{)}
+                 \PY{n}{num\PYZus{}nonzerocoef}\PY{p}{[}\PY{n}{ipen}\PY{p}{,} \PY{n}{ifold}\PY{p}{]}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n+nb}{abs}\PY{p}{(}\PY{n}{logreg}\PY{o}{.}\PY{n}{coef\PYZus{}}\PY{p}{)} \PY{o}{\PYZgt{}} \PY{l+m+mf}{0.01}\PY{p}{)}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Fold }\PY{l+s+si}{\PYZpc{}d}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{p}{(}\PY{n}{ifold}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Fold 1
+Fold 2
+Fold 3
+Fold 4
+Fold 5
+Fold 6
+Fold 7
+Fold 8
+Fold 9
+Fold 10
+
+    \end{Verbatim}
+
+    Now compute the mean and standard error on the error rate for each
+\texttt{C} and plot the results (Use \texttt{errorbar()} method). Also
+determine and print the minimum test error rate and corresponding C
+value.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}17}]:} \PY{c+c1}{\PYZsh{} TODO}
+         \PY{n}{err\PYZus{}mean} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{err\PYZus{}rate}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{num\PYZus{}nonzerocoef\PYZus{}mean} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{num\PYZus{}nonzerocoef}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{err\PYZus{}se} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{std}\PY{p}{(}\PY{n}{err\PYZus{}rate}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)} \PY{o}{/} \PY{n}{np}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{n}{nfold}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{errorbar}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{log10}\PY{p}{(}\PY{n}{C\PYZus{}test}\PY{p}{)}\PY{p}{,} \PY{n}{err\PYZus{}mean}\PY{p}{,} \PY{n}{marker}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{o}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{yerr}\PY{o}{=}\PY{n}{err\PYZus{}se}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{grid}\PY{p}{(}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+sa}{r}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZdl{}}\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{log\PYZus{}}\PY{l+s+si}{\PYZob{}10\PYZcb{}}\PY{l+s+s1}{(C)\PYZdl{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Error rate}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{n}{imin} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{argmin}\PY{p}{(}\PY{n}{err\PYZus{}mean}\PY{p}{)}
+         
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{The minimum test error rate = }\PY{l+s+si}{\PYZpc{}0.4e}\PY{l+s+s2}{, SE=}\PY{l+s+si}{\PYZpc{}0.4e}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{p}{(}\PY{n}{err\PYZus{}mean}\PY{p}{[}\PY{n}{imin}\PY{p}{]}\PY{p}{,} \PY{n}{err\PYZus{}se}\PY{p}{[}\PY{n}{imin}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{The C value corresponding to minimum error = }\PY{l+s+si}{\PYZpc{}0.4e}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{p}{(}\PY{n}{C\PYZus{}test}\PY{p}{[}\PY{n}{imin}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+The minimum test error rate = 8.3333e-03, SE=2.9117e-03
+The C value corresponding to minimum error = 7.8476e-01
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_35_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    We see that the minimum error rate is significantly below the classifier
+that did not use the l1-penalty. Use the one-standard error rule to
+determine the optimal \texttt{C} and the corresponding test error rate.
+Note that because \texttt{C} is inversely proportional to the
+regularization strength, you want to select a \texttt{C} as \emph{small}
+as possible while meeting the error target!
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}18}]:} \PY{c+c1}{\PYZsh{} TODO}
+         \PY{n}{err\PYZus{}tgt} \PY{o}{=} \PY{n}{err\PYZus{}mean}\PY{p}{[}\PY{n}{imin}\PY{p}{]} \PY{o}{+} \PY{n}{err\PYZus{}se}\PY{p}{[}\PY{n}{imin}\PY{p}{]}
+         \PY{n}{iopt} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{where}\PY{p}{(}\PY{n}{err\PYZus{}mean} \PY{o}{\PYZlt{}} \PY{n}{err\PYZus{}tgt}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+         \PY{n}{C\PYZus{}opt} \PY{o}{=} \PY{n}{C\PYZus{}test}\PY{p}{[}\PY{n}{iopt}\PY{p}{]}
+         
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Optimal C = }\PY{l+s+si}{\PYZpc{}0.4e}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{n}{C\PYZus{}opt}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{The test error rate = }\PY{l+s+si}{\PYZpc{}0.4e}\PY{l+s+s2}{, SE=}\PY{l+s+si}{\PYZpc{}0.4e}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{p}{(}\PY{n}{err\PYZus{}mean}\PY{p}{[}\PY{n}{iopt}\PY{p}{]}\PY{p}{,} \PY{n}{err\PYZus{}se}\PY{p}{[}\PY{n}{iopt}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Accuracy = }\PY{l+s+si}{\PYZpc{}0.4f}\PY{l+s+s1}{, SE=}\PY{l+s+si}{\PYZpc{}0.4f}\PY{l+s+s1}{\PYZsq{}} \PY{o}{\PYZpc{}} \PY{p}{(}\PY{l+m+mi}{1}\PY{o}{\PYZhy{}}\PY{n}{err\PYZus{}mean}\PY{p}{[}\PY{n}{iopt}\PY{p}{]}\PY{p}{,} \PY{n}{err\PYZus{}se}\PY{p}{[}\PY{n}{iopt}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Optimal C = 4.8329e-01
+The test error rate = 1.1111e-02, SE=2.3097e-03
+Accuracy = 0.9889, SE=0.0023
+
+    \end{Verbatim}
+
+    \textbf{Question:} How does the test error rate compare with the
+classifier that did not use the l1-penalty? Explain why.
+
+    \textbf{Type Answer Here:}
+
+The error rate with L1-penalty is a bit smaller than the classifier that
+did not use the L1-penalty. I think the reason is that L1-penalty shrink
+some of the features to be zero, which means these features play no role
+on the prediction. So the prediction will focus on the true related
+features. Thus, it leads to a smaller error rate.
+
+    Now plot the nubmer of non-zero coefficients for the first class for
+different C values. Also determine and print the number of non-zero
+coefficients corresponding to C\_opt.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}19}]:} \PY{c+c1}{\PYZsh{} TODO}
+         \PY{n}{num\PYZus{}nonzerocoef\PYZus{}mean} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{num\PYZus{}nonzerocoef}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{log10}\PY{p}{(}\PY{n}{C\PYZus{}test}\PY{p}{)}\PY{p}{,}\PY{n}{num\PYZus{}nonzerocoef\PYZus{}mean}\PY{p}{)}
+         
+         \PY{n}{plt}\PY{o}{.}\PY{n}{grid}\PY{p}{(}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{log10(C)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Num of nonzero coeff.}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{The number of non\PYZhy{}zero coefficients for the optimal C = }\PY{l+s+si}{\PYZpc{}f}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{n}{num\PYZus{}nonzerocoef\PYZus{}mean}\PY{p}{[}\PY{n}{iopt}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+The number of non-zero coefficients for the optimal C = 249.300000
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_41_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    For the optimal \texttt{C}, fit the model on the entire training data
+with l1 regularization. Find the resulting weight matrix,
+\texttt{W\_l1}. Plot the first row of this weight matrix and compare it
+to the first row of the weight matrix without the regularization. You
+should see that, with l1-regularization, the weight matrix is much more
+sparse and hence the roles of particular genes are more clearly visible.
+Please also compare the accuracy for the training data using optimal
+\texttt{C} with the previous results not using LASSO regularization. Do
+you expect the accuracy to improve?
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}20}]:} \PY{c+c1}{\PYZsh{} TODO}
+         \PY{n}{logreg} \PY{o}{=} \PY{n}{linear\PYZus{}model}\PY{o}{.}\PY{n}{LogisticRegression}\PY{p}{(}\PY{n}{C}\PY{o}{=}\PY{n}{C\PYZus{}opt}\PY{p}{,}\PY{n}{penalty}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{l1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{logreg}\PY{o}{.}\PY{n}{C}\PY{o}{=} \PY{n}{C\PYZus{}opt}
+         \PY{n}{logreg}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{Xs}\PY{p}{,}\PY{n}{y}\PY{p}{)}
+         \PY{n}{yhat} \PY{o}{=} \PY{n}{logreg}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{Xs}\PY{p}{)}
+         \PY{n}{acc} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{yhat} \PY{o}{==} \PY{n}{y}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Accuracy on the training data is }\PY{l+s+si}{\PYZob{}0:f\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{acc}\PY{p}{)}\PY{p}{)}
+         \PY{n}{W\PYZus{}l1} \PY{o}{=} \PY{n}{logreg}\PY{o}{.}\PY{n}{coef\PYZus{}}
+         
+         \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{7}\PY{p}{,}\PY{l+m+mi}{7}\PY{p}{)}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{stem}\PY{p}{(}\PY{n}{W}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{p}{:}\PY{p}{]}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{No regularization}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{stem}\PY{p}{(}\PY{n}{W\PYZus{}l1}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{p}{:}\PY{p}{]}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{l1\PYZhy{}regularization}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Accuracy on the training data is 0.997222
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_43_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
