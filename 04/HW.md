@@ -90,9 +90,7 @@ z_i'&=(\mathbf{w}')^\mathrm{T}\mathbf{x}_i+b' \\
 &=\alpha z_i
 \end{aligned}
 $$
-Notice that the sign of $z_i'$ is the same as $z_i$.
 So the $\hat{y}$ will not change.       
-However, the probabilities will change. For example, $\alpha>1$.
 Since for $z_i>0$, $z_i'>z_i$; for $z_i<0$, $z_i'<z_i$, 
 we can tell that for $P(y_i=1|\mathbf{x})>0.5$, the probability will increase; for $P(y_i=1|\mathbf{x})<0.5$, the probability will decrease.
 
