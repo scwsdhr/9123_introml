@@ -1,0 +1,881 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{lab05\_audio\_partial}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \section{Lab 5: Pitch Detection in
+Audio}\label{lab-5-pitch-detection-in-audio}
+
+In this lab, we will use numerical optimization to find the pitch and
+harmonics in a simple audio signal. In addition to the concepts in the
+\href{./grad_descent.ipynb}{gradient descent demo}, you will learn to: *
+Load, visualize and play audio recordings * Divide audio data into
+frames * Perform nested minimization
+
+The ML method presented here for pitch detection is actually not a very
+good one. As we will see, it is highly susceptible to local minima and
+quite slow. There are several better
+\href{https://en.wikipedia.org/wiki/Pitch_detection_algorithm}{pitch
+detection algorithms}, mostly using frequency-domain techniques. But,
+the method here will illustrate non-linear estimation well.
+
+    \subsection{Reading the Audio File}\label{reading-the-audio-file}
+
+Python provides a very simple method to read a \texttt{wav} file in the
+\texttt{scipy.io.wavefile} package. We first load that along with the
+other packages.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{k+kn}{from} \PY{n+nn}{scipy}\PY{n+nn}{.}\PY{n+nn}{io}\PY{n+nn}{.}\PY{n+nn}{wavfile} \PY{k}{import} \PY{n}{read}
+        \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+        \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
+\end{Verbatim}
+
+
+    In the github repository, you should find a file,
+\href{./viola.wav}{\texttt{viola.wav}}. Download this file to your local
+directory. Although the file is included in the github repository, you
+can find it along with many other audio samples in
+\href{https://ccrma.stanford.edu/~jos/pasp/Sound_Examples.html}{CCRMA
+audio website}. After you have downloaded the file, you can then read
+the file with the \texttt{read} command. Print the sample rate in Hz,
+the number of samples in the file and the file length in seconds.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{c+c1}{\PYZsh{} Read the file}
+        \PY{n}{sr}\PY{p}{,} \PY{n}{y} \PY{o}{=} \PY{n}{read}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{viola.wav}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} Convert to floating point values so that compuations below do not overflow}
+        \PY{n}{y} \PY{o}{=} \PY{n}{y}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{n+nb}{float}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} TODO:  Print sample rate, number of samples and file length in seconds.}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Sample rate: }\PY{l+s+si}{\PYZpc{}d}\PY{l+s+s1}{Hz}\PY{l+s+s1}{\PYZsq{}} \PY{o}{\PYZpc{}} \PY{n}{sr}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{The number of samples: }\PY{l+s+si}{\PYZpc{}d}\PY{l+s+s1}{\PYZsq{}} \PY{o}{\PYZpc{}} \PY{n+nb}{len}\PY{p}{(}\PY{n}{y}\PY{p}{)}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{The file length: }\PY{l+s+si}{\PYZpc{}.4f}\PY{l+s+s1}{s}\PY{l+s+s1}{\PYZsq{}} \PY{o}{\PYZpc{}} \PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{y}\PY{p}{)}\PY{o}{/}\PY{n}{sr}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Sample rate: 44100Hz
+The number of samples: 299350
+The file length: 6.7880s
+
+    \end{Verbatim}
+
+    You can then play the file with the following command. You should hear
+the viola play a sequence of simple notes.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{k+kn}{import} \PY{n+nn}{IPython}\PY{n+nn}{.}\PY{n+nn}{display} \PY{k}{as} \PY{n+nn}{ipd}
+        \PY{n}{ipd}\PY{o}{.}\PY{n}{Audio}\PY{p}{(}\PY{n}{y}\PY{p}{,} \PY{n}{rate}\PY{o}{=}\PY{n}{sr}\PY{p}{)} \PY{c+c1}{\PYZsh{} load a NumPy array}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}3}]:} <IPython.lib.display.Audio object>
+\end{Verbatim}
+            
+    For the analysis below, it will be easier to re-scale the samples so
+that they have an average squared value of 1. Find the \texttt{scale}
+value in the code below to do this.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{c+c1}{\PYZsh{} TODO}
+        \PY{n}{scale} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{(}\PY{n}{y}\PY{o}{/}\PY{n}{np}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{y}\PY{p}{)}\PY{p}{)}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}
+        \PY{n}{y} \PY{o}{=} \PY{n}{y} \PY{o}{/} \PY{n}{scale}
+\end{Verbatim}
+
+
+    \subsection{Dividing the Audio File into
+Frames}\label{dividing-the-audio-file-into-frames}
+
+In audio processing, it is common to divide audio streams into short
+frames (typically between 10 to 40 ms long). Since frames are often
+processed with an FFT, the frames are typically a power of two. Analysis
+is then performed in the frames separately. Given the vector \texttt{y},
+create a \texttt{nfft\ x\ nframe} matrix \texttt{yframe} where
+
+\begin{verbatim}
+yframe[:,0] = samples y[k], k=0,...,nfft-1
+yframe[:,1] = samples y[k], k=nfft,...,2*nfft-1,
+yframe[:,2] = samples y[k], k=2*nfft,...,3*nfft-1,
+...
+\end{verbatim}
+
+You can do this with the \texttt{reshape} command with \texttt{order=F}.
+Zero pad \texttt{y} if the number of samples of \texttt{y} is not
+divisible by \texttt{nfft}. Print the total number of frames as well as
+the length (in milliseconds) of each frame.
+
+Note that in actual audio processing, the frames are typically
+overlapping and use careful windowing. But, we will ignore that here for
+simplicity.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{c+c1}{\PYZsh{} Frame size}
+        \PY{n}{nfft} \PY{o}{=} \PY{l+m+mi}{1024}
+        
+        \PY{c+c1}{\PYZsh{} TODO:}
+        \PY{k+kn}{import} \PY{n+nn}{math}
+        \PY{n}{nframe} \PY{o}{=} \PY{n}{math}\PY{o}{.}\PY{n}{ceil}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{y}\PY{p}{)} \PY{o}{/} \PY{n}{nfft}\PY{p}{)}
+        \PY{n}{yframe} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{pad}\PY{p}{(}\PY{n}{y}\PY{p}{,} \PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{nfft} \PY{o}{\PYZhy{}} \PY{n+nb}{len}\PY{p}{(}\PY{n}{y}\PY{p}{)} \PY{o}{\PYZpc{}} \PY{n}{nfft}\PY{p}{)}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{constant}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{n}{nfft}\PY{p}{,} \PY{n}{nframe}\PY{p}{,} \PY{n}{order}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{F}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Total number of frames: }\PY{l+s+si}{\PYZpc{}d}\PY{l+s+s1}{\PYZsq{}} \PY{o}{\PYZpc{}} \PY{n}{nframe}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Length of each frame: }\PY{l+s+si}{\PYZpc{}.4f}\PY{l+s+s1}{ms}\PY{l+s+s1}{\PYZsq{}} \PY{o}{\PYZpc{}} \PY{p}{(}\PY{n}{nfft}\PY{o}{/}\PY{n}{sr}\PY{o}{*}\PY{l+m+mi}{1000}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Total number of frames: 293
+Length of each frame: 23.2200ms
+
+    \end{Verbatim}
+
+    Let \texttt{i0=10} and set \texttt{yi=yframe{[}:,i0{]}} be the samples
+of frame \texttt{i0}. We will use this frame for most of the rest of the
+lab. Plot the samples of \texttt{yi}. Label the time axis in
+milliseconds (ms).
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{c+c1}{\PYZsh{} Get samples from frame 10}
+        \PY{n}{i0} \PY{o}{=} \PY{l+m+mi}{10}
+        \PY{n}{yi} \PY{o}{=} \PY{n}{yframe}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{n}{i0}\PY{p}{]}
+        
+        \PY{c+c1}{\PYZsh{} TODO:  Plot yi vs. time (in ms)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{yi}\PY{p}{)}\PY{p}{)}\PY{p}{)}\PY{o}{/}\PY{n}{sr}\PY{o}{*}\PY{l+m+mi}{1000}\PY{p}{,} \PY{n}{yi}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Time(ms)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Amplitude}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_12_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsection{Fitting a Multi-Sinusoid}\label{fitting-a-multi-sinusoid}
+
+A common model for audio samples, \texttt{yi{[}k{]}}, containing an
+instrument playing a single note is the multi-sinusoid model:
+
+\begin{verbatim}
+yi[k] \approx yhati[k] = c + \sum_{j=0}^{nterms-1} a[j]*cos(2*np.pi*k*freq0*(j+1)/sr) 
+                                                +  b[j]*sin(2*np.pi*k*freq0*(j+1)/sr),
+    
+\end{verbatim}
+
+where \texttt{sr} is the sample rate. The parameter \texttt{freq0} is
+called the fundamental frequency and the audio signal is modeled as
+being composed of sinusoids and cosinusoids with frequencies equal to
+integer multiples of the fundamental. In audio processing, these terms
+are called \emph{harmonics}. In analyzing audio signals, a common goal
+is to determine both the fundamental frequency \texttt{freq0} (the pitch
+of the audio) as well as the coefficients of the harmonics,
+
+\begin{verbatim}
+beta = (c, a[0], ..., a[nterms-1], b[0], ..., b[nterms-1]).
+\end{verbatim}
+
+To find the parameters, we will fit the mean squared error loss
+function:
+
+\begin{verbatim}
+mse(freq0,beta) := 1/N * \sum_k (yi[k] - yhati[k])**2,   N = len(yi).
+\end{verbatim}
+
+In practice, a separate model would be fit for each audio frame. But, in
+this lab, we will mostly look at a single frame.
+
+\subsubsection{Nested Minimization}\label{nested-minimization}
+
+We will perform the minimization of \texttt{mse} in a nested manner:
+First, given a fundamental frequency \texttt{freq0}, we minimize over
+the coefficients \texttt{beta}. Call this minimum \texttt{mse1}:
+
+\begin{verbatim}
+mse1(freq0) := min_beta mse(freq0,beta)
+\end{verbatim}
+
+Importantly, this minimizaiton can be performed by least-squares. Then,
+we find the fundamental frequency \texttt{freq0} by minimizing
+\texttt{mse1}:
+
+\begin{verbatim}
+min_{freq0} mse1(freq0) 
+\end{verbatim}
+
+We will use gradient-descent minimization with \texttt{mse1(freq0)} as
+the objective function. This form of \emph{nested} minimization is
+commonly used whenever we can minimize over one set of parameters easily
+given the other.
+
+    \subsection{Setting Up the Objective
+Function}\label{setting-up-the-objective-function}
+
+We will use the class \texttt{AudioFitFn} below to perform the two-part
+minimization. Complete the \texttt{feval} method in the class. The
+method should take the argument \texttt{freq0} and perform the
+minimization of the MSE over \texttt{beta}. Specifically, fill the code
+in \texttt{feval} to perform the following: * Construct a matrix,
+\texttt{A} such that \texttt{yhati\ =\ A*beta}.\\
+* Find \texttt{betahat} with the \texttt{np.linalg.lstsq()} method using
+the matrix \texttt{A} and the samples \texttt{self.yi}. This is simpler
+than constructing a linear regression object.\\
+* Compute and store the estimate \texttt{self.yhati\ =\ A.dot(betahat)}.
+* Compute the \texttt{mse1}, the minimum MSE, by comparing
+\texttt{self.yhati} and \texttt{self.yi}. * For now, set the gradient to
+\texttt{mse1\_grad=0}. We will fill this part in later.\\
+* Return \texttt{mse1} and \texttt{mse1\_grad}.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{k}{class} \PY{n+nc}{AudioFitFn}\PY{p}{(}\PY{n+nb}{object}\PY{p}{)}\PY{p}{:}
+            \PY{k}{def} \PY{n+nf}{\PYZus{}\PYZus{}init\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,}\PY{n}{yi}\PY{p}{,}\PY{n}{sr}\PY{o}{=}\PY{l+m+mi}{44100}\PY{p}{,}\PY{n}{nterms}\PY{o}{=}\PY{l+m+mi}{8}\PY{p}{)}\PY{p}{:}
+                \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+        \PY{l+s+sd}{        A class for fitting }
+        \PY{l+s+sd}{        }
+        \PY{l+s+sd}{        yi:  One frame of audio}
+        \PY{l+s+sd}{        sr:  Sample rate (in Hz)}
+        \PY{l+s+sd}{        nterms:  Number of harmonics used in the model (default=8)}
+        \PY{l+s+sd}{        \PYZdq{}\PYZdq{}\PYZdq{}}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{yi} \PY{o}{=} \PY{n}{yi}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{sr} \PY{o}{=} \PY{n}{sr}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{nterms} \PY{o}{=} \PY{n}{nterms}
+                        
+            \PY{k}{def} \PY{n+nf}{feval}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,}\PY{n}{freq0}\PY{p}{)}\PY{p}{:}
+                \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+        \PY{l+s+sd}{        Optimization function for audio fitting.  Given a fundamental frequency, freq0, the }
+        \PY{l+s+sd}{        method performs a least squares fit for the audio sample using the model:}
+        \PY{l+s+sd}{        }
+        \PY{l+s+sd}{        yhati[k] = c + \PYZbs{}sum\PYZus{}\PYZob{}j=0\PYZcb{}\PYZca{}\PYZob{}nterms\PYZhy{}1\PYZcb{} a[j]*cos(2*np.pi*k*freq0*(j+1)/sr) }
+        \PY{l+s+sd}{                                          +  b[j]*sin(2*np.pi*k*freq0*(j+1)/sr)}
+        \PY{l+s+sd}{        }
+        \PY{l+s+sd}{        The coefficients beta = [c,a[0],...,a[nterms\PYZhy{}1],b[0],...,b[nterms\PYZhy{}1]] }
+        \PY{l+s+sd}{        are found by least squares.}
+        
+        \PY{l+s+sd}{        Returns:}
+        \PY{l+s+sd}{        }
+        \PY{l+s+sd}{        mse1:   The MSE of the best least square fit.}
+        \PY{l+s+sd}{        mse1\PYZus{}grad:  The gradient of mse1 wrt to the parameter freq0}
+        \PY{l+s+sd}{        \PYZdq{}\PYZdq{}\PYZdq{}}
+                
+                \PY{c+c1}{\PYZsh{} TODO   }
+                \PY{c+c1}{\PYZsh{} TODO Write code to find optimal beta to minimize MSE and find minimal MSE with this beta}
+                \PY{n}{cos\PYZus{}vals} \PY{o}{=} \PY{p}{[}\PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{cos}\PY{p}{(}\PY{l+m+mi}{2}\PY{o}{*}\PY{n}{np}\PY{o}{.}\PY{n}{pi}\PY{o}{*}\PY{n}{k}\PY{o}{*}\PY{n}{freq0}\PY{o}{*}\PY{p}{(}\PY{n}{j}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}\PY{o}{/}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{sr}\PY{p}{)} \PYZbs{}
+                             \PY{k}{for} \PY{n}{j} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{nterms}\PY{p}{)}\PY{p}{]} \PY{k}{for} \PY{n}{k} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{yi}\PY{p}{)}\PY{p}{)}\PY{p}{]}
+                \PY{n}{sin\PYZus{}vals} \PY{o}{=} \PY{p}{[}\PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{sin}\PY{p}{(}\PY{l+m+mi}{2}\PY{o}{*}\PY{n}{np}\PY{o}{.}\PY{n}{pi}\PY{o}{*}\PY{n}{k}\PY{o}{*}\PY{n}{freq0}\PY{o}{*}\PY{p}{(}\PY{n}{j}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}\PY{o}{/}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{sr}\PY{p}{)} \PYZbs{}
+                             \PY{k}{for} \PY{n}{j} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{nterms}\PY{p}{)}\PY{p}{]} \PY{k}{for} \PY{n}{k} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{yi}\PY{p}{)}\PY{p}{)}\PY{p}{]}
+                \PY{n}{A} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{column\PYZus{}stack}\PY{p}{(}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{ones}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{yi}\PY{p}{)}\PY{p}{,}\PY{p}{)}\PY{p}{,} \PY{n}{cos\PYZus{}vals}\PY{p}{,} \PY{n}{sin\PYZus{}vals}\PY{p}{)}\PY{p}{)}
+                \PY{n}{beta} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linalg}\PY{o}{.}\PY{n}{lstsq}\PY{p}{(}\PY{n}{A}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{yi}\PY{p}{,} \PY{n}{rcond}\PY{o}{=}\PY{k+kc}{None}\PY{p}{)}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{yhati} \PY{o}{=} \PY{n}{A}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{beta}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+                \PY{n}{mse1} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{yi}\PY{o}{\PYZhy{}}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{yhati}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)}
+            
+                \PY{c+c1}{\PYZsh{} Compute the gradient wrt to freq0 }
+                \PY{n}{mse1\PYZus{}grad} \PY{o}{=} \PY{l+m+mi}{0}
+                \PY{k}{return} \PY{n}{mse1}\PY{p}{,} \PY{n}{mse1\PYZus{}grad}
+\end{Verbatim}
+
+
+    Instantiate an object, \texttt{audio\_fn} from the class
+\texttt{AudioFitFn} with the samples \texttt{yi}. Then, using the
+\texttt{feval} method, compute and plot \texttt{mse1} for values
+\texttt{freq0} in the range of 0 to 500 Hz with a step size of 0.5Hz.
+You should see a minimum around \texttt{freq0\ =\ 131} Hz, but there are
+several other local minima.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{c+c1}{\PYZsh{} TODO}
+        \PY{n}{audio\PYZus{}fn} \PY{o}{=} \PY{n}{AudioFitFn}\PY{p}{(}\PY{n}{yi}\PY{p}{,} \PY{n}{sr}\PY{p}{)}
+        \PY{n}{freq0} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{l+m+mi}{40}\PY{p}{,} \PY{l+m+mi}{500}\PY{p}{,} \PY{l+m+mi}{100}\PY{p}{)}
+        \PY{n}{mse1} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{n}{audio\PYZus{}fn}\PY{o}{.}\PY{n}{feval}\PY{p}{(}\PY{n}{f}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{k}{for} \PY{n}{f} \PY{o+ow}{in} \PY{n}{freq0}\PY{p}{]}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{freq0}\PY{p}{,} \PY{n}{mse1}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{freq0}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{mse1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_17_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Determine and print the value of \texttt{freq0} that achieves the
+minimum \texttt{mse1}. Also, plot the estimated function
+\texttt{audio\_fn.yhati} for that \texttt{freq0} along with the original
+samples \texttt{yi}.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{c+c1}{\PYZsh{} TODO}
+        \PY{n}{min\PYZus{}freq0} \PY{o}{=} \PY{n}{freq0}\PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{argmin}\PY{p}{(}\PY{n}{mse1}\PY{p}{)}\PY{p}{]}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{freq0 that minimums mse1: }\PY{l+s+si}{\PYZpc{}.6f}\PY{l+s+s1}{Hz}\PY{l+s+s1}{\PYZsq{}} \PY{o}{\PYZpc{}} \PY{n}{min\PYZus{}freq0}\PY{p}{)}
+        \PY{n}{audio\PYZus{}fn}\PY{o}{.}\PY{n}{feval}\PY{p}{(}\PY{n}{min\PYZus{}freq0}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{yi}\PY{p}{)}\PY{p}{)}\PY{p}{)}\PY{o}{/}\PY{n}{sr}\PY{o}{*}\PY{l+m+mi}{1000}\PY{p}{,} \PY{n}{yi}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Original samples}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{yi}\PY{p}{)}\PY{p}{)}\PY{p}{)}\PY{o}{/}\PY{n}{sr}\PY{o}{*}\PY{l+m+mi}{1000}\PY{p}{,} \PY{n}{audio\PYZus{}fn}\PY{o}{.}\PY{n}{yhati}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Estimated samples}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Time(ms)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Amplitude}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+freq0 that minimums mse1: 132.929293Hz
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_19_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsection{Computing the Gradient}\label{computing-the-gradient}
+
+The above method found the estimate for \texttt{freq0} by performing a
+search over 100 different frequency values and selecting the frequency
+value with the lowest MSE. We now see if we can estimate the frequency
+with gradient descent minimization of the MSE. We first need to modify
+the \texttt{feval} method in the \texttt{AudioFitFn} class above to
+compute the gradient. Some elementary calculus (see the homework), shows
+that
+
+\begin{verbatim}
+dmse1(freq0)/dfreq0 = dmse(freq0,betahat)/dfreq0
+\end{verbatim}
+
+So, we just need to evaluate the partial derivative of
+\texttt{mse\ =\ np.mean((yi-yhati)**2)} with respect to the parameter
+\texttt{freq0} holding the parameters \texttt{beta=betahat}. Modify the
+\texttt{feval} method above to compute the gradient and return the
+gradient in \texttt{mse1\_grad}.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{k}{class} \PY{n+nc}{AudioFitFn}\PY{p}{(}\PY{n+nb}{object}\PY{p}{)}\PY{p}{:}
+             \PY{k}{def} \PY{n+nf}{\PYZus{}\PYZus{}init\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,}\PY{n}{yi}\PY{p}{,}\PY{n}{sr}\PY{o}{=}\PY{l+m+mi}{44100}\PY{p}{,}\PY{n}{nterms}\PY{o}{=}\PY{l+m+mi}{8}\PY{p}{)}\PY{p}{:}
+                 \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+         \PY{l+s+sd}{        A class for fitting }
+         \PY{l+s+sd}{        }
+         \PY{l+s+sd}{        yi:  One frame of audio}
+         \PY{l+s+sd}{        sr:  Sample rate (in Hz)}
+         \PY{l+s+sd}{        nterms:  Number of harmonics used in the model (default=8)}
+         \PY{l+s+sd}{        \PYZdq{}\PYZdq{}\PYZdq{}}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{yi} \PY{o}{=} \PY{n}{yi}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{sr} \PY{o}{=} \PY{n}{sr}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{nterms} \PY{o}{=} \PY{n}{nterms}
+                         
+             \PY{k}{def} \PY{n+nf}{feval}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,}\PY{n}{freq0}\PY{p}{)}\PY{p}{:}
+                 \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+         \PY{l+s+sd}{        Optimization function for audio fitting.  Given a fundamental frequency, freq0, the }
+         \PY{l+s+sd}{        method performs a least squares fit for the audio sample using the model:}
+         \PY{l+s+sd}{        }
+         \PY{l+s+sd}{        yhati[k] = c + \PYZbs{}sum\PYZus{}\PYZob{}j=0\PYZcb{}\PYZca{}\PYZob{}nterms\PYZhy{}1\PYZcb{} a[j]*cos(2*np.pi*k*freq0*(j+1)/sr) }
+         \PY{l+s+sd}{                                          +  b[j]*sin(2*np.pi*k*freq0*(j+1)/sr)}
+         \PY{l+s+sd}{        }
+         \PY{l+s+sd}{        The coefficients beta = [c,a[0],...,a[nterms\PYZhy{}1],b[0],...,b[nterms\PYZhy{}1]] }
+         \PY{l+s+sd}{        are found by least squares.}
+         
+         \PY{l+s+sd}{        Returns:}
+         \PY{l+s+sd}{        }
+         \PY{l+s+sd}{        mse1:   The MSE of the best least square fit.}
+         \PY{l+s+sd}{        mse1\PYZus{}grad:  The gradient of mse1 wrt to the parameter freq0}
+         \PY{l+s+sd}{        \PYZdq{}\PYZdq{}\PYZdq{}}
+                 
+                 \PY{c+c1}{\PYZsh{} TODO   }
+                 \PY{n}{cos\PYZus{}vals} \PY{o}{=} \PY{p}{[}\PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{cos}\PY{p}{(}\PY{l+m+mi}{2}\PY{o}{*}\PY{n}{np}\PY{o}{.}\PY{n}{pi}\PY{o}{*}\PY{n}{k}\PY{o}{*}\PY{n}{freq0}\PY{o}{*}\PY{p}{(}\PY{n}{j}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}\PY{o}{/}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{sr}\PY{p}{)} \PYZbs{}
+                              \PY{k}{for} \PY{n}{j} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{nterms}\PY{p}{)}\PY{p}{]} \PY{k}{for} \PY{n}{k} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{yi}\PY{p}{)}\PY{p}{)}\PY{p}{]}
+                 \PY{n}{sin\PYZus{}vals} \PY{o}{=} \PY{p}{[}\PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{sin}\PY{p}{(}\PY{l+m+mi}{2}\PY{o}{*}\PY{n}{np}\PY{o}{.}\PY{n}{pi}\PY{o}{*}\PY{n}{k}\PY{o}{*}\PY{n}{freq0}\PY{o}{*}\PY{p}{(}\PY{n}{j}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}\PY{o}{/}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{sr}\PY{p}{)} \PYZbs{}
+                              \PY{k}{for} \PY{n}{j} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{nterms}\PY{p}{)}\PY{p}{]} \PY{k}{for} \PY{n}{k} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{yi}\PY{p}{)}\PY{p}{)}\PY{p}{]}
+                 \PY{n}{A} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{column\PYZus{}stack}\PY{p}{(}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{ones}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{yi}\PY{p}{)}\PY{p}{,}\PY{p}{)}\PY{p}{,} \PY{n}{cos\PYZus{}vals}\PY{p}{,} \PY{n}{sin\PYZus{}vals}\PY{p}{)}\PY{p}{)}
+                 \PY{n}{beta} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linalg}\PY{o}{.}\PY{n}{lstsq}\PY{p}{(}\PY{n}{A}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{yi}\PY{p}{,} \PY{n}{rcond}\PY{o}{=}\PY{k+kc}{None}\PY{p}{)}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{yhati} \PY{o}{=} \PY{n}{A}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{beta}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+                 \PY{n}{mse1} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{yi}\PY{o}{\PYZhy{}}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{yhati}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)}
+                 
+                 \PY{c+c1}{\PYZsh{} Compute the gradient wrt to freq0 }
+                 
+                 \PY{c+c1}{\PYZsh{} TODO }
+                 \PY{n}{dcos\PYZus{}vals} \PY{o}{=} \PY{p}{[}\PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{sin}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{2}\PY{o}{*}\PY{n}{np}\PY{o}{.}\PY{n}{pi}\PY{o}{*}\PY{n}{k}\PY{o}{*}\PY{n}{freq0}\PY{o}{*}\PY{p}{(}\PY{n}{j}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}\PY{o}{/}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{sr}\PY{p}{)}\PY{o}{*}\PY{p}{(}\PY{l+m+mi}{2}\PY{o}{*}\PY{n}{np}\PY{o}{.}\PY{n}{pi}\PY{o}{*}\PY{n}{k}\PY{o}{*}\PY{p}{(}\PY{n}{j}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}\PY{o}{/}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{sr}\PY{p}{)} \PYZbs{}
+                               \PY{k}{for} \PY{n}{j} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{nterms}\PY{p}{)}\PY{p}{]} \PY{k}{for} \PY{n}{k} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{yi}\PY{p}{)}\PY{p}{)}\PY{p}{]}
+                 \PY{n}{dsin\PYZus{}vals} \PY{o}{=} \PY{p}{[}\PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{cos}\PY{p}{(}\PY{l+m+mi}{2}\PY{o}{*}\PY{n}{np}\PY{o}{.}\PY{n}{pi}\PY{o}{*}\PY{n}{k}\PY{o}{*}\PY{n}{freq0}\PY{o}{*}\PY{p}{(}\PY{n}{j}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}\PY{o}{/}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{sr}\PY{p}{)}\PY{o}{*}\PY{p}{(}\PY{l+m+mi}{2}\PY{o}{*}\PY{n}{np}\PY{o}{.}\PY{n}{pi}\PY{o}{*}\PY{n}{k}\PY{o}{*}\PY{p}{(}\PY{n}{j}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}\PY{o}{/}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{sr}\PY{p}{)} \PYZbs{}
+                               \PY{k}{for} \PY{n}{j} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{nterms}\PY{p}{)}\PY{p}{]} \PY{k}{for} \PY{n}{k} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{yi}\PY{p}{)}\PY{p}{)}\PY{p}{]}
+                 \PY{n}{A\PYZus{}grad} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{column\PYZus{}stack}\PY{p}{(}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{yi}\PY{p}{)}\PY{p}{,}\PY{p}{)}\PY{p}{,} \PY{n}{dcos\PYZus{}vals}\PY{p}{,} \PY{n}{dsin\PYZus{}vals}\PY{p}{)}\PY{p}{)}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{yhati\PYZus{}grad} \PY{o}{=} \PY{n}{A\PYZus{}grad}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{beta}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+                 \PY{n}{mse1\PYZus{}grad} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{l+m+mi}{2}\PY{o}{*}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{yhati}\PY{o}{\PYZhy{}}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{yi}\PY{p}{)}\PY{o}{*}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{yhati\PYZus{}grad}\PY{p}{)}
+                 \PY{k}{return} \PY{n}{mse1}\PY{p}{,} \PY{n}{mse1\PYZus{}grad}
+\end{Verbatim}
+
+
+    Now, test the gradient by taking two close values of \texttt{freq0}, say
+\texttt{freq0\_0} and \texttt{freq0\_1} and verifying that first-order
+approximation holds.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{c+c1}{\PYZsh{} TODO}
+         \PY{n}{freq0\PYZus{}0} \PY{o}{=} \PY{n}{freq0}\PY{p}{[}\PY{l+m+mi}{20}\PY{p}{]}
+         \PY{n}{freq0\PYZus{}1} \PY{o}{=} \PY{n}{freq0\PYZus{}0} \PY{o}{+} \PY{l+m+mf}{1e\PYZhy{}6}
+         
+         \PY{n}{mse1\PYZus{}0}\PY{p}{,} \PY{n}{mse1\PYZus{}grad\PYZus{}0} \PY{o}{=} \PY{n}{audio\PYZus{}fn}\PY{o}{.}\PY{n}{feval}\PY{p}{(}\PY{n}{freq0\PYZus{}0}\PY{p}{)}
+         \PY{n}{mse1\PYZus{}1}\PY{p}{,} \PY{n}{\PYZus{}}           \PY{o}{=} \PY{n}{audio\PYZus{}fn}\PY{o}{.}\PY{n}{feval}\PY{p}{(}\PY{n}{freq0\PYZus{}1}\PY{p}{)}
+         
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{LHS = }\PY{l+s+si}{\PYZpc{}.12e}\PY{l+s+s1}{\PYZsq{}} \PY{o}{\PYZpc{}} \PY{p}{(}\PY{n}{mse1\PYZus{}0}\PY{o}{\PYZhy{}}\PY{n}{mse1\PYZus{}1}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{RHS = }\PY{l+s+si}{\PYZpc{}.12e}\PY{l+s+s1}{\PYZsq{}} \PY{o}{\PYZpc{}} \PY{p}{(}\PY{p}{(}\PY{n}{mse1\PYZus{}grad\PYZus{}0}\PY{p}{)} \PY{o}{*} \PY{p}{(}\PY{n}{freq0\PYZus{}0}\PY{o}{\PYZhy{}}\PY{n}{freq0\PYZus{}1}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+LHS = -1.045718676929e-07
+RHS = -0.000000000000e+00
+
+    \end{Verbatim}
+
+    \subsection{Run the Optimizer}\label{run-the-optimizer}
+
+    We cut and paste the optimizer from the
+\href{./grad_descent.ipynb}{gradient descent demo}.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{k}{def} \PY{n+nf}{grad\PYZus{}opt\PYZus{}adapt}\PY{p}{(}\PY{n}{feval}\PY{p}{,} \PY{n}{winit}\PY{p}{,} \PY{n}{nit}\PY{o}{=}\PY{l+m+mi}{1000}\PY{p}{,} \PY{n}{lr\PYZus{}init}\PY{o}{=}\PY{l+m+mf}{1e\PYZhy{}3}\PY{p}{)}\PY{p}{:}
+             \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+         \PY{l+s+sd}{    Gradient descent optimization with adaptive step size}
+         \PY{l+s+sd}{    }
+         \PY{l+s+sd}{    feval:  A function that returns f, fgrad, the objective}
+         \PY{l+s+sd}{            function and its gradient}
+         \PY{l+s+sd}{    winit:  Initial estimate}
+         \PY{l+s+sd}{    nit:    Number of iterations}
+         \PY{l+s+sd}{    lr:     Initial learning rate}
+         \PY{l+s+sd}{    }
+         \PY{l+s+sd}{    Returns:}
+         \PY{l+s+sd}{    w:   Final estimate for the optimal}
+         \PY{l+s+sd}{    f0:  Function at the optimal}
+         \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+             
+             \PY{c+c1}{\PYZsh{} Set initial point}
+             \PY{n}{w0} \PY{o}{=} \PY{n}{winit}
+             \PY{n}{f0}\PY{p}{,} \PY{n}{fgrad0} \PY{o}{=} \PY{n}{feval}\PY{p}{(}\PY{n}{w0}\PY{p}{)}
+             \PY{n}{lr} \PY{o}{=} \PY{n}{lr\PYZus{}init}
+             
+             \PY{c+c1}{\PYZsh{} Create history dictionary for tracking progress per iteration.}
+             \PY{c+c1}{\PYZsh{} This isn\PYZsq{}t necessary if you just want the final answer, but it }
+             \PY{c+c1}{\PYZsh{} is useful for debugging}
+             \PY{n}{hist} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{lr}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{p}{[}\PY{p}{]}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{w}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{p}{[}\PY{p}{]}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{f}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{p}{[}\PY{p}{]}\PY{p}{\PYZcb{}}
+         
+             \PY{k}{for} \PY{n}{it} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{nit}\PY{p}{)}\PY{p}{:}
+         
+                 \PY{c+c1}{\PYZsh{} Take a gradient step}
+                 \PY{n}{w1} \PY{o}{=} \PY{n}{w0} \PY{o}{\PYZhy{}} \PY{n}{lr}\PY{o}{*}\PY{n}{fgrad0}
+         
+                 \PY{c+c1}{\PYZsh{} Evaluate the test point by computing the objective function, f1,}
+                 \PY{c+c1}{\PYZsh{} at the test point and the predicted decrease, df\PYZus{}est}
+                 \PY{n}{f1}\PY{p}{,} \PY{n}{fgrad1} \PY{o}{=} \PY{n}{feval}\PY{p}{(}\PY{n}{w1}\PY{p}{)}
+                 \PY{n}{df\PYZus{}est} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{fgrad0}\PY{p}{,} \PY{p}{(}\PY{n}{w1}\PY{o}{\PYZhy{}}\PY{n}{w0}\PY{p}{)}\PY{p}{)}
+                 
+                 \PY{c+c1}{\PYZsh{} Check if test point passes the Armijo rule}
+                 \PY{n}{alpha} \PY{o}{=} \PY{l+m+mf}{0.5}
+                 \PY{k}{if} \PY{p}{(}\PY{n}{f1}\PY{o}{\PYZhy{}}\PY{n}{f0} \PY{o}{\PYZlt{}} \PY{n}{alpha}\PY{o}{*}\PY{n}{df\PYZus{}est}\PY{p}{)} \PY{o+ow}{and} \PY{p}{(}\PY{n}{f1} \PY{o}{\PYZlt{}} \PY{n}{f0}\PY{p}{)}\PY{p}{:}
+                     \PY{c+c1}{\PYZsh{} If descent is sufficient, accept the point and increase the}
+                     \PY{c+c1}{\PYZsh{} learning rate}
+                     \PY{n}{lr} \PY{o}{=} \PY{n}{lr}\PY{o}{*}\PY{l+m+mi}{2}
+                     \PY{n}{f0} \PY{o}{=} \PY{n}{f1}
+                     \PY{n}{fgrad0} \PY{o}{=} \PY{n}{fgrad1}
+                     \PY{n}{w0} \PY{o}{=} \PY{n}{w1}
+                 \PY{k}{else}\PY{p}{:}
+                     \PY{c+c1}{\PYZsh{} Otherwise, decrease the learning rate}
+                     \PY{n}{lr} \PY{o}{=} \PY{n}{lr}\PY{o}{/}\PY{l+m+mi}{2}            
+                     
+                 \PY{c+c1}{\PYZsh{} Save history}
+                 \PY{n}{hist}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{f}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{f0}\PY{p}{)}
+                 \PY{n}{hist}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{lr}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{lr}\PY{p}{)}
+                 \PY{n}{hist}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{w}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{w0}\PY{p}{)}
+         
+             \PY{c+c1}{\PYZsh{} Convert to numpy arrays}
+             \PY{k}{for} \PY{n}{elem} \PY{o+ow}{in} \PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{f}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{lr}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{w}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{hist}\PY{p}{[}\PY{n}{elem}\PY{p}{]} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{hist}\PY{p}{[}\PY{n}{elem}\PY{p}{]}\PY{p}{)}
+             \PY{k}{return} \PY{n}{w0}\PY{p}{,} \PY{n}{f0}\PY{p}{,} \PY{n}{hist}
+\end{Verbatim}
+
+
+    Now, run the optimizer with the feval function with a starting estimate
+for freq0 = 130 Hz. Use \texttt{lr\_init=1e-3} and
+\texttt{f0\_init=130}. Print the final frequency estimate. Also, print
+the \href{https://newt.phys.unsw.edu.au/jw/notes.html}{midi number} of
+the estimated frequency:
+
+\begin{verbatim}
+ midi_num = 12*log2(freq/440 Hz) + 69
+ 
+\end{verbatim}
+
+If the note was exactly a musical note, \texttt{midi\_num} should be an
+integer. But you will see that the frequency does not exactly lie on a
+note since the pitch in a viola bends around the note.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{c+c1}{\PYZsh{} TODO}
+         \PY{n}{lr\PYZus{}init} \PY{o}{=} \PY{l+m+mf}{1e\PYZhy{}3}
+         \PY{n}{f0\PYZus{}init} \PY{o}{=} \PY{l+m+mi}{130}
+         \PY{n}{freq0\PYZus{}min}\PY{p}{,} \PY{n}{mse\PYZus{}min}\PY{p}{,} \PY{n}{hist} \PY{o}{=} \PY{n}{grad\PYZus{}opt\PYZus{}adapt}\PY{p}{(}\PY{n}{audio\PYZus{}fn}\PY{o}{.}\PY{n}{feval}\PY{p}{,} \PY{n}{winit}\PY{o}{=}\PY{n}{f0\PYZus{}init}\PY{p}{,} \PY{n}{lr\PYZus{}init}\PY{o}{=}\PY{n}{lr\PYZus{}init}\PY{p}{)}
+         
+         \PY{n}{midi\PYZus{}num} \PY{o}{=} \PY{l+m+mi}{12} \PY{o}{*} \PY{n}{np}\PY{o}{.}\PY{n}{log2}\PY{p}{(}\PY{n}{freq0\PYZus{}min} \PY{o}{/} \PY{l+m+mi}{440}\PY{p}{)} \PY{o}{+} \PY{l+m+mi}{69}
+         
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{f0\PYZus{}min=}\PY{l+s+si}{\PYZpc{}f}\PY{l+s+s2}{ midi=}\PY{l+s+si}{\PYZpc{}f}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{p}{(}\PY{n}{freq0\PYZus{}min}\PY{p}{,} \PY{n}{midi\PYZus{}num}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+f0\_min=130.000000 midi=47.892097
+
+    \end{Verbatim}
+
+    Plot the MSE as a function of the iteration. You should tell whether you
+gradient algorithm has converged. If not, you may need to adjust the
+number of iterations.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}14}]:} \PY{c+c1}{\PYZsh{}TODO}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{semilogx}\PY{p}{(}\PY{n}{hist}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{f}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Iterations}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{MSE}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_30_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Compare your solution of f0\_min with the one obtained using exhaustive
+search. You may notice a slight difference. Explain why and also which
+solution is likely to be correct?
+
+    Answer:
+
+The frequency does not exactly lie on a note since the pitch in a viola
+bends around the note.
+
+    Now, repeat with an initial frequency of 200 Hz. Print the final
+estimated frequency. Also plot the MSE per iteration on the same graph
+as the MSE per iteration with the initial condition = 130 Hz.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}15}]:} \PY{c+c1}{\PYZsh{} TODO}
+         \PY{n}{freq0\PYZus{}min1}\PY{p}{,} \PY{n}{mse\PYZus{}min1}\PY{p}{,} \PY{n}{hist1} \PY{o}{=} \PY{n}{grad\PYZus{}opt\PYZus{}adapt}\PY{p}{(}\PY{n}{audio\PYZus{}fn}\PY{o}{.}\PY{n}{feval}\PY{p}{,} \PY{n}{winit}\PY{o}{=}\PY{l+m+mi}{200}\PY{p}{,} \PY{n}{lr\PYZus{}init}\PY{o}{=}\PY{l+m+mf}{1e\PYZhy{}3}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{semilogx}\PY{p}{(}\PY{n}{hist}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{f}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{semilogx}\PY{p}{(}\PY{n}{hist1}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{f}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Iterations}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{MSE}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Final estimated frequency: }\PY{l+s+si}{\PYZpc{}f}\PY{l+s+s1}{\PYZsq{}} \PY{o}{\PYZpc{}} \PY{n}{freq0\PYZus{}min1}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Final estimated frequency: 200.000000
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_34_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Did you get the same solution as when you used an initial solution of
+130 Hz? Why?
+
+    Answer:
+
+No. The optimizer does not obtain the minimum MSE since it gets stuck at
+a local minima. This is the main reason this form of pitch detection is
+not used -\/- it requires a very good initial condition.
+
+    \subsection{More Fun}\label{more-fun}
+
+While the above method does not work very well, there are many good
+approaches. For one thing, we can obtain a good initial condition using
+an FFT of the frame. The FFT is used in many pitch detection methods.
+More difficult problems include multi-tone detection, chord detection
+and instrument separation. A useful python library that contains all
+sorts of interesting audio analysis tools in the
+\href{https://librosa.github.io/librosa/}{librosa package}.
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
