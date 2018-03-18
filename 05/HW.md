@@ -244,6 +244,6 @@ where
 $$
 \frac{\partial J(\mathbf{a}, \mathbf{b})}{\partial a_j}
 =\sum_{i=1}^n\frac{\partial(y_i-\hat{y}_i)^2}{\partial a_j}
-=-2\sum_{i=1}^n\partial(y_i-\hat{y}_i)\frac{\partial \hat{y}_i}{\partial a_j}
-=2\sum_{i=1}^n\partial(y_i-\hat{y}_i)b_jx_ie^{-a_jx_i}
+=-2\sum_{i=1}^n(y_i-\hat{y}_i)\frac{\partial \hat{y}_i}{\partial a_j}
+=2\sum_{i=1}^n(y_i-\hat{y}_i)b_jx_ie^{-a_jx_i}
 $$.
