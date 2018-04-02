@@ -438,7 +438,7 @@ nice display. You may want to size your plot with the
 
 
     \begin{Verbatim}[commandchars=\\\{\}]
-Label: [4 4 8 2 1 4 4 0]
+Label: [8 0 5 8 4 7 7 8]
 
     \end{Verbatim}
 
@@ -465,7 +465,7 @@ Upper and lower case letters belong to the same class.
 
 
     \begin{Verbatim}[commandchars=\\\{\}]
-Label: [ 9 22 21 13 25 23 21 22]
+Label: [ 3  6 14  3 20 12  1 23]
 
     \end{Verbatim}
 
@@ -654,17 +654,17 @@ Print a confusion matrix. You should see that the error rate on the
 
 
     \begin{Verbatim}[commandchars=\\\{\}]
-[[0.95  0.    0.    0.    0.    0.    0.004 0.    0.    0.    0.024]
- [0.    0.981 0.002 0.    0.    0.    0.    0.002 0.    0.    0.008]
- [0.002 0.002 0.906 0.    0.    0.    0.    0.002 0.006 0.    0.042]
- [0.002 0.    0.008 0.936 0.    0.006 0.    0.004 0.011 0.004 0.014]
- [0.002 0.    0.    0.    0.913 0.    0.002 0.    0.002 0.014 0.034]
- [0.    0.    0.    0.006 0.    0.905 0.002 0.    0.    0.    0.041]
- [0.    0.    0.    0.    0.    0.    0.948 0.    0.    0.    0.026]
- [0.    0.    0.004 0.    0.004 0.    0.    0.96  0.002 0.    0.015]
- [0.    0.    0.002 0.008 0.    0.002 0.    0.    0.872 0.008 0.051]
- [0.    0.002 0.002 0.002 0.014 0.    0.    0.012 0.006 0.918 0.023]
- [0.038 0.021 0.039 0.019 0.04  0.078 0.028 0.01  0.025 0.041 0.831]]
+[[0.955 0.    0.    0.    0.    0.002 0.002 0.    0.    0.    0.021]
+ [0.    0.962 0.002 0.004 0.    0.    0.    0.004 0.    0.    0.014]
+ [0.002 0.    0.902 0.004 0.002 0.    0.    0.004 0.002 0.    0.04 ]
+ [0.    0.    0.006 0.934 0.    0.002 0.    0.006 0.008 0.002 0.02 ]
+ [0.    0.002 0.    0.    0.892 0.    0.    0.    0.002 0.01  0.046]
+ [0.004 0.    0.    0.01  0.    0.884 0.006 0.    0.002 0.002 0.047]
+ [0.    0.    0.    0.    0.002 0.002 0.945 0.    0.    0.    0.025]
+ [0.    0.004 0.    0.    0.004 0.    0.    0.968 0.    0.008 0.009]
+ [0.    0.004 0.    0.014 0.    0.002 0.    0.    0.852 0.008 0.06 ]
+ [0.    0.    0.    0.008 0.004 0.    0.    0.008 0.004 0.941 0.017]
+ [0.037 0.002 0.025 0.016 0.041 0.043 0.032 0.008 0.03  0.051 0.858]]
 
     \end{Verbatim}
 
@@ -684,8 +684,8 @@ Print a confusion matrix. You should see that the error rate on the
 
 
     \begin{Verbatim}[commandchars=\\\{\}]
-The fraction of digits are mislabeled as letters is 5.56\%.
-The fraction of letters are mislabeled as digits is 16.90\%.
+The fraction of digits are mislabeled as letters is 5.98\%.
+The fraction of letters are mislabeled as digits is 14.20\%.
 
     \end{Verbatim}
 
@@ -751,14 +751,14 @@ sections.} Pick whichever one you want.
 
     \begin{Verbatim}[commandchars=\\\{\}]
 The accuracy matrix is:
-[[0.7805     0.604      0.16666667]
- [0.86683333 0.89183333 0.21733333]
- [0.90133333 0.89883333 0.219     ]]
+[[0.78316667 0.58883333 0.16666667]
+ [0.8685     0.88916667 0.21283333]
+ [0.89966667 0.89616667 0.21616667]]
 
     \end{Verbatim}
 
     \begin{Verbatim}[commandchars=\\\{\}]
-{\color{incolor}In [{\color{incolor}27}]:} \PY{c+c1}{\PYZsh{} TODO:  Print the maximum accuracy and the corresponding best C and gamma}
+{\color{incolor}In [{\color{incolor}20}]:} \PY{c+c1}{\PYZsh{} TODO:  Print the maximum accuracy and the corresponding best C and gamma}
          \PY{n}{c} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{argmax}\PY{p}{(}\PY{n}{acc}\PY{p}{)}
          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{The maximum accuracy: }\PY{l+s+si}{\PYZpc{}.3f}\PY{l+s+si}{\PYZpc{}\PYZpc{}}\PY{l+s+s1}{\PYZsq{}} \PY{o}{\PYZpc{}} \PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{n}{acc}\PY{p}{)}\PY{o}{*}\PY{l+m+mi}{100}\PY{p}{)}\PY{p}{)}
          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{The corresponding best C and gamma: C=}\PY{l+s+si}{\PYZpc{}r}\PY{l+s+s1}{, gamma=}\PY{l+s+si}{\PYZpc{}r}\PY{l+s+s1}{\PYZsq{}} \PY{o}{\PYZpc{}} \PY{p}{(}\PY{n}{C\PYZus{}test}\PY{p}{[}\PY{n+nb}{int}\PY{p}{(}\PY{p}{(}\PY{n}{c}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{]}\PY{p}{,}\PY{n}{gam\PYZus{}test}\PY{p}{[}\PY{n+nb}{int}\PY{p}{(}\PY{p}{(}\PY{n}{c}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}\PY{o}{\PYZpc{}}\PY{k}{3})]))
@@ -766,7 +766,7 @@ The accuracy matrix is:
 
 
     \begin{Verbatim}[commandchars=\\\{\}]
-The maximum accuracy: 90.133\%
+The maximum accuracy: 89.967\%
 The corresponding best C and gamma: C=10, gamma=0.01
 
     \end{Verbatim}
