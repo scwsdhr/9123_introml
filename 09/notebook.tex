@@ -1,0 +1,1099 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{Lab09a\_pca\_NN\_CNN\_partial}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \hypertarget{lab-9a-pca-for-face-recognition}{%
+\section{Lab 9a: PCA for Face
+Recognition}\label{lab-9a-pca-for-face-recognition}}
+
+Following the demo for this unit, we will explore further the use of PCA
+for feature dimension reduction for classification. We will use a
+2-layer neural net on the PCA coefficients. We will practice optimizing
+the classificaiton parameters (the number of PCA components and the
+number of hidden nodes in the NN classifier). We will furthermore
+compare this approach with using convolutional neural net on raw images.
+
+Through the lab, you will learn to:
+
+\begin{itemize}
+\tightlist
+\item
+  Perform PCA on the a face dataset to find the PC components
+\item
+  Evaluate the effect of using different nubmer of principle components
+  for data representation and classification.
+\item
+  Optimize the number of PC coefficients and classifier parameters
+  together to maximize classification accuracy.
+\item
+  Understand the impact of training data size on the feature and
+  classification method selection.
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib}
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{c+c1}{\PYZsh{} Import the flw\PYZus{}people dataset. }
+        \PY{c+c1}{\PYZsh{} Select only those people with at least 100 instances }
+        \PY{c+c1}{\PYZsh{} Reduce the face image size by 0.4}
+        
+        \PY{c+c1}{\PYZsh{} TO DO}
+        \PY{k+kn}{import} \PY{n+nn}{warnings}
+        \PY{n}{warnings}\PY{o}{.}\PY{n}{filterwarnings}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ignore}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        
+        \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{datasets} \PY{k}{import} \PY{n}{fetch\PYZus{}lfw\PYZus{}people}
+        \PY{n}{lfw\PYZus{}people} \PY{o}{=} \PY{n}{fetch\PYZus{}lfw\PYZus{}people}\PY{p}{(}\PY{n}{min\PYZus{}faces\PYZus{}per\PYZus{}person}\PY{o}{=}\PY{l+m+mi}{100}\PY{p}{,} \PY{n}{resize}\PY{o}{=}\PY{l+m+mf}{0.6}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{c+c1}{\PYZsh{} Save the face images in a datamatrix X and the labels and corresponding names in a datamatrix y and target\PYZus{}names}
+        \PY{c+c1}{\PYZsh{} Furthermore, determine the number of samples and the image size }
+        \PY{c+c1}{\PYZsh{} Determine the number of different faces (number of classes)}
+        
+        \PY{c+c1}{\PYZsh{} TO DO}
+        \PY{c+c1}{\PYZsh{} Get images}
+        \PY{n}{n\PYZus{}samples}\PY{p}{,} \PY{n}{h}\PY{p}{,} \PY{n}{w} \PY{o}{=} \PY{n}{lfw\PYZus{}people}\PY{o}{.}\PY{n}{images}\PY{o}{.}\PY{n}{shape}
+        \PY{n}{npix} \PY{o}{=} \PY{n}{h}\PY{o}{*}\PY{n}{w}
+        
+        \PY{c+c1}{\PYZsh{} Data in 2D form}
+        \PY{n}{X} \PY{o}{=} \PY{n}{lfw\PYZus{}people}\PY{o}{.}\PY{n}{data}
+        \PY{n}{n\PYZus{}features} \PY{o}{=} \PY{n}{X}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}
+        
+        \PY{c+c1}{\PYZsh{} Labels of images }
+        \PY{n}{y} \PY{o}{=} \PY{n}{lfw\PYZus{}people}\PY{o}{.}\PY{n}{target}
+        \PY{n}{target\PYZus{}names} \PY{o}{=} \PY{n}{lfw\PYZus{}people}\PY{o}{.}\PY{n}{target\PYZus{}names}
+        \PY{n}{n\PYZus{}classes} \PY{o}{=} \PY{n}{target\PYZus{}names}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+        
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Image size     = }\PY{l+s+si}{\PYZob{}0:d\PYZcb{}}\PY{l+s+s2}{ x }\PY{l+s+si}{\PYZob{}1:d\PYZcb{}}\PY{l+s+s2}{ = }\PY{l+s+si}{\PYZob{}2:d\PYZcb{}}\PY{l+s+s2}{ pixels}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{h}\PY{p}{,}\PY{n}{w}\PY{p}{,}\PY{n}{npix}\PY{p}{)}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Number faces   = }\PY{l+s+si}{\PYZob{}0:d\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{n\PYZus{}samples}\PY{p}{)}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Number classes = }\PY{l+s+si}{\PYZob{}0:d\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{n\PYZus{}classes}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Image size     = 75 x 56 = 4200 pixels
+Number faces   = 1140
+Number classes = 5
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{c+c1}{\PYZsh{} Plot some sample images to make sure your data load is correct}
+        \PY{k}{def} \PY{n+nf}{plt\PYZus{}face}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{:}
+            \PY{k}{global} \PY{n}{h}
+            \PY{k}{global} \PY{n}{s}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{x}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{p}{(}\PY{n}{h}\PY{p}{,} \PY{n}{w}\PY{p}{)}\PY{p}{)}\PY{p}{,} \PY{n}{cmap}\PY{o}{=}\PY{n}{plt}\PY{o}{.}\PY{n}{cm}\PY{o}{.}\PY{n}{gray}\PY{p}{)}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{xticks}\PY{p}{(}\PY{p}{[}\PY{p}{]}\PY{p}{)}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{yticks}\PY{p}{(}\PY{p}{[}\PY{p}{]}\PY{p}{)}
+            
+        \PY{n}{I} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{permutation}\PY{p}{(}\PY{n}{n\PYZus{}samples}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{,}\PY{l+m+mi}{20}\PY{p}{)}\PY{p}{)}
+        \PY{n}{nplt} \PY{o}{=} \PY{l+m+mi}{4}\PY{p}{;}
+        \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{nplt}\PY{p}{)}\PY{p}{:}    
+            \PY{n}{ind} \PY{o}{=} \PY{n}{I}\PY{p}{[}\PY{n}{i}\PY{p}{]}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{n}{nplt}\PY{p}{,}\PY{n}{i}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}
+            \PY{n}{plt\PYZus{}face}\PY{p}{(}\PY{n}{X}\PY{p}{[}\PY{n}{ind}\PY{p}{]}\PY{p}{)}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{n}{target\PYZus{}names}\PY{p}{[}\PY{n}{y}\PY{p}{[}\PY{n}{ind}\PY{p}{]}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_4_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{c+c1}{\PYZsh{} Split the data into a training set and test set with 50\PYZpc{} data for training. }
+        \PY{c+c1}{\PYZsh{} Use \PYZdq{}stratify\PYZdq{} option to make sure the training data and test data have same }
+        \PY{c+c1}{\PYZsh{} proportion of images from different faces}
+        \PY{c+c1}{\PYZsh{} print the number of samples in the training data}
+        
+        \PY{c+c1}{\PYZsh{} TO DO }
+        \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{model\PYZus{}selection} \PY{k}{import} \PY{n}{train\PYZus{}test\PYZus{}split}
+        \PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{X\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}test} \PY{o}{=} \PY{n}{train\PYZus{}test\PYZus{}split}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{test\PYZus{}size}\PY{o}{=}\PY{l+m+mf}{0.5}\PY{p}{,} \PY{n}{stratify} \PY{o}{=} \PY{n}{y}\PY{p}{,} \PY{n}{random\PYZus{}state}\PY{o}{=}\PY{l+m+mi}{43}\PY{p}{)}
+        \PY{n}{ntr\PYZus{}samples}\PY{p}{,} \PY{n}{\PYZus{}} \PY{o}{=} \PY{n}{X\PYZus{}train}\PY{o}{.}\PY{n}{shape}
+        \PY{n}{nts\PYZus{}samples}\PY{p}{,} \PY{n}{\PYZus{}} \PY{o}{=} \PY{n}{X\PYZus{}test}\PY{o}{.}\PY{n}{shape}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{The number of samples in the trainning data is }\PY{l+s+si}{\PYZpc{}d}\PY{l+s+s1}{\PYZsq{}} \PY{o}{\PYZpc{}} \PY{n}{ntr\PYZus{}samples}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+The number of samples in the trainning data is 570
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{c+c1}{\PYZsh{} Perfom PCA on the training data to derive the principle components (PCs) and the PCA coefficients }
+        \PY{c+c1}{\PYZsh{} You can directly use the PCA class in PCA package or use SVD.}
+        \PY{c+c1}{\PYZsh{} Remember that you need to remove the mean from the data first}
+        \PY{c+c1}{\PYZsh{} Also you should rescale the PCs so that the PCA coefficients all have unit variance}
+        \PY{c+c1}{\PYZsh{} Determine the total number of PCs}
+        
+        \PY{c+c1}{\PYZsh{} TO DO }
+        \PY{n}{Xtr\PYZus{}mean} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{)}
+        \PY{n}{Xtr} \PY{o}{=} \PY{n}{X\PYZus{}train} \PY{o}{\PYZhy{}} \PY{n}{Xtr\PYZus{}mean}\PY{p}{[}\PY{k+kc}{None}\PY{p}{,}\PY{p}{:}\PY{p}{]}
+        \PY{n}{Utr}\PY{p}{,}\PY{n}{Str}\PY{p}{,}\PY{n}{Vtr} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linalg}\PY{o}{.}\PY{n}{svd}\PY{p}{(}\PY{n}{Xtr}\PY{p}{,} \PY{n}{full\PYZus{}matrices}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}
+\end{Verbatim}
+
+
+    First let us construct a 2-layer neural net classifier that uses npc=
+100 PCA coefficients to classify the faces. Set up your training and
+testing data to contain npc PCA coefficients using the previously
+determined principle components. You should directly use matrix
+multiplication (i.e.~projecting original data to the first 100 principle
+components you found previously) to find the coefficients rather then
+using the pca.transform( ) method.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{c+c1}{\PYZsh{} TO DO}
+        \PY{n}{npc} \PY{o}{=} \PY{l+m+mi}{100}
+        
+        \PY{n}{eigenface} \PY{o}{=} \PY{n}{Vtr}\PY{p}{[}\PY{p}{:}\PY{n}{npc}\PY{p}{,}\PY{p}{:}\PY{p}{]}
+        \PY{n}{Xtr\PYZus{}pca} \PY{o}{=} \PY{n}{Xtr}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{eigenface}\PY{o}{.}\PY{n}{T}\PY{p}{)}
+        \PY{n}{Xtr\PYZus{}pca\PYZus{}s} \PY{o}{=} \PY{n}{Xtr\PYZus{}pca} \PY{o}{/} \PY{n}{Str}\PY{p}{[}\PY{k+kc}{None}\PY{p}{,}\PY{p}{:}\PY{n}{npc}\PY{p}{]} \PY{o}{*} \PY{n}{np}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{n}{ntr\PYZus{}samples}\PY{p}{)}
+        
+        \PY{n}{Xts} \PY{o}{=} \PY{n}{X\PYZus{}test} \PY{o}{\PYZhy{}} \PY{n}{Xtr\PYZus{}mean}\PY{p}{[}\PY{k+kc}{None}\PY{p}{,}\PY{p}{:}\PY{p}{]}
+        \PY{n}{Xts\PYZus{}pca} \PY{o}{=} \PY{n}{Xts}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{eigenface}\PY{o}{.}\PY{n}{T}\PY{p}{)}
+        \PY{n}{Xts\PYZus{}pca\PYZus{}s} \PY{o}{=} \PY{n}{Xts\PYZus{}pca} \PY{o}{/} \PY{n}{Str}\PY{p}{[}\PY{k+kc}{None}\PY{p}{,}\PY{p}{:}\PY{n}{npc}\PY{p}{]} \PY{o}{*} \PY{n}{np}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{n}{ntr\PYZus{}samples}\PY{p}{)}
+\end{Verbatim}
+
+
+    Now set up and compile a NN model with number of hidden nodes nnode=100
+and a output layer, and then fit the model to the training data. Use
+`relu' for the activation for the hidden layer and use `softmax' for the
+output layer. Using \texttt{sparse\_categorical\_crossentropy} for the
+loss. Use \texttt{accuracy} as the metrics. You can choose to do a small
+number of epochs (=10) with batch size =100. Determine the accuracy on
+the validation set.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{c+c1}{\PYZsh{} TO DO}
+        \PY{k+kn}{from} \PY{n+nn}{keras}\PY{n+nn}{.}\PY{n+nn}{models} \PY{k}{import} \PY{n}{Model}\PY{p}{,} \PY{n}{Sequential}
+        \PY{k+kn}{from} \PY{n+nn}{keras}\PY{n+nn}{.}\PY{n+nn}{layers} \PY{k}{import} \PY{n}{Dense}\PY{p}{,} \PY{n}{Activation}
+        
+        \PY{k+kn}{import} \PY{n+nn}{keras}\PY{n+nn}{.}\PY{n+nn}{backend} \PY{k}{as} \PY{n+nn}{K}
+        \PY{n}{K}\PY{o}{.}\PY{n}{clear\PYZus{}session}\PY{p}{(}\PY{p}{)}
+        
+        \PY{n}{nin} \PY{o}{=} \PY{n}{Xtr\PYZus{}pca\PYZus{}s}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}  \PY{c+c1}{\PYZsh{} dimension of input data}
+        \PY{n}{nnode} \PY{o}{=} \PY{l+m+mi}{100}     \PY{c+c1}{\PYZsh{} number of hidden units}
+        \PY{n}{nout} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{n}{y\PYZus{}train}\PY{p}{)}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}    \PY{c+c1}{\PYZsh{} number of outputs = 10 since there are 10 classes}
+        \PY{n}{model} \PY{o}{=} \PY{n}{Sequential}\PY{p}{(}\PY{p}{)}
+        \PY{n}{model}\PY{o}{.}\PY{n}{add}\PY{p}{(}\PY{n}{Dense}\PY{p}{(}\PY{n}{nnode}\PY{p}{,} \PY{n}{input\PYZus{}shape}\PY{o}{=}\PY{p}{(}\PY{n}{nin}\PY{p}{,}\PY{p}{)}\PY{p}{,} \PY{n}{activation}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{relu}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{name}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{hidden}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}
+        \PY{n}{model}\PY{o}{.}\PY{n}{add}\PY{p}{(}\PY{n}{Dense}\PY{p}{(}\PY{n}{nout}\PY{p}{,} \PY{n}{activation}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{softmax}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{name}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{output}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}
+        
+        \PY{k+kn}{from} \PY{n+nn}{keras} \PY{k}{import} \PY{n}{optimizers}
+        
+        \PY{n}{batch\PYZus{}size} \PY{o}{=} \PY{l+m+mi}{100}
+        \PY{n}{epochs} \PY{o}{=} \PY{l+m+mi}{10}
+        \PY{n}{lrate} \PY{o}{=} \PY{l+m+mf}{0.006}
+        \PY{n}{decay} \PY{o}{=} \PY{n}{lrate}\PY{o}{/}\PY{n}{epochs}
+        
+        \PY{n}{opt} \PY{o}{=} \PY{n}{optimizers}\PY{o}{.}\PY{n}{Adam}\PY{p}{(}\PY{n}{lr}\PY{o}{=}\PY{n}{lrate}\PY{p}{)}
+        \PY{n}{model}\PY{o}{.}\PY{n}{compile}\PY{p}{(}\PY{n}{optimizer}\PY{o}{=}\PY{n}{opt}\PY{p}{,}
+                      \PY{n}{loss}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sparse\PYZus{}categorical\PYZus{}crossentropy}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                      \PY{n}{metrics}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{accuracy}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+        
+        \PY{n}{hist} \PY{o}{=} \PY{n}{model}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{Xtr\PYZus{}pca\PYZus{}s}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{,} \PY{n}{batch\PYZus{}size}\PY{o}{=}\PY{n}{batch\PYZus{}size}\PY{p}{,} \PY{n}{epochs}\PY{o}{=}\PY{n}{epochs}\PY{p}{,} \PY{n}{validation\PYZus{}data}\PY{o}{=}\PY{p}{(}\PY{n}{Xts\PYZus{}pca\PYZus{}s}\PY{p}{,}\PY{n}{y\PYZus{}test}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Using TensorFlow backend.
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Train on 570 samples, validate on 570 samples
+Epoch 1/10
+570/570 [==============================] - 0s 298us/step - loss: 1.6609 - acc: 0.3404 - val\_loss: 1.1812 - val\_acc: 0.5439
+Epoch 2/10
+570/570 [==============================] - 0s 27us/step - loss: 0.8411 - acc: 0.7158 - val\_loss: 0.8495 - val\_acc: 0.7368
+Epoch 3/10
+570/570 [==============================] - 0s 25us/step - loss: 0.4671 - acc: 0.9316 - val\_loss: 0.6571 - val\_acc: 0.8123
+Epoch 4/10
+570/570 [==============================] - 0s 25us/step - loss: 0.2747 - acc: 0.9667 - val\_loss: 0.5579 - val\_acc: 0.8316
+Epoch 5/10
+570/570 [==============================] - 0s 27us/step - loss: 0.1630 - acc: 0.9877 - val\_loss: 0.5090 - val\_acc: 0.8404
+Epoch 6/10
+570/570 [==============================] - 0s 26us/step - loss: 0.1019 - acc: 0.9912 - val\_loss: 0.4880 - val\_acc: 0.8474
+Epoch 7/10
+570/570 [==============================] - 0s 25us/step - loss: 0.0639 - acc: 0.9982 - val\_loss: 0.4757 - val\_acc: 0.8579
+Epoch 8/10
+570/570 [==============================] - 0s 26us/step - loss: 0.0436 - acc: 0.9982 - val\_loss: 0.4722 - val\_acc: 0.8614
+Epoch 9/10
+570/570 [==============================] - 0s 26us/step - loss: 0.0316 - acc: 1.0000 - val\_loss: 0.4736 - val\_acc: 0.8579
+Epoch 10/10
+570/570 [==============================] - 0s 26us/step - loss: 0.0240 - acc: 1.0000 - val\_loss: 0.4779 - val\_acc: 0.8614
+
+    \end{Verbatim}
+
+    Now try to identify the best number of PCs and the best number of hidden
+nodes in the NN classifer that can achieve the highest validation
+accuracy. You can set the range of PCs and nubmer of hidden nodes as
+below.
+
+nnodes = {[}50,100,150,200, 250{]}, npcs = {[}50,100,150,200{]}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{c+c1}{\PYZsh{} Set up an array to store accuracy for different nnode and npcs}
+        \PY{c+c1}{\PYZsh{} TO DO}
+        \PY{n}{nnodes} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{50}\PY{p}{,}\PY{l+m+mi}{100}\PY{p}{,}\PY{l+m+mi}{150}\PY{p}{,}\PY{l+m+mi}{200}\PY{p}{,}\PY{l+m+mi}{250}\PY{p}{]}
+        \PY{n}{npcs} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{50}\PY{p}{,}\PY{l+m+mi}{100}\PY{p}{,}\PY{l+m+mi}{150}\PY{p}{,}\PY{l+m+mi}{200}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{c+c1}{\PYZsh{} Loop through the combinations to find the accuracy for each combination}
+         \PY{c+c1}{\PYZsh{} For each possible combination of `nnode` and `npc`, set up and fit the model }
+         \PY{c+c1}{\PYZsh{} using features containing only coefficents corresponding to npc coefficients.}
+         
+         \PY{c+c1}{\PYZsh{} TO DO }
+         \PY{n}{K}\PY{o}{.}\PY{n}{clear\PYZus{}session}\PY{p}{(}\PY{p}{)}
+         
+         \PY{n}{val\PYZus{}acc} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{npcs}\PY{p}{)}\PY{p}{,}\PY{n+nb}{len}\PY{p}{(}\PY{n}{nnodes}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+         \PY{k}{for} \PY{n}{i}\PY{p}{,} \PY{n}{npc} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{npcs}\PY{p}{)}\PY{p}{:}
+             \PY{n}{eigenface} \PY{o}{=} \PY{n}{Vtr}\PY{p}{[}\PY{p}{:}\PY{n}{npc}\PY{p}{,}\PY{p}{:}\PY{p}{]}
+             \PY{n}{Xtr\PYZus{}pca} \PY{o}{=} \PY{n}{Xtr}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{eigenface}\PY{o}{.}\PY{n}{T}\PY{p}{)}
+             \PY{n}{Xtr\PYZus{}pca\PYZus{}s} \PY{o}{=} \PY{n}{Xtr\PYZus{}pca} \PY{o}{/} \PY{n}{Str}\PY{p}{[}\PY{k+kc}{None}\PY{p}{,}\PY{p}{:}\PY{n}{npc}\PY{p}{]} \PY{o}{*} \PY{n}{np}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{n}{ntr\PYZus{}samples}\PY{p}{)}
+             
+             \PY{n}{Xts} \PY{o}{=} \PY{n}{X\PYZus{}test} \PY{o}{\PYZhy{}} \PY{n}{Xtr\PYZus{}mean}\PY{p}{[}\PY{k+kc}{None}\PY{p}{,}\PY{p}{:}\PY{p}{]}
+             \PY{n}{Xts\PYZus{}pca} \PY{o}{=} \PY{n}{Xts}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{eigenface}\PY{o}{.}\PY{n}{T}\PY{p}{)}
+             \PY{n}{Xts\PYZus{}pca\PYZus{}s} \PY{o}{=} \PY{n}{Xts\PYZus{}pca} \PY{o}{/} \PY{n}{Str}\PY{p}{[}\PY{k+kc}{None}\PY{p}{,}\PY{p}{:}\PY{n}{npc}\PY{p}{]} \PY{o}{*} \PY{n}{np}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{n}{ntr\PYZus{}samples}\PY{p}{)}
+             \PY{k}{for} \PY{n}{j}\PY{p}{,} \PY{n}{nnode} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{nnodes}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{nin} \PY{o}{=} \PY{n}{Xtr\PYZus{}pca\PYZus{}s}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}  \PY{c+c1}{\PYZsh{} dimension of input data}
+                 \PY{n}{nout} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{n}{y}\PY{p}{)}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}    \PY{c+c1}{\PYZsh{} number of outputs = 10 since there are 10 classes}
+                 \PY{n}{model} \PY{o}{=} \PY{n}{Sequential}\PY{p}{(}\PY{p}{)}
+                 \PY{n}{model}\PY{o}{.}\PY{n}{add}\PY{p}{(}\PY{n}{Dense}\PY{p}{(}\PY{n}{nnode}\PY{p}{,} \PY{n}{input\PYZus{}shape}\PY{o}{=}\PY{p}{(}\PY{n}{nin}\PY{p}{,}\PY{p}{)}\PY{p}{,} \PY{n}{activation}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{relu}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{name}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{hidden}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}
+                 \PY{n}{model}\PY{o}{.}\PY{n}{add}\PY{p}{(}\PY{n}{Dense}\PY{p}{(}\PY{n}{nout}\PY{p}{,} \PY{n}{activation}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{softmax}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{name}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{output}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}
+         
+                 \PY{k+kn}{from} \PY{n+nn}{keras} \PY{k}{import} \PY{n}{optimizers}
+         
+                 \PY{n}{opt} \PY{o}{=} \PY{n}{optimizers}\PY{o}{.}\PY{n}{Adam}\PY{p}{(}\PY{n}{lr}\PY{o}{=}\PY{n}{lrate}\PY{p}{)}
+                 \PY{n}{model}\PY{o}{.}\PY{n}{compile}\PY{p}{(}\PY{n}{optimizer}\PY{o}{=}\PY{n}{opt}\PY{p}{,}
+                               \PY{n}{loss}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sparse\PYZus{}categorical\PYZus{}crossentropy}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                               \PY{n}{metrics}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{accuracy}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+         
+                 \PY{n}{hist} \PY{o}{=} \PY{n}{model}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{Xtr\PYZus{}pca\PYZus{}s}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{,} \PY{n}{batch\PYZus{}size}\PY{o}{=}\PY{n}{batch\PYZus{}size}\PY{p}{,} \PY{n}{epochs}\PY{o}{=}\PY{n}{epochs}\PY{p}{,} \PY{n}{verbose}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{validation\PYZus{}data}\PY{o}{=}\PY{p}{(}\PY{n}{Xts\PYZus{}pca\PYZus{}s}\PY{p}{,}\PY{n}{y\PYZus{}test}\PY{p}{)}\PY{p}{)}
+                 \PY{n}{val\PYZus{}acc}\PY{p}{[}\PY{n}{i}\PY{p}{,}\PY{n}{j}\PY{p}{]} \PY{o}{=} \PY{n}{hist}\PY{o}{.}\PY{n}{history}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{val\PYZus{}acc}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{c+c1}{\PYZsh{} Determine the npc and nnode that provides the highest validation accuracy }
+         \PY{c+c1}{\PYZsh{} TO DO }
+         \PY{n}{re} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{where}\PY{p}{(}\PY{n}{val\PYZus{}acc} \PY{o}{==} \PY{n}{np}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{n}{val\PYZus{}acc}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsh{} The npc and nnode that provides the highest validation accuracy:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{npc: }\PY{l+s+si}{\PYZpc{}d}\PY{l+s+s1}{\PYZsq{}} \PY{o}{\PYZpc{}} \PY{n}{npcs}\PY{p}{[}\PY{n}{re}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{]}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{nnode: }\PY{l+s+si}{\PYZpc{}d}\PY{l+s+s1}{\PYZsq{}} \PY{o}{\PYZpc{}} \PY{n}{nnodes}\PY{p}{[}\PY{n}{re}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{]}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{validation accuracy: }\PY{l+s+si}{\PYZpc{}.4f}\PY{l+s+si}{\PYZpc{}\PYZpc{}}\PY{l+s+s1}{\PYZsq{}} \PY{o}{\PYZpc{}} \PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{n}{val\PYZus{}acc}\PY{p}{)}\PY{o}{*}\PY{l+m+mi}{100}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+\# The npc and nnode that provides the highest validation accuracy:
+npc: 100
+nnode: 100
+validation accuracy: 87.7193\%
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{c+c1}{\PYZsh{} Produce a contour plot of the accuracy using different nnode and npc combincations}
+         \PY{c+c1}{\PYZsh{} TO DO}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{contourf}\PY{p}{(}\PY{n}{nnodes}\PY{p}{,} \PY{n}{npcs}\PY{p}{,} \PY{n}{val\PYZus{}acc}\PY{p}{,} \PY{l+m+mi}{20}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{nnode}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{npc}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_15_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{now-let-us-compare-the-pcann-with-applying-a-cnn-on-the-raw-image-data-only.}{%
+\subsection{Now let us compare the PCA+NN with applying a CNN on the raw
+image data
+only.}\label{now-let-us-compare-the-pcann-with-applying-a-cnn-on-the-raw-image-data-only.}}
+
+Note that you should scale your image data to between 0 and 1. And you
+should reshape your training and testing data according to image width
+and height
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{c+c1}{\PYZsh{} Data preparation for input to CNN}
+         \PY{c+c1}{\PYZsh{} TO DO}
+         \PY{k+kn}{import} \PY{n+nn}{keras}
+         
+         \PY{n}{x\PYZus{}train} \PY{o}{=} \PY{n}{X\PYZus{}train}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{float32}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{x\PYZus{}test} \PY{o}{=} \PY{n}{X\PYZus{}test}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{float32}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{x\PYZus{}train} \PY{o}{=} \PY{n}{x\PYZus{}train}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{n}{ntr\PYZus{}samples}\PY{p}{,} \PY{n}{h}\PY{p}{,} \PY{n}{w}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{x\PYZus{}test} \PY{o}{=} \PY{n}{x\PYZus{}test}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{n}{nts\PYZus{}samples}\PY{p}{,} \PY{n}{h}\PY{p}{,} \PY{n}{w}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{x\PYZus{}train} \PY{o}{/}\PY{o}{=} \PY{l+m+mi}{255}
+         \PY{n}{x\PYZus{}test} \PY{o}{/}\PY{o}{=} \PY{l+m+mi}{255}
+         
+         \PY{n}{y\PYZus{}train} \PY{o}{=} \PY{n}{keras}\PY{o}{.}\PY{n}{utils}\PY{o}{.}\PY{n}{to\PYZus{}categorical}\PY{p}{(}\PY{n}{y\PYZus{}train}\PY{p}{,} \PY{n}{n\PYZus{}classes}\PY{p}{)}
+         \PY{n}{y\PYZus{}test} \PY{o}{=} \PY{n}{keras}\PY{o}{.}\PY{n}{utils}\PY{o}{.}\PY{n}{to\PYZus{}categorical}\PY{p}{(}\PY{n}{y\PYZus{}test}\PY{p}{,} \PY{n}{n\PYZus{}classes}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}14}]:} \PY{c+c1}{\PYZsh{} Set up a CNN model}
+         \PY{c+c1}{\PYZsh{} You can use 2 conv2D layer, each with kernel size of 5x5, each followed by a pooling layer with strides of 2}
+         \PY{c+c1}{\PYZsh{} For this part, let both conv2D layer generate 16 channels. }
+         \PY{c+c1}{\PYZsh{} The Conv layer should be followed by a flatten layer and two dense layers. }
+         \PY{c+c1}{\PYZsh{} The first dense layer should produce 200 outputs. }
+         \PY{c+c1}{\PYZsh{} The last dense layer is the output layer with n\PYZus{}classes output using \PYZsq{}softmax\PYZsq{} activation.}
+         \PY{c+c1}{\PYZsh{} Print model summary to verify it follows the desired structure and compile the model}
+         
+         \PY{c+c1}{\PYZsh{} TO DO }
+         \PY{k+kn}{from} \PY{n+nn}{keras}\PY{n+nn}{.}\PY{n+nn}{layers} \PY{k}{import} \PY{n}{Dense}\PY{p}{,} \PY{n}{Dropout}\PY{p}{,} \PY{n}{Activation}\PY{p}{,} \PY{n}{Flatten}
+         \PY{k+kn}{from} \PY{n+nn}{keras}\PY{n+nn}{.}\PY{n+nn}{layers} \PY{k}{import} \PY{n}{Conv2D}\PY{p}{,} \PY{n}{MaxPooling2D}
+         
+         \PY{n}{batch\PYZus{}size} \PY{o}{=} \PY{l+m+mi}{100}
+         \PY{n}{epochs} \PY{o}{=} \PY{l+m+mi}{40}
+         \PY{n}{lrate\PYZus{}cnn} \PY{o}{=} \PY{l+m+mf}{0.001}
+         \PY{n}{decay\PYZus{}cnn} \PY{o}{=} \PY{n}{lrate\PYZus{}cnn}\PY{o}{/}\PY{n}{epochs}
+         
+         \PY{n}{K}\PY{o}{.}\PY{n}{clear\PYZus{}session}\PY{p}{(}\PY{p}{)}
+         
+         \PY{n}{model} \PY{o}{=} \PY{n}{Sequential}\PY{p}{(}\PY{p}{)}
+         
+         \PY{n}{model}\PY{o}{.}\PY{n}{add}\PY{p}{(}\PY{n}{Conv2D}\PY{p}{(}\PY{l+m+mi}{16}\PY{p}{,} 
+                          \PY{p}{(}\PY{l+m+mi}{5}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{)}\PY{p}{,} 
+                          \PY{n}{padding}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{valid}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+                          \PY{n}{input\PYZus{}shape}\PY{o}{=}\PY{n}{x\PYZus{}train}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{:}\PY{p}{]}\PY{p}{,}
+                          \PY{n}{activation}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{relu}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}
+         \PY{n}{model}\PY{o}{.}\PY{n}{add}\PY{p}{(}\PY{n}{MaxPooling2D}\PY{p}{(}\PY{n}{pool\PYZus{}size}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+         \PY{n}{model}\PY{o}{.}\PY{n}{add}\PY{p}{(}\PY{n}{Conv2D}\PY{p}{(}\PY{l+m+mi}{16}\PY{p}{,} \PY{p}{(}\PY{l+m+mi}{5}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{)}\PY{p}{,} \PY{n}{padding}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{valid}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{activation}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{relu}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}
+         \PY{n}{model}\PY{o}{.}\PY{n}{add}\PY{p}{(}\PY{n}{MaxPooling2D}\PY{p}{(}\PY{n}{pool\PYZus{}size}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+         
+         \PY{n}{model}\PY{o}{.}\PY{n}{add}\PY{p}{(}\PY{n}{Flatten}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+         \PY{n}{model}\PY{o}{.}\PY{n}{add}\PY{p}{(}\PY{n}{Dense}\PY{p}{(}\PY{l+m+mi}{200}\PY{p}{,} \PY{n}{activation}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{relu}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}
+         \PY{n}{model}\PY{o}{.}\PY{n}{add}\PY{p}{(}\PY{n}{Dense}\PY{p}{(}\PY{n}{n\PYZus{}classes}\PY{p}{,} \PY{n}{activation}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{softmax}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} initiate Adam optimizer}
+         \PY{n}{opt} \PY{o}{=} \PY{n}{keras}\PY{o}{.}\PY{n}{optimizers}\PY{o}{.}\PY{n}{adam}\PY{p}{(}\PY{n}{lr}\PY{o}{=}\PY{n}{lrate\PYZus{}cnn}\PY{p}{,} \PY{n}{decay}\PY{o}{=}\PY{n}{decay\PYZus{}cnn}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Let\PYZsq{}s train the model using Adam}
+         \PY{n}{model}\PY{o}{.}\PY{n}{compile}\PY{p}{(}\PY{n}{loss}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{categorical\PYZus{}crossentropy}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                       \PY{n}{optimizer}\PY{o}{=}\PY{n}{opt}\PY{p}{,}
+                       \PY{n}{metrics}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{accuracy}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{model}\PY{o}{.}\PY{n}{summary}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+Layer (type)                 Output Shape              Param \#   
+=================================================================
+conv2d\_1 (Conv2D)            (None, 71, 52, 16)        416       
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+max\_pooling2d\_1 (MaxPooling2 (None, 35, 26, 16)        0         
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+conv2d\_2 (Conv2D)            (None, 31, 22, 16)        6416      
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+max\_pooling2d\_2 (MaxPooling2 (None, 15, 11, 16)        0         
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+flatten\_1 (Flatten)          (None, 2640)              0         
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+dense\_1 (Dense)              (None, 200)               528200    
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+dense\_2 (Dense)              (None, 5)                 1005      
+=================================================================
+Total params: 536,037
+Trainable params: 536,037
+Non-trainable params: 0
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+None
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}15}]:} \PY{c+c1}{\PYZsh{} Fit the model using batch size=100, epochs = 40}
+         \PY{c+c1}{\PYZsh{} Print the accuracy on the validation set}
+         
+         \PY{c+c1}{\PYZsh{} TO DO }
+         \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{seed}\PY{p}{(}\PY{p}{)}
+         \PY{n}{hist\PYZus{}cnn} \PY{o}{=} \PY{n}{model}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{x\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{,}
+                   \PY{n}{batch\PYZus{}size}\PY{o}{=}\PY{n}{batch\PYZus{}size}\PY{p}{,}
+                   \PY{n}{epochs}\PY{o}{=}\PY{n}{epochs}\PY{p}{,}
+                   \PY{n}{validation\PYZus{}data}\PY{o}{=}\PY{p}{(}\PY{n}{x\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}test}\PY{p}{)}\PY{p}{,}
+                   \PY{n}{shuffle}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+WARNING:tensorflow:Variable *= will be deprecated. Use variable.assign\_mul if you want assignment to the variable value or 'x = x * y' if you want a new python Tensor object.
+Train on 570 samples, validate on 570 samples
+Epoch 1/40
+570/570 [==============================] - 2s 4ms/step - loss: 1.4895 - acc: 0.4614 - val\_loss: 1.4468 - val\_acc: 0.4649
+Epoch 2/40
+570/570 [==============================] - 2s 3ms/step - loss: 1.4291 - acc: 0.4649 - val\_loss: 1.4100 - val\_acc: 0.4649
+Epoch 3/40
+570/570 [==============================] - 2s 3ms/step - loss: 1.3995 - acc: 0.4649 - val\_loss: 1.3905 - val\_acc: 0.4649
+Epoch 4/40
+570/570 [==============================] - 2s 3ms/step - loss: 1.3805 - acc: 0.4649 - val\_loss: 1.3626 - val\_acc: 0.4649
+Epoch 5/40
+570/570 [==============================] - 2s 3ms/step - loss: 1.3490 - acc: 0.4649 - val\_loss: 1.3306 - val\_acc: 0.4649
+Epoch 6/40
+570/570 [==============================] - 2s 3ms/step - loss: 1.3120 - acc: 0.4772 - val\_loss: 1.2679 - val\_acc: 0.4684
+Epoch 7/40
+570/570 [==============================] - 2s 3ms/step - loss: 1.2363 - acc: 0.5123 - val\_loss: 1.1765 - val\_acc: 0.5123
+Epoch 8/40
+570/570 [==============================] - 2s 3ms/step - loss: 1.1302 - acc: 0.5509 - val\_loss: 1.0774 - val\_acc: 0.5702
+Epoch 9/40
+570/570 [==============================] - 2s 3ms/step - loss: 1.0108 - acc: 0.6018 - val\_loss: 0.9573 - val\_acc: 0.6316
+Epoch 10/40
+570/570 [==============================] - 2s 3ms/step - loss: 0.9175 - acc: 0.6316 - val\_loss: 0.8952 - val\_acc: 0.6667
+Epoch 11/40
+570/570 [==============================] - 2s 4ms/step - loss: 0.7728 - acc: 0.7439 - val\_loss: 0.8108 - val\_acc: 0.6947
+Epoch 12/40
+570/570 [==============================] - 2s 4ms/step - loss: 0.6988 - acc: 0.7491 - val\_loss: 0.7758 - val\_acc: 0.7123
+Epoch 13/40
+570/570 [==============================] - 2s 3ms/step - loss: 0.6547 - acc: 0.7789 - val\_loss: 0.6799 - val\_acc: 0.7965
+Epoch 14/40
+570/570 [==============================] - 2s 3ms/step - loss: 0.5573 - acc: 0.8158 - val\_loss: 0.6100 - val\_acc: 0.8088
+Epoch 15/40
+570/570 [==============================] - 2s 3ms/step - loss: 0.4836 - acc: 0.8579 - val\_loss: 0.6767 - val\_acc: 0.7684
+Epoch 16/40
+570/570 [==============================] - 2s 3ms/step - loss: 0.4340 - acc: 0.8632 - val\_loss: 0.5058 - val\_acc: 0.8368
+Epoch 17/40
+570/570 [==============================] - 2s 3ms/step - loss: 0.3881 - acc: 0.8702 - val\_loss: 0.4975 - val\_acc: 0.8439
+Epoch 18/40
+570/570 [==============================] - 2s 3ms/step - loss: 0.3399 - acc: 0.8947 - val\_loss: 0.5131 - val\_acc: 0.8333
+Epoch 19/40
+570/570 [==============================] - 2s 3ms/step - loss: 0.2932 - acc: 0.9123 - val\_loss: 0.4459 - val\_acc: 0.8509
+Epoch 20/40
+570/570 [==============================] - 2s 3ms/step - loss: 0.2526 - acc: 0.9193 - val\_loss: 0.4303 - val\_acc: 0.8509
+Epoch 21/40
+570/570 [==============================] - 2s 3ms/step - loss: 0.2497 - acc: 0.9351 - val\_loss: 0.4692 - val\_acc: 0.8421
+Epoch 22/40
+570/570 [==============================] - 2s 3ms/step - loss: 0.2279 - acc: 0.9351 - val\_loss: 0.4013 - val\_acc: 0.8684
+Epoch 23/40
+570/570 [==============================] - 2s 4ms/step - loss: 0.2031 - acc: 0.9456 - val\_loss: 0.3941 - val\_acc: 0.8754
+Epoch 24/40
+570/570 [==============================] - 2s 4ms/step - loss: 0.1639 - acc: 0.9596 - val\_loss: 0.4233 - val\_acc: 0.8649
+Epoch 25/40
+570/570 [==============================] - 2s 3ms/step - loss: 0.1558 - acc: 0.9596 - val\_loss: 0.3977 - val\_acc: 0.8684
+Epoch 26/40
+570/570 [==============================] - 2s 4ms/step - loss: 0.1476 - acc: 0.9561 - val\_loss: 0.4067 - val\_acc: 0.8737
+Epoch 27/40
+570/570 [==============================] - 2s 4ms/step - loss: 0.1242 - acc: 0.9684 - val\_loss: 0.3957 - val\_acc: 0.8754
+Epoch 28/40
+570/570 [==============================] - 2s 3ms/step - loss: 0.1050 - acc: 0.9860 - val\_loss: 0.4164 - val\_acc: 0.8877
+Epoch 29/40
+570/570 [==============================] - 2s 3ms/step - loss: 0.0959 - acc: 0.9754 - val\_loss: 0.4359 - val\_acc: 0.8737
+Epoch 30/40
+570/570 [==============================] - 2s 3ms/step - loss: 0.0892 - acc: 0.9807 - val\_loss: 0.3802 - val\_acc: 0.8965
+Epoch 31/40
+570/570 [==============================] - 2s 3ms/step - loss: 0.0726 - acc: 0.9895 - val\_loss: 0.3645 - val\_acc: 0.8877
+Epoch 32/40
+570/570 [==============================] - 2s 3ms/step - loss: 0.0662 - acc: 0.9930 - val\_loss: 0.4444 - val\_acc: 0.8860
+Epoch 33/40
+570/570 [==============================] - 2s 3ms/step - loss: 0.0600 - acc: 0.9930 - val\_loss: 0.4093 - val\_acc: 0.8930
+Epoch 34/40
+570/570 [==============================] - 2s 3ms/step - loss: 0.0515 - acc: 0.9947 - val\_loss: 0.3758 - val\_acc: 0.8842
+Epoch 35/40
+570/570 [==============================] - 2s 3ms/step - loss: 0.0552 - acc: 0.9947 - val\_loss: 0.4668 - val\_acc: 0.8789
+Epoch 36/40
+570/570 [==============================] - 2s 4ms/step - loss: 0.0411 - acc: 0.9965 - val\_loss: 0.3857 - val\_acc: 0.9000
+Epoch 37/40
+570/570 [==============================] - 2s 3ms/step - loss: 0.0388 - acc: 0.9965 - val\_loss: 0.3913 - val\_acc: 0.8947
+Epoch 38/40
+570/570 [==============================] - 2s 3ms/step - loss: 0.0360 - acc: 1.0000 - val\_loss: 0.4298 - val\_acc: 0.8860
+Epoch 39/40
+570/570 [==============================] - 2s 3ms/step - loss: 0.0324 - acc: 1.0000 - val\_loss: 0.4104 - val\_acc: 0.8930
+Epoch 40/40
+570/570 [==============================] - 2s 3ms/step - loss: 0.0263 - acc: 1.0000 - val\_loss: 0.4256 - val\_acc: 0.8947
+
+    \end{Verbatim}
+
+    How do the result compared with the PCA+NN method? (If you did right,
+they should be similar, with PCA+NN being slightly better. If you used
+more training data (e.g.~75\%) and you trained the CNN with more epochs,
+CNN method may get better).
+
+    A: The result of the two methods are similar. Since I have adjusted the
+parameters well for CNN, the result of CNN is slightly better. Generally
+speaking, CNN may have a higher upperbound than PCA+NN, while it
+requires more training data, more epochs, good parameters and more time.
+
+    \hypertarget{repeat-the-above-using-a-small-dataset}{%
+\subsection{Repeat the above using a small
+dataset}\label{repeat-the-above-using-a-small-dataset}}
+
+Instead of using 50\% of the total data for training, let us assume you
+have only 10\% of the total data for training. Repeat both the PCA+NN
+and the CNN method, to see which one gives you better results.
+
+Note that with only 10\% data for training, the range of the npc has to
+be set to be below the total number of training samples.
+
+For the CNN model, because you have small number of training samples,
+you cannot train a network with a large number of parameters reliably.
+Instead of producing 16 channels for each of the two conv2D layers,
+configure the model to produce only 8 channels each.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}16}]:} \PY{c+c1}{\PYZsh{}\PYZsh{} TO DO}
+         \PY{c+c1}{\PYZsh{} PCA+NN PART}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{PCA+NN PART START}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{} Import the flw\PYZus{}people dataset. }
+         \PY{c+c1}{\PYZsh{} Select only those people with at least 100 instances }
+         \PY{c+c1}{\PYZsh{} Reduce the face image size by 0.4}
+         \PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{X\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}test} \PY{o}{=} \PY{n}{train\PYZus{}test\PYZus{}split}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{test\PYZus{}size}\PY{o}{=}\PY{l+m+mf}{0.9}\PY{p}{,} \PY{n}{stratify} \PY{o}{=} \PY{n}{y}\PY{p}{,} \PY{n}{random\PYZus{}state}\PY{o}{=}\PY{l+m+mi}{43}\PY{p}{)}
+         \PY{n}{ntr\PYZus{}samples}\PY{p}{,} \PY{n}{\PYZus{}} \PY{o}{=} \PY{n}{X\PYZus{}train}\PY{o}{.}\PY{n}{shape}
+         \PY{n}{nts\PYZus{}samples}\PY{p}{,} \PY{n}{\PYZus{}} \PY{o}{=} \PY{n}{X\PYZus{}test}\PY{o}{.}\PY{n}{shape}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{The number of samples in the trainning data is }\PY{l+s+si}{\PYZpc{}d}\PY{l+s+s1}{\PYZsq{}} \PY{o}{\PYZpc{}} \PY{n}{ntr\PYZus{}samples}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Perfom PCA on the training data to derive the principle components (PCs) and the PCA coefficients }
+         \PY{c+c1}{\PYZsh{} You can directly use the PCA class in PCA package or use SVD.}
+         \PY{c+c1}{\PYZsh{} Remember that you need to remove the mean from the data first}
+         \PY{c+c1}{\PYZsh{} Also you should rescale the PCs so that the PCA coefficients all have unit variance}
+         \PY{c+c1}{\PYZsh{} Determine the total number of PCs}
+         \PY{n}{Xtr\PYZus{}mean} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{)}
+         \PY{n}{Xtr} \PY{o}{=} \PY{n}{X\PYZus{}train} \PY{o}{\PYZhy{}} \PY{n}{Xtr\PYZus{}mean}\PY{p}{[}\PY{k+kc}{None}\PY{p}{,}\PY{p}{:}\PY{p}{]}
+         \PY{n}{Utr}\PY{p}{,}\PY{n}{Str}\PY{p}{,}\PY{n}{Vtr} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linalg}\PY{o}{.}\PY{n}{svd}\PY{p}{(}\PY{n}{Xtr}\PY{p}{,} \PY{n}{full\PYZus{}matrices}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Set up an array to store accuracy for different nnode and npcs}
+         \PY{n}{nnodes} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{50}\PY{p}{,}\PY{l+m+mi}{100}\PY{p}{,}\PY{l+m+mi}{150}\PY{p}{,}\PY{l+m+mi}{200}\PY{p}{,}\PY{l+m+mi}{250}\PY{p}{]}
+         \PY{n}{npcs} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{50}\PY{p}{,}\PY{l+m+mi}{70}\PY{p}{,}\PY{l+m+mi}{90}\PY{p}{,}\PY{l+m+mi}{11}\PY{p}{]}
+         
+         \PY{c+c1}{\PYZsh{} Loop through the combinations to find the accuracy for each combination}
+         \PY{c+c1}{\PYZsh{} For each possible combination of `nnode` and `npc`, set up and fit the model }
+         \PY{c+c1}{\PYZsh{} using features containing only coefficents corresponding to npc coefficients.}
+         \PY{n}{K}\PY{o}{.}\PY{n}{clear\PYZus{}session}\PY{p}{(}\PY{p}{)}
+         
+         \PY{n}{val\PYZus{}acc} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{npcs}\PY{p}{)}\PY{p}{,}\PY{n+nb}{len}\PY{p}{(}\PY{n}{nnodes}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+         \PY{k}{for} \PY{n}{i}\PY{p}{,} \PY{n}{npc} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{npcs}\PY{p}{)}\PY{p}{:}
+             \PY{n}{eigenface} \PY{o}{=} \PY{n}{Vtr}\PY{p}{[}\PY{p}{:}\PY{n}{npc}\PY{p}{,}\PY{p}{:}\PY{p}{]}
+             \PY{n}{Xtr\PYZus{}pca} \PY{o}{=} \PY{n}{Xtr}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{eigenface}\PY{o}{.}\PY{n}{T}\PY{p}{)}
+             \PY{n}{Xtr\PYZus{}pca\PYZus{}s} \PY{o}{=} \PY{n}{Xtr\PYZus{}pca} \PY{o}{/} \PY{n}{Str}\PY{p}{[}\PY{k+kc}{None}\PY{p}{,}\PY{p}{:}\PY{n}{npc}\PY{p}{]} \PY{o}{*} \PY{n}{np}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{n}{ntr\PYZus{}samples}\PY{p}{)}
+             
+             \PY{n}{Xts} \PY{o}{=} \PY{n}{X\PYZus{}test} \PY{o}{\PYZhy{}} \PY{n}{Xtr\PYZus{}mean}\PY{p}{[}\PY{k+kc}{None}\PY{p}{,}\PY{p}{:}\PY{p}{]}
+             \PY{n}{Xts\PYZus{}pca} \PY{o}{=} \PY{n}{Xts}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{eigenface}\PY{o}{.}\PY{n}{T}\PY{p}{)}
+             \PY{n}{Xts\PYZus{}pca\PYZus{}s} \PY{o}{=} \PY{n}{Xts\PYZus{}pca} \PY{o}{/} \PY{n}{Str}\PY{p}{[}\PY{k+kc}{None}\PY{p}{,}\PY{p}{:}\PY{n}{npc}\PY{p}{]} \PY{o}{*} \PY{n}{np}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{n}{ntr\PYZus{}samples}\PY{p}{)}
+             \PY{k}{for} \PY{n}{j}\PY{p}{,} \PY{n}{nnode} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{nnodes}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{nin} \PY{o}{=} \PY{n}{Xtr\PYZus{}pca\PYZus{}s}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}  \PY{c+c1}{\PYZsh{} dimension of input data}
+                 \PY{n}{nout} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{n}{y}\PY{p}{)}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}    \PY{c+c1}{\PYZsh{} number of outputs = 10 since there are 10 classes}
+                 \PY{n}{model} \PY{o}{=} \PY{n}{Sequential}\PY{p}{(}\PY{p}{)}
+                 \PY{n}{model}\PY{o}{.}\PY{n}{add}\PY{p}{(}\PY{n}{Dense}\PY{p}{(}\PY{n}{nnode}\PY{p}{,} \PY{n}{input\PYZus{}shape}\PY{o}{=}\PY{p}{(}\PY{n}{nin}\PY{p}{,}\PY{p}{)}\PY{p}{,} \PY{n}{activation}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{relu}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{name}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{hidden}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}
+                 \PY{n}{model}\PY{o}{.}\PY{n}{add}\PY{p}{(}\PY{n}{Dense}\PY{p}{(}\PY{n}{nout}\PY{p}{,} \PY{n}{activation}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{softmax}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{name}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{output}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}
+         
+                 \PY{k+kn}{from} \PY{n+nn}{keras} \PY{k}{import} \PY{n}{optimizers}
+         
+                 \PY{n}{opt} \PY{o}{=} \PY{n}{optimizers}\PY{o}{.}\PY{n}{Adam}\PY{p}{(}\PY{n}{lr}\PY{o}{=}\PY{n}{lrate}\PY{p}{)}
+                 \PY{n}{model}\PY{o}{.}\PY{n}{compile}\PY{p}{(}\PY{n}{optimizer}\PY{o}{=}\PY{n}{opt}\PY{p}{,}
+                               \PY{n}{loss}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sparse\PYZus{}categorical\PYZus{}crossentropy}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                               \PY{n}{metrics}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{accuracy}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+         
+                 \PY{n}{hist} \PY{o}{=} \PY{n}{model}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{Xtr\PYZus{}pca\PYZus{}s}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{,} \PY{n}{batch\PYZus{}size}\PY{o}{=}\PY{n}{batch\PYZus{}size}\PY{p}{,} \PY{n}{epochs}\PY{o}{=}\PY{n}{epochs}\PY{p}{,} \PY{n}{verbose}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{validation\PYZus{}data}\PY{o}{=}\PY{p}{(}\PY{n}{Xts\PYZus{}pca\PYZus{}s}\PY{p}{,}\PY{n}{y\PYZus{}test}\PY{p}{)}\PY{p}{)}
+                 \PY{n}{val\PYZus{}acc}\PY{p}{[}\PY{n}{i}\PY{p}{,}\PY{n}{j}\PY{p}{]} \PY{o}{=} \PY{n}{hist}\PY{o}{.}\PY{n}{history}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{val\PYZus{}acc}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}
+                 
+         \PY{c+c1}{\PYZsh{} Determine the npc and nnode that provides the highest validation accuracy }
+         \PY{n}{re} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{where}\PY{p}{(}\PY{n}{val\PYZus{}acc} \PY{o}{==} \PY{n}{np}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{n}{val\PYZus{}acc}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsh{} The npc and nnode that provides the highest validation accuracy:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{npc: }\PY{l+s+si}{\PYZpc{}d}\PY{l+s+s1}{\PYZsq{}} \PY{o}{\PYZpc{}} \PY{n}{npcs}\PY{p}{[}\PY{n}{re}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{]}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{nnode: }\PY{l+s+si}{\PYZpc{}d}\PY{l+s+s1}{\PYZsq{}} \PY{o}{\PYZpc{}} \PY{n}{nnodes}\PY{p}{[}\PY{n}{re}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{]}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{validation accuracy: }\PY{l+s+si}{\PYZpc{}.4f}\PY{l+s+si}{\PYZpc{}\PYZpc{}}\PY{l+s+s1}{\PYZsq{}} \PY{o}{\PYZpc{}} \PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{n}{val\PYZus{}acc}\PY{p}{)}\PY{o}{*}\PY{l+m+mi}{100}\PY{p}{)}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Produce a contour plot of the accuracy using different nnode and npc combincations}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{contourf}\PY{p}{(}\PY{n}{nnodes}\PY{p}{,} \PY{n}{npcs}\PY{p}{,} \PY{n}{val\PYZus{}acc}\PY{p}{,} \PY{l+m+mi}{20}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{nnode}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{npc}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+         
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{PCA+NN PART END}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{} CNN PART}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{CNN PART START}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{} Data preparation for input to CNN}
+         
+         \PY{n}{x\PYZus{}train} \PY{o}{=} \PY{n}{X\PYZus{}train}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{float32}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{x\PYZus{}test} \PY{o}{=} \PY{n}{X\PYZus{}test}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{float32}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{x\PYZus{}train} \PY{o}{=} \PY{n}{x\PYZus{}train}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{n}{ntr\PYZus{}samples}\PY{p}{,} \PY{n}{h}\PY{p}{,} \PY{n}{w}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{x\PYZus{}test} \PY{o}{=} \PY{n}{x\PYZus{}test}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{n}{nts\PYZus{}samples}\PY{p}{,} \PY{n}{h}\PY{p}{,} \PY{n}{w}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{x\PYZus{}train} \PY{o}{/}\PY{o}{=} \PY{l+m+mi}{255}
+         \PY{n}{x\PYZus{}test} \PY{o}{/}\PY{o}{=} \PY{l+m+mi}{255}
+         
+         \PY{n}{y\PYZus{}train} \PY{o}{=} \PY{n}{keras}\PY{o}{.}\PY{n}{utils}\PY{o}{.}\PY{n}{to\PYZus{}categorical}\PY{p}{(}\PY{n}{y\PYZus{}train}\PY{p}{,} \PY{n}{n\PYZus{}classes}\PY{p}{)}
+         \PY{n}{y\PYZus{}test} \PY{o}{=} \PY{n}{keras}\PY{o}{.}\PY{n}{utils}\PY{o}{.}\PY{n}{to\PYZus{}categorical}\PY{p}{(}\PY{n}{y\PYZus{}test}\PY{p}{,} \PY{n}{n\PYZus{}classes}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Set up a CNN model}
+         \PY{c+c1}{\PYZsh{} You can use 2 conv2D layer, each with kernel size of 5x5, each followed by a pooling layer with strides of 2}
+         \PY{c+c1}{\PYZsh{} For this part, let both conv2D layer generate 8 channels. }
+         \PY{c+c1}{\PYZsh{} The Conv layer should be followed by a flatten layer and two dense layers. }
+         \PY{c+c1}{\PYZsh{} The first dense layer should produce 200 outputs. }
+         \PY{c+c1}{\PYZsh{} The last dense layer is the output layer with n\PYZus{}classes output using \PYZsq{}softmax\PYZsq{} activation.}
+         \PY{c+c1}{\PYZsh{} Print model summary to verify it follows the desired structure and compile the model}
+         \PY{n}{K}\PY{o}{.}\PY{n}{clear\PYZus{}session}\PY{p}{(}\PY{p}{)}
+         
+         \PY{n}{model} \PY{o}{=} \PY{n}{Sequential}\PY{p}{(}\PY{p}{)}
+         
+         \PY{n}{model}\PY{o}{.}\PY{n}{add}\PY{p}{(}\PY{n}{Conv2D}\PY{p}{(}\PY{l+m+mi}{8}\PY{p}{,} 
+                          \PY{p}{(}\PY{l+m+mi}{5}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{)}\PY{p}{,} 
+                          \PY{n}{padding}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{valid}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+                          \PY{n}{input\PYZus{}shape}\PY{o}{=}\PY{n}{x\PYZus{}train}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{:}\PY{p}{]}\PY{p}{,}
+                          \PY{n}{activation}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{relu}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}
+         \PY{n}{model}\PY{o}{.}\PY{n}{add}\PY{p}{(}\PY{n}{MaxPooling2D}\PY{p}{(}\PY{n}{pool\PYZus{}size}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+         \PY{n}{model}\PY{o}{.}\PY{n}{add}\PY{p}{(}\PY{n}{Conv2D}\PY{p}{(}\PY{l+m+mi}{8}\PY{p}{,} \PY{p}{(}\PY{l+m+mi}{5}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{)}\PY{p}{,} \PY{n}{padding}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{valid}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{activation}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{relu}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}
+         \PY{n}{model}\PY{o}{.}\PY{n}{add}\PY{p}{(}\PY{n}{MaxPooling2D}\PY{p}{(}\PY{n}{pool\PYZus{}size}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+         
+         \PY{n}{model}\PY{o}{.}\PY{n}{add}\PY{p}{(}\PY{n}{Flatten}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+         \PY{n}{model}\PY{o}{.}\PY{n}{add}\PY{p}{(}\PY{n}{Dense}\PY{p}{(}\PY{l+m+mi}{200}\PY{p}{,} \PY{n}{activation}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{relu}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}
+         \PY{n}{model}\PY{o}{.}\PY{n}{add}\PY{p}{(}\PY{n}{Dense}\PY{p}{(}\PY{n}{n\PYZus{}classes}\PY{p}{,} \PY{n}{activation}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{softmax}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} initiate Adam optimizer}
+         \PY{n}{opt} \PY{o}{=} \PY{n}{keras}\PY{o}{.}\PY{n}{optimizers}\PY{o}{.}\PY{n}{adam}\PY{p}{(}\PY{n}{lr}\PY{o}{=}\PY{n}{lrate\PYZus{}cnn}\PY{p}{,} \PY{n}{decay}\PY{o}{=}\PY{n}{decay\PYZus{}cnn}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Let\PYZsq{}s train the model using Adam}
+         \PY{n}{model}\PY{o}{.}\PY{n}{compile}\PY{p}{(}\PY{n}{loss}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{categorical\PYZus{}crossentropy}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                       \PY{n}{optimizer}\PY{o}{=}\PY{n}{opt}\PY{p}{,}
+                       \PY{n}{metrics}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{accuracy}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{model}\PY{o}{.}\PY{n}{summary}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Fit the model using batch size=100, epochs = 40}
+         \PY{c+c1}{\PYZsh{} Print the accuracy on the validation set}
+         \PY{n}{batch\PYZus{}size} \PY{o}{=} \PY{l+m+mi}{100}
+         \PY{n}{epochs} \PY{o}{=} \PY{l+m+mi}{40}
+         
+         \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{seed}\PY{p}{(}\PY{p}{)}
+         \PY{n}{hist\PYZus{}cnn} \PY{o}{=} \PY{n}{model}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{x\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{,}
+                   \PY{n}{batch\PYZus{}size}\PY{o}{=}\PY{n}{batch\PYZus{}size}\PY{p}{,}
+                   \PY{n}{epochs}\PY{o}{=}\PY{n}{epochs}\PY{p}{,}
+                   \PY{n}{validation\PYZus{}data}\PY{o}{=}\PY{p}{(}\PY{n}{x\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}test}\PY{p}{)}\PY{p}{,}
+                   \PY{n}{shuffle}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+         
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{CNN PART END}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+PCA+NN PART START
+The number of samples in the trainning data is 114
+\# The npc and nnode that provides the highest validation accuracy:
+npc: 90
+nnode: 250
+validation accuracy: 73.8791\%
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_23_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+PCA+NN PART END
+------------------
+CNN PART START
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+Layer (type)                 Output Shape              Param \#   
+=================================================================
+conv2d\_1 (Conv2D)            (None, 71, 52, 8)         208       
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+max\_pooling2d\_1 (MaxPooling2 (None, 35, 26, 8)         0         
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+conv2d\_2 (Conv2D)            (None, 31, 22, 8)         1608      
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+max\_pooling2d\_2 (MaxPooling2 (None, 15, 11, 8)         0         
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+flatten\_1 (Flatten)          (None, 1320)              0         
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+dense\_1 (Dense)              (None, 200)               264200    
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+dense\_2 (Dense)              (None, 5)                 1005      
+=================================================================
+Total params: 267,021
+Trainable params: 267,021
+Non-trainable params: 0
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+None
+Train on 114 samples, validate on 1026 samples
+Epoch 1/40
+114/114 [==============================] - 1s 9ms/step - loss: 1.6614 - acc: 0.1404 - val\_loss: 1.4398 - val\_acc: 0.4649
+Epoch 2/40
+114/114 [==============================] - 1s 8ms/step - loss: 1.4414 - acc: 0.4649 - val\_loss: 1.4254 - val\_acc: 0.4649
+Epoch 3/40
+114/114 [==============================] - 1s 8ms/step - loss: 1.4205 - acc: 0.4649 - val\_loss: 1.4043 - val\_acc: 0.4649
+Epoch 4/40
+114/114 [==============================] - 1s 8ms/step - loss: 1.3971 - acc: 0.4649 - val\_loss: 1.4156 - val\_acc: 0.4649
+Epoch 5/40
+114/114 [==============================] - 1s 8ms/step - loss: 1.4112 - acc: 0.4649 - val\_loss: 1.4312 - val\_acc: 0.4649
+Epoch 6/40
+114/114 [==============================] - 1s 8ms/step - loss: 1.4232 - acc: 0.4649 - val\_loss: 1.4270 - val\_acc: 0.4649
+Epoch 7/40
+114/114 [==============================] - 1s 8ms/step - loss: 1.4150 - acc: 0.4649 - val\_loss: 1.4114 - val\_acc: 0.4649
+Epoch 8/40
+114/114 [==============================] - 1s 8ms/step - loss: 1.3993 - acc: 0.4649 - val\_loss: 1.4042 - val\_acc: 0.4649
+Epoch 9/40
+114/114 [==============================] - 1s 8ms/step - loss: 1.3911 - acc: 0.4649 - val\_loss: 1.3995 - val\_acc: 0.4649
+Epoch 10/40
+114/114 [==============================] - 1s 7ms/step - loss: 1.3840 - acc: 0.4649 - val\_loss: 1.3868 - val\_acc: 0.4649
+Epoch 11/40
+114/114 [==============================] - 1s 7ms/step - loss: 1.3642 - acc: 0.4649 - val\_loss: 1.3910 - val\_acc: 0.4649
+Epoch 12/40
+114/114 [==============================] - 1s 7ms/step - loss: 1.3733 - acc: 0.4649 - val\_loss: 1.3993 - val\_acc: 0.4649
+Epoch 13/40
+114/114 [==============================] - 1s 7ms/step - loss: 1.3747 - acc: 0.4649 - val\_loss: 1.3872 - val\_acc: 0.4649
+Epoch 14/40
+114/114 [==============================] - 1s 7ms/step - loss: 1.3582 - acc: 0.4649 - val\_loss: 1.3769 - val\_acc: 0.4649
+Epoch 15/40
+114/114 [==============================] - 1s 7ms/step - loss: 1.3416 - acc: 0.4649 - val\_loss: 1.3859 - val\_acc: 0.4649
+Epoch 16/40
+114/114 [==============================] - 1s 7ms/step - loss: 1.3476 - acc: 0.4649 - val\_loss: 1.3843 - val\_acc: 0.4649
+Epoch 17/40
+114/114 [==============================] - 1s 7ms/step - loss: 1.3376 - acc: 0.4649 - val\_loss: 1.3628 - val\_acc: 0.4649
+Epoch 18/40
+114/114 [==============================] - 1s 7ms/step - loss: 1.3081 - acc: 0.4649 - val\_loss: 1.3643 - val\_acc: 0.4649
+Epoch 19/40
+114/114 [==============================] - 1s 7ms/step - loss: 1.3131 - acc: 0.4649 - val\_loss: 1.3696 - val\_acc: 0.4688
+Epoch 20/40
+114/114 [==============================] - 1s 7ms/step - loss: 1.3098 - acc: 0.4825 - val\_loss: 1.3437 - val\_acc: 0.4639
+Epoch 21/40
+114/114 [==============================] - 1s 7ms/step - loss: 1.2797 - acc: 0.4649 - val\_loss: 1.3219 - val\_acc: 0.4649
+Epoch 22/40
+114/114 [==============================] - 1s 7ms/step - loss: 1.2499 - acc: 0.4649 - val\_loss: 1.3228 - val\_acc: 0.4649
+Epoch 23/40
+114/114 [==============================] - 1s 7ms/step - loss: 1.2428 - acc: 0.4649 - val\_loss: 1.3001 - val\_acc: 0.4649
+Epoch 24/40
+114/114 [==============================] - 1s 7ms/step - loss: 1.2138 - acc: 0.4649 - val\_loss: 1.2772 - val\_acc: 0.4786
+Epoch 25/40
+114/114 [==============================] - 1s 7ms/step - loss: 1.1741 - acc: 0.5000 - val\_loss: 1.2713 - val\_acc: 0.5019
+Epoch 26/40
+114/114 [==============================] - 1s 7ms/step - loss: 1.1598 - acc: 0.5263 - val\_loss: 1.2680 - val\_acc: 0.5185
+Epoch 27/40
+114/114 [==============================] - 1s 7ms/step - loss: 1.1398 - acc: 0.5614 - val\_loss: 1.2354 - val\_acc: 0.5185
+Epoch 28/40
+114/114 [==============================] - 1s 7ms/step - loss: 1.0997 - acc: 0.5702 - val\_loss: 1.2106 - val\_acc: 0.5068
+Epoch 29/40
+114/114 [==============================] - 1s 7ms/step - loss: 1.0615 - acc: 0.5614 - val\_loss: 1.2155 - val\_acc: 0.4873
+Epoch 30/40
+114/114 [==============================] - 1s 7ms/step - loss: 1.0537 - acc: 0.5263 - val\_loss: 1.1834 - val\_acc: 0.5205
+Epoch 31/40
+114/114 [==============================] - 1s 7ms/step - loss: 1.0145 - acc: 0.6053 - val\_loss: 1.1687 - val\_acc: 0.5702
+Epoch 32/40
+114/114 [==============================] - 1s 7ms/step - loss: 0.9757 - acc: 0.6579 - val\_loss: 1.1593 - val\_acc: 0.5712
+Epoch 33/40
+114/114 [==============================] - 1s 7ms/step - loss: 0.9427 - acc: 0.6579 - val\_loss: 1.1381 - val\_acc: 0.5789
+Epoch 34/40
+114/114 [==============================] - 1s 7ms/step - loss: 0.9056 - acc: 0.6842 - val\_loss: 1.1093 - val\_acc: 0.5858
+Epoch 35/40
+114/114 [==============================] - 1s 7ms/step - loss: 0.8572 - acc: 0.6579 - val\_loss: 1.1016 - val\_acc: 0.5760
+Epoch 36/40
+114/114 [==============================] - 1s 7ms/step - loss: 0.8348 - acc: 0.6491 - val\_loss: 1.1183 - val\_acc: 0.5750
+Epoch 37/40
+114/114 [==============================] - 1s 7ms/step - loss: 0.8311 - acc: 0.6754 - val\_loss: 1.0597 - val\_acc: 0.6062
+Epoch 38/40
+114/114 [==============================] - 1s 7ms/step - loss: 0.7558 - acc: 0.7281 - val\_loss: 1.0310 - val\_acc: 0.6101
+Epoch 39/40
+114/114 [==============================] - 1s 7ms/step - loss: 0.7106 - acc: 0.7544 - val\_loss: 1.0374 - val\_acc: 0.6179
+Epoch 40/40
+114/114 [==============================] - 1s 7ms/step - loss: 0.6915 - acc: 0.7807 - val\_loss: 1.0228 - val\_acc: 0.6238
+CNN PART END
+------------------
+
+    \end{Verbatim}
+
+    Q: How does CNN compare with PCA+NN with the small training set? Why?
+
+    A: With the small trainning set, PCA+NN performs better than CNN. This
+is partly because the PCA process has already reduce the dimension in
+the direction of the greatest variance. As a result, although it may
+kill some gentle features, it do make most of the features more obvious
+and easier to be learned by the neural network. Thus, it can reach a
+better result with the small training set.
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
